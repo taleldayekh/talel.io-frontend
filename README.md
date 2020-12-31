@@ -1,9 +1,31 @@
 # Table of Contents
 
+- [Development](#development)
+  - [Setup](#setup)
 - [Deployment](#deployment)
   - [Infrastructure Diagram](#infrastructure-diagram)
   - [AWS ECR](#aws-ecr-elastic-container-registry)
   - [AWS ECS](#aws-ecs-elastic-container-service)
+
+# Development
+
+## Setup
+
+1. **Clone repository**  
+
+   ```bash
+   git clone git@github.com:taleldayekh/talel.io-frontend.git
+   ```
+
+2. **Set Git Hooks path**  
+
+   This is necessary for using the hooks located in the `.githooks` directory. The path is added locally for the git config of this repository.
+
+   In the repository root, run:
+
+   ```bash
+   git config core.hooksPath .githooks
+   ```
 
 # Deployment
 
