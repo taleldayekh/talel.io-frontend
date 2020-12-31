@@ -1,0 +1,4 @@
+# Hooks files needs to be made executable
+# by running chmod a+x <hooks-path>
+yarn prettier
+yarn lint
