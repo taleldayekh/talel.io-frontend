@@ -1,6 +1,7 @@
 {
   "name": "talel.io-frontend",
   "version": "0.1.0",
+  "homepage": "https://taleldayekh.github.io/talel.io-frontend",
   "private": true,
   "dependencies": {
     "axios": "^0.21.1",
@@ -16,11 +17,14 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
+    "gh-pages": "^3.1.0",
     "prettier": "^2.2.1",
     "react-scripts": "4.0.1",
     "typescript": "^4.0.3"
   },
   "scripts": {
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
