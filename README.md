@@ -1,7 +1,12 @@
+![CI](https://github.com/taleldayekh/talel.io-frontend/workflows/CI/badge.svg) [![codecov](https://codecov.io/gh/taleldayekh/talel.io-frontend/branch/develop/graph/badge.svg?token=H787HD9CKJ)](https://codecov.io/gh/taleldayekh/talel.io-frontend)
+
 # Table of Contents
 
 - [Development](#development)
   - [Setup](#setup)
+  - [Code Style](#code-style)
+  - [Testing](#testing)
+  - [CI/CD](#cicd)
 - [Deployment](#deployment)
   - [Infrastructure Diagram](#infrastructure-diagram)
   - [AWS ECR](#aws-ecr-elastic-container-registry)
@@ -26,6 +31,36 @@
    ```bash
    git config core.hooksPath .githooks
    ```
+
+3. **Install dependencies**  
+
+   ```bash
+   yarn install
+   ```
+
+## Code Style
+
+To help detect errors and reduce bugs, the project is:
+
+- Written in [TypeScript](https://github.com/microsoft/TypeScript).
+
+- Uses [ESLint](https://github.com/eslint/eslint) for checking programming errors.  
+
+  ```bash
+  yarn lint
+  ```
+
+To maintain consistency across the codebase, coding standards are enforced with the help of:
+
+- [Prettier](https://github.com/prettier/prettier) for reformatting the code.  
+
+  ```bash
+  yarn prettier
+  ```
+
+## Testing
+
+## CI/CD
 
 # Deployment
 
