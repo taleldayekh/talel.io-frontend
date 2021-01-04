@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/talel.io-frontend/static/css/main.a56b650b.chunk.css",
+    "main.js": "/talel.io-frontend/static/js/main.587e142b.chunk.js",
+    "main.js.map": "/talel.io-frontend/static/js/main.587e142b.chunk.js.map",
+    "runtime-main.js": "/talel.io-frontend/static/js/runtime-main.f1879a69.js",
+    "runtime-main.js.map": "/talel.io-frontend/static/js/runtime-main.f1879a69.js.map",
+    "static/js/2.537ed16b.chunk.js": "/talel.io-frontend/static/js/2.537ed16b.chunk.js",
+    "static/js/2.537ed16b.chunk.js.map": "/talel.io-frontend/static/js/2.537ed16b.chunk.js.map",
+    "static/js/3.171ec0a9.chunk.js": "/talel.io-frontend/static/js/3.171ec0a9.chunk.js",
+    "static/js/3.171ec0a9.chunk.js.map": "/talel.io-frontend/static/js/3.171ec0a9.chunk.js.map",
+    "index.html": "/talel.io-frontend/index.html",
+    "static/css/main.a56b650b.chunk.css.map": "/talel.io-frontend/static/css/main.a56b650b.chunk.css.map",
+    "static/js/2.537ed16b.chunk.js.LICENSE.txt": "/talel.io-frontend/static/js/2.537ed16b.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f1879a69.js",
+    "static/js/2.537ed16b.chunk.js",
+    "static/css/main.a56b650b.chunk.css",
+    "static/js/main.587e142b.chunk.js"
+  ]
+}
