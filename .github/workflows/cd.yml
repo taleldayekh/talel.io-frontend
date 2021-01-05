@@ -39,7 +39,5 @@ jobs:
 
       - name: Deploy
         run: |
-          git config --global user.name 'test'
-          git config --global user.email 'test@test.com'
           git remote set-url origin https://${{ secrets.GHPAGES_DEPLOYMENT_TOKEN }}@github.com/${{ github.repository }}
           yarn deploy

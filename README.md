@@ -9,8 +9,7 @@
   - [CI/CD](#cicd)
 - [Deployment](#deployment)
   - [Infrastructure Diagram](#infrastructure-diagram)
-  - [AWS ECR](#aws-ecr-elastic-container-registry)
-  - [AWS ECS](#aws-ecs-elastic-container-service)
+  - [Configurations](#configurations)
 
 # Development
 
@@ -62,31 +61,44 @@ To maintain consistency across the codebase, coding standards are enforced with 
 
 ## CI/CD
 
+### CI
+
+### CD
+
 # Deployment
+
+The _*talel.io*_ frontend is deployed on [GitHub Pages](https://pages.github.com) as a client-side rendered (CSR) React single-page application (SPA).
 
 ## Infrastructure Diagram
 
 ```
-╭─── GitHub ───╮         ╭─── AWS ECR ───╮         ╭─── AWS ECS ───╮
-│ Server CI/CD │ ──────► │ Server Images │ ──────► │ ╭───────────╮ │         ╭──────────────╮
-╰──────────────╯         ╰───────────────╯         │ │           │ │         │              │
-                                                   │ │    EC2    │ │ ──────► │ www.talel.io │
-╭─── GitHub ───╮         ╭─── AWS ECR ───╮         │ │           │ │         │              │
-│ Client CI/CD │ ──────► │ Client Images │ ──────► │ ╰───────────╯ │         ╰──────────────╯
-╰──────────────╯         ╰───────────────╯         ╰───────────────╯
+╭─── GitHub ───╮         ╭─── GitHub Pages ───╮ API req ╭─── AWS EC2 ───╮
+│              │         │                    │ ──────► │               │
+│ Client CI/CD │ ──────► │  Production Build  │         │    Backend    │
+│              │         │                    │ ◄────── │               │
+╰──────────────╯         ╰────────────────────╯	API res ╰───────────────╯
+                                   │
+                                   │
+                                   ▼
+                            ╭──────────────╮
+                            │              │
+                            │ www.talel.io │
+                            │              │
+                            ╰──────────────╯
 ```
 
-## AWS ECR (Elastic Container Registry)
+1. **GitHub**  
 
-The Docker image artifacts which represents the application backend and frontend are hosted with [Amazon Elastic Container Registry](https://aws.amazon.com/ecr/).
+   Any added code has to pass the GitHub Actions [CI and CD pipelines](#cicd) before the production build is committed to the `gh-pages` branch.
 
-Each image has its separate repository containing all versions of a given image. The lifecycle policy for the repositories is however set to only keep the latest version of an image.
+2. **GitHub Pages**  
 
-## AWS ECS (Elastic Container Service)
+   GitHub Pages looks on the `gh-pages` branch for the static files from the production build which then gets published on the internet and are accessible by visiting [www.talel.io](https://www.talel.io).
 
-[Amazon Elastic Container Service](https://aws.amazon.com/ecs/) orchestration platform manages and deploys Docker containers based on the images from the ECR.
+   The frontend is decoupled from the backend and communicates with the backend server via its [API](https://github.com/taleldayekh/talel.io-backend#api).
 
-The _*talelio*_ ECS cluster (grouping of hardware resources) currently consists of one provisioned [t2.micro EC2](https://aws.amazon.com/ec2/instance-types/t2/) instance. Both the backend and frontend containers run on this EC2 instance.
+3. **AWS EC2**  
 
-### Configurations
+   The backend is hosted on a AWS EC2 instance. See the [deployment section](https://github.com/taleldayekh/talel.io-backend#deployment) in the [talel.io-backend repo](https://github.com/taleldayekh/talel.io-backend) for details on the server-side deployment infrastructure.
 
+## Configurations
