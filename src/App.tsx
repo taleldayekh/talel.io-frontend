@@ -8,12 +8,18 @@ const App: React.FC = () => {
     if (welcomeMessage) return;
 
     axios
-      .get('http://54.173.176.222:5000/api/v1/user/')
+      .get('https://api.talel.io')
       .then((res) => setWelcomeMessage(res.data.message));
   });
 
   return (
-    <>{welcomeMessage ? <h1>{welcomeMessage}</h1> : <h1>Loading message</h1>}</>
+    <>
+      {welcomeMessage ? (
+        <h1>{welcomeMessage}</h1>
+      ) : (
+        <h1>Loading message api</h1>
+      )}
+    </>
   );
 };
 
