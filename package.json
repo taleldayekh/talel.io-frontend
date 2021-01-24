@@ -1,7 +1,7 @@
 {
   "name": "talel.io-frontend",
   "version": "0.1.0",
-  "homepage": "https://taleldayekh.github.io/talel.io-frontend",
+  "homepage": "https://www.talel.io",
   "private": true,
   "dependencies": {
     "axios": "^0.21.1",
