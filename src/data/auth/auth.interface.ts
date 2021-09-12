@@ -14,7 +14,3 @@ export interface LoginData {
   email: string;
   password: string;
 }
-
-export interface Auth {
-  login(data: LoginData): Promise<LoginDTO>;
-}

@@ -1,13 +1,13 @@
-import { Auth, LoginData, LoginDTO } from 'src/data/auth/auth.interface';
+import { LoginData, LoginDTO } from 'src/data/auth/auth.interface';
 import HttpClient from 'src/libs/http-client/http-client';
 import AuthMapper from 'src/data/auth/auth-mapper';
 import { ACCOUNTS_LOGIN } from 'src/data/api/resources';
 
-export default class AuthRepository implements Auth {
-  private _httpClient: HttpClient;
+export default class AuthRepository {
+  private _httpClient: typeof HttpClient;
 
-  constructor() {
-    this._httpClient = new HttpClient();
+  constructor(httpClient: typeof HttpClient) {
+    this._httpClient = httpClient;
   }
 
   public async login(data: LoginData): Promise<LoginDTO> {

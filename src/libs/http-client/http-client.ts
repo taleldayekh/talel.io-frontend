@@ -4,7 +4,7 @@ import ErrorMapper from 'src/data/error-mapper';
 import { API_V1_BASE_URL } from 'src/data/api/resources';
 
 class HttpClient {
-  private error(error: unknown): ErrorDTO | unknown {
+  private _error(error: unknown): ErrorDTO | unknown {
     const apiError = error as AxiosError<ErrorDTO>;
 
     if (axios.isAxiosError(error) && apiError.response) {
@@ -19,7 +19,7 @@ class HttpClient {
     try {
       return await axios.post(`${API_V1_BASE_URL}/${resource}`, rest);
     } catch (error) {
-      throw this.error(error);
+      throw this._error(error);
     }
   }
 }
