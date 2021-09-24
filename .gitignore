@@ -4,6 +4,9 @@
 # production
 /build
 
+# env
+.env.production
+
 # tooling
 /coverage
 .eslintcache
