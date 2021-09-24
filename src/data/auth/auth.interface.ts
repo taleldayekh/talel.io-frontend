@@ -2,12 +2,10 @@
 
 export interface LoginResponse {
   access_token: string;
-  refresh_token: string;
 }
 
 export interface LoginDTO {
   accessToken: string;
-  refreshToken: string;
 }
 
 export interface LoginData {
