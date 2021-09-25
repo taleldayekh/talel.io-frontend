@@ -39,5 +39,7 @@ jobs:
 
       - name: Deploy
         run: |
+          git config --global user.email ${{ secrets.TALEL_GITHUB_EMAIL }}
+          git config --global user.name "taleldayekh"
           git remote set-url origin https://${{ secrets.GHPAGES_DEPLOYMENT_TOKEN }}@github.com/${{ github.repository }}
           yarn deploy
