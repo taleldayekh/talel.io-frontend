@@ -14,8 +14,8 @@ export default class AuthModel {
     return this._authRepository.login(data);
   }
 
-  public newAccessToken(): Auth['accessToken'] {
-    // Not implemented
-    return '';
-  }
+  // public newAccessToken(): Auth['accessToken'] {
+  //   // Not implemented
+  //   return '';
+  // }
 }
