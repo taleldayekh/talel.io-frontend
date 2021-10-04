@@ -1,3 +1,4 @@
+import { AccessToken } from 'src/view-models/auth/auth-view-model.interface';
 import AuthModel from 'src/models/auth/auth';
 
 export default class AuthViewModel {
@@ -7,14 +8,10 @@ export default class AuthViewModel {
     this._authModel = new AuthModel();
   }
 
-  private static storeAccessToken(accessToken: string): void {
-    console.log(`Persisting ${accessToken}`);
-  }
-
-  public async login(email: string, password: string): Promise<void> {
+  public async login(email: string, password: string): Promise<AccessToken> {
     const authRes = await this._authModel.login({ email, password });
     const accessToken = authRes.accessToken;
 
-    AuthViewModel.storeAccessToken(accessToken);
+    return accessToken;
   }
 }

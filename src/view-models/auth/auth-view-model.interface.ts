@@ -1,3 +1,1 @@
-export interface Auth {
-  accessToken: string;
-}
+export type AccessToken = string;

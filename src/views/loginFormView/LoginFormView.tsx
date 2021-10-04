@@ -1,31 +1,28 @@
-import React, { useState } from 'react';
-import AuthViewModel from 'src/view-models/auth/auth';
+import React from 'react';
+import { LoginFormViewProps } from 'src/views/loginFormView/login-form-view.interface';
+import { InputType } from 'src/views/inputView/input-view.interface';
 import InputView from 'src/views/inputView/InputView';
 
-const LoginFormView: React.FC = () => {
-  const [login, setLogin] = useState({ user: '', pwd: '' });
+const LoginFormView: React.FC<LoginFormViewProps> = (
+  props: LoginFormViewProps,
+) => {
+  const { updateEmail, updatePassword, login } = props;
 
-  const emit = (value: string): void => {
-    setLogin({ ...login, user: value });
-  };
+  const emit = (type: string, value: string): void => {
+    if (type === InputType.TEXT) {
+      updateEmail(value);
+    }
 
-  const emitPwd = (value: string): void => {
-    setLogin({ ...login, pwd: value });
-  };
-
-  const handleSubmit = (event: { preventDefault: () => void }) => {
-    new AuthViewModel()
-      .login(login.user, login.pwd)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-    event.preventDefault();
+    if (type === InputType.PASSWORD) {
+      updatePassword(value);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={login}>
       <InputView emitValue={emit} />
-      <InputView emitValue={emitPwd} password />
-      <input type="submit" value="Submit" />
+      <InputView emitValue={emit} password />
+      <input type="submit" value="Login" />
     </form>
   );
 };
