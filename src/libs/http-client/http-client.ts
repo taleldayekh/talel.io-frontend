@@ -1,3 +1,4 @@
+import { RequestBody } from 'src/libs/http-client/http-client.interface';
 import { ErrorDTO } from 'src/data/error.interface';
 import axios, { AxiosResponse, AxiosError } from 'axios';
 import ErrorMapper from 'src/data/error-mapper';
@@ -15,9 +16,12 @@ class HttpClient {
     }
   }
 
-  public async post(resource: string, { ...rest }): Promise<AxiosResponse> {
+  public async post(
+    resource: string,
+    body?: RequestBody,
+  ): Promise<AxiosResponse> {
     try {
-      return await axios.post(`${API_V1_BASE_URL}/${resource}`, rest);
+      return await axios.post(`${API_V1_BASE_URL}/${resource}`, body);
     } catch (error) {
       throw this._error(error);
     }

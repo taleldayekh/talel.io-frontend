@@ -1,7 +1,14 @@
-import { LoginData, LoginDTO } from 'src/data/auth/auth.interface';
+import {
+  LoginData,
+  LoginDTO,
+  NewAccessTokenDTO,
+} from 'src/data/auth/auth.interface';
 import HttpClient from 'src/libs/http-client/http-client';
 import AuthMapper from 'src/data/auth/auth-mapper';
-import { ACCOUNTS_LOGIN } from 'src/data/api/resources';
+import {
+  ACCOUNTS_LOGIN,
+  ACCOUNTS_NEW_ACCESS_TOKEN,
+} from 'src/data/api/resources';
 
 export default class AuthRepository {
   private _httpClient: typeof HttpClient;
@@ -15,5 +22,16 @@ export default class AuthRepository {
     const loginDTO = AuthMapper.toLoginDTO(loginRes.data);
 
     return loginDTO;
+  }
+
+  public async newAccessToken(): Promise<NewAccessTokenDTO> {
+    const newAccessTokenRes = await this._httpClient.post(
+      ACCOUNTS_NEW_ACCESS_TOKEN,
+    );
+    const newAccessTokenDTO = AuthMapper.toNewAccessTokenDTO(
+      newAccessTokenRes.data,
+    );
+
+    return newAccessTokenDTO;
   }
 }
