@@ -12,3 +12,7 @@ export interface LoginData {
   email: string;
   password: string;
 }
+
+export type NewAccessTokenResponse = LoginResponse;
+
+export type NewAccessTokenDTO = LoginDTO;

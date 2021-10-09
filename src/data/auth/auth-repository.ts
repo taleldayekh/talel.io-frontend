@@ -27,6 +27,8 @@ export default class AuthRepository {
   public async newAccessToken(): Promise<NewAccessTokenDTO> {
     const newAccessTokenRes = await this._httpClient.post(
       ACCOUNTS_NEW_ACCESS_TOKEN,
+      undefined,
+      true,
     );
     const newAccessTokenDTO = AuthMapper.toNewAccessTokenDTO(
       newAccessTokenRes.data,

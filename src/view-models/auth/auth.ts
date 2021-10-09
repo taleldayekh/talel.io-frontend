@@ -27,6 +27,12 @@ export default class AuthViewModel {
     return !!expiredAccessToken;
   }
 
+  public requestRequiresAuthentication(requestUrl: string): boolean {
+    const urlsWithAuthentication = [''];
+
+    return urlsWithAuthentication.some((url) => url.includes(requestUrl));
+  }
+
   public async login(email: string, password: string): Promise<AccessToken> {
     const loginRes = await this._authModel.login({ email, password });
     const accessToken = loginRes.accessToken;
