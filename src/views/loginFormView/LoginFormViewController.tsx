@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext, FormEvent } from 'react';
 import { LoginCredentials } from 'src/views/loginFormView/login-form-view.interface';
 import { AuthContext } from 'src/contexts/auth/auth-context';
-import AuthViewModel from 'src/view-models/auth/auth';
+import AuthViewModel from 'src/view-models/auth/auth.view-model';
 import LoginFormView from 'src/views/loginFormView/LoginFormView';
 
 const LoginFormViewController: React.FC = () => {

@@ -1,17 +1,17 @@
 import {
   AccessToken,
   AccessTokenPayload,
-} from 'src/view-models/auth/auth-view-model.interface';
+} from 'src/view-models/auth/auth.view-model.interface';
 import AuthModel from 'src/models/auth/auth';
 
 export default class AuthViewModel {
-  private _authModel: AuthModel;
+  private authModel: AuthModel;
 
   constructor() {
-    this._authModel = new AuthModel();
+    this.authModel = new AuthModel();
   }
 
-  private static _decodeAccessTokenPayload(
+  private static decodeAccessTokenPayload(
     accessToken: string,
   ): AccessTokenPayload {
     const jwtPayload = accessToken.split('.')[1];
@@ -21,7 +21,7 @@ export default class AuthViewModel {
   }
 
   public accessTokenHasExpired(accessToken: string): boolean {
-    const { exp } = AuthViewModel._decodeAccessTokenPayload(accessToken);
+    const { exp } = AuthViewModel.decodeAccessTokenPayload(accessToken);
     const expiredAccessToken = Date.now() >= exp * 1000;
 
     return !!expiredAccessToken;
@@ -34,14 +34,14 @@ export default class AuthViewModel {
   }
 
   public async login(email: string, password: string): Promise<AccessToken> {
-    const loginRes = await this._authModel.login({ email, password });
+    const loginRes = await this.authModel.login({ email, password });
     const accessToken = loginRes.accessToken;
 
     return accessToken;
   }
 
   public async newAccessToken(): Promise<AccessToken> {
-    const newAccessTokenRes = await this._authModel.newAccessToken();
+    const newAccessTokenRes = await this.authModel.newAccessToken();
     const accessToken = newAccessTokenRes.accessToken;
 
     return accessToken;
