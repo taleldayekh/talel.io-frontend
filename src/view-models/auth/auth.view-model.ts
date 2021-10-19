@@ -2,7 +2,7 @@ import {
   AccessToken,
   AccessTokenPayload,
 } from 'src/view-models/auth/auth.view-model.interface';
-import AuthModel from 'src/models/auth/auth';
+import AuthModel from 'src/models/auth/auth.model';
 
 export default class AuthViewModel {
   private authModel: AuthModel;
