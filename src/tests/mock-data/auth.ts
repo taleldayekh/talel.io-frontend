@@ -7,7 +7,7 @@ const ACCESS_TOKEN = jwt.sign(
     username: USERNAME_TALEL,
     exp: new Date().getTime(),
   },
-  '',
+  'secret key',
 );
 
 const EXPIRED_ACCESS_TOKEN =
