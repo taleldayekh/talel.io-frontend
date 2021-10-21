@@ -1,8 +1,9 @@
 import {
   AccessToken,
   AccessTokenPayload,
-} from 'src/view-models/auth/auth.view-model.interface';
+} from 'src/view-models/auth/interfaces';
 import AuthModel from 'src/models/auth/auth.model';
+import { resourcesWithAuthentication } from 'src/data/api/resources';
 
 export default class AuthViewModel {
   private authModel: AuthModel;
@@ -28,9 +29,10 @@ export default class AuthViewModel {
   }
 
   public requestRequiresAuthentication(requestUrl: string): boolean {
-    const urlsWithAuthentication = [''];
+    // ! console.log to see the actual url structure here
+    const protectedResources = [...resourcesWithAuthentication];
 
-    return urlsWithAuthentication.some((url) => url.includes(requestUrl));
+    return protectedResources.some((resource) => resource.includes(requestUrl));
   }
 
   public async login(email: string, password: string): Promise<AccessToken> {
