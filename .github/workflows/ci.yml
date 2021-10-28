@@ -17,16 +17,10 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: '12.x'
-
+          node-version: '14.x'
+      
       - name: Install Dependencies
-        run: yarn install
-
-      - name: Static Code Analysis
-        run: yarn lint
-
-      - name: Test
-        run: yarn test -- --coverage
-
-      - name: Upload Test Coverage
-        uses: codecov/codecov-action@v1
+        run: npm install
+      
+      - name: Unit Tests
+        run: npm run test:unit

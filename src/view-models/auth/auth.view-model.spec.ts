@@ -64,7 +64,9 @@ describe('AuthViewModel', () => {
 
   describe('newAccessToken', () => {
     it('should return new access token', async () => {
-      //
+      const accessToken = await authViewModel.newAccessToken();
+
+      expect(accessToken).toBe(ACCESS_TOKEN);
     });
   });
 });
