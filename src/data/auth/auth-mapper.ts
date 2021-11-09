@@ -1,22 +1,8 @@
-import {
-  LoginResponse,
-  NewAccessTokenResponse,
-  LoginDTO,
-  NewAccessTokenDTO,
-} from 'src/data/auth/auth.interface';
+import { LoginResponse } from 'src/data/auth/interfaces';
+import AccessTokenModel from 'src/models/auth/access-token.model';
 
 export default class AuthMapper {
-  public static toLoginDTO(loginResponse: LoginResponse): LoginDTO {
-    return {
-      accessToken: loginResponse.access_token,
-    };
-  }
-
-  public static toNewAccessTokenDTO(
-    newAccessTokenResponse: NewAccessTokenResponse,
-  ): NewAccessTokenDTO {
-    return {
-      accessToken: newAccessTokenResponse.access_token,
-    };
+  public static toAccessToken(loginResponse: LoginResponse): AccessTokenModel {
+    return new AccessTokenModel(loginResponse.access_token);
   }
 }
