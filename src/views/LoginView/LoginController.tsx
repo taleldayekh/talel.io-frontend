@@ -1,5 +1,6 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, useContext, FormEvent } from 'react';
 import { LoginCredentials } from 'src/views/LoginView/interfaces';
+import { AuthenticationContext } from 'src/contexts/authentication/authentication.context';
 import AccessTokenModel from 'src/models/authentication/access-token.model';
 import HttpClient from 'src/libs/http-client/http-client';
 import AuthenticationRepository from 'src/data/authentication/authentication.repository';
@@ -7,6 +8,8 @@ import AuthenticationMapper from 'src/data/authentication/authentication.mapper'
 import LoginView from 'src/views/LoginView/LoginView';
 
 const LoginController: React.FC = () => {
+  const { setAccessToken } = useContext(AuthenticationContext);
+
   const [authenticationRepository] = useState<AuthenticationRepository>(
     new AuthenticationRepository(HttpClient),
   );
@@ -29,10 +32,10 @@ const LoginController: React.FC = () => {
       .then((res: AccessTokenModel) => {
         const authenticationViewModel =
           AuthenticationMapper.toAuthenticationViewModel(res);
-
-        console.log(authenticationViewModel.accessToken);
+        setAccessToken(authenticationViewModel.accessToken);
       })
       .catch((error) => {
+        // Todo: Error handling
         console.log(error);
       });
 
