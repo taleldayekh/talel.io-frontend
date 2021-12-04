@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 
-export interface AuthContextValues {
+export interface AuthenticationContextValues {
   accessToken: string;
   setAccessToken: Dispatch<SetStateAction<string>>;
 }
