@@ -1,9 +1,9 @@
 import AccessTokenModel from 'src/models/authentication/access-token.model';
 
 export default class AuthenticationViewModel {
-  public accessToken: string;
+  public accessToken: AccessTokenModel;
 
   constructor(accessToken: AccessTokenModel) {
-    this.accessToken = accessToken.accessToken;
+    this.accessToken = accessToken;
   }
 }
