@@ -1,9 +1,15 @@
-import { LoginResponse } from 'src/data/authentication/interfaces';
+import {
+  LoginResponse,
+  NewAccessTokenResponse,
+} from 'src/data/authentication/interfaces';
 import { AxiosResponse } from 'axios';
 import HttpClient from 'src/libs/http-client/http-client';
 import AuthenticationMapper from 'src/data/authentication/authentication.mapper';
-import AccessTokenModel from 'src/models/authentication/access-token.model';
-import { ACCOUNTS_LOGIN } from 'src/data/api/resources';
+import TokenModel from 'src/models/authentication/token.model';
+import {
+  ACCOUNTS_LOGIN,
+  ACCOUNTS_NEW_ACCESS_TOKEN,
+} from 'src/data/api/resources';
 
 export default class AuthenticationRepository {
   private httpClient: typeof HttpClient;
@@ -12,10 +18,7 @@ export default class AuthenticationRepository {
     this.httpClient = httpClient;
   }
 
-  public async login(
-    email: string,
-    password: string,
-  ): Promise<AccessTokenModel> {
+  public async login(email: string, password: string): Promise<TokenModel> {
     const loginData = {
       email,
       password,
@@ -25,6 +28,16 @@ export default class AuthenticationRepository {
       loginData,
     );
     const accessToken = AuthenticationMapper.toAccessToken(loginRes.data);
+
+    return accessToken;
+  }
+
+  public async getNewAccessToken(): Promise<TokenModel> {
+    const newAccessTokenRes: AxiosResponse<NewAccessTokenResponse> =
+      await this.httpClient.post(ACCOUNTS_NEW_ACCESS_TOKEN);
+    const accessToken = AuthenticationMapper.toAccessToken(
+      newAccessTokenRes.data,
+    );
 
     return accessToken;
   }
