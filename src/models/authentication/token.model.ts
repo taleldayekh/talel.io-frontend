@@ -1,4 +1,4 @@
-export default class AccessTokenModel {
+export default class TokenModel {
   public accessToken: string;
 
   constructor(accessToken: string) {
