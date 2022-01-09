@@ -1,14 +1,13 @@
 import React, { useState, useContext, FormEvent } from 'react';
 import { LoginCredentials } from 'src/views/LoginView/interfaces';
 import { AuthenticationContext } from 'src/contexts/authentication/authentication.context';
-import AccessTokenModel from 'src/models/authentication/access-token.model';
+import TokenModel from 'src/models/authentication/token.model';
 import HttpClient from 'src/libs/http-client/http-client';
 import AuthenticationRepository from 'src/data/authentication/authentication.repository';
-import AuthenticationMapper from 'src/data/authentication/authentication.mapper';
 import LoginView from 'src/views/LoginView/LoginView';
 
 const LoginController: React.FC = () => {
-  const { setAccessToken } = useContext(AuthenticationContext);
+  const { setAuthenticationContext } = useContext(AuthenticationContext);
 
   const [authenticationRepository] = useState<AuthenticationRepository>(
     new AuthenticationRepository(HttpClient),
@@ -29,10 +28,8 @@ const LoginController: React.FC = () => {
   const login = (event: FormEvent<HTMLFormElement>): void => {
     authenticationRepository
       .login(loginCredentials.email, loginCredentials.password)
-      .then((res: AccessTokenModel) => {
-        const authenticationViewModel =
-          AuthenticationMapper.toAuthenticationViewModel(res);
-        setAccessToken(authenticationViewModel.accessToken);
+      .then((res: TokenModel) => {
+        setAuthenticationContext(res);
       })
       .catch((error) => {
         // Todo: Error handling
