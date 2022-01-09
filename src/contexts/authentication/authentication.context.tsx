@@ -1,19 +1,23 @@
 import React, { createContext, useState } from 'react';
 import { AuthenticationContextValues } from 'src/contexts/authentication/interfaces';
-import AccessTokenModel from 'src/models/authentication/access-token.model';
+import TokenModel from 'src/models/authentication/token.model';
 
 export const AuthenticationContext = createContext<AuthenticationContextValues>(
   {
-    accessToken: new AccessTokenModel(''),
-    setAccessToken: () => null,
+    authenticationContext: new TokenModel(''),
+    setAuthenticationContext: () => null,
   },
 );
 
 export const AuthenticationProvider: React.FC = ({ children }) => {
-  const [accessToken, setAccessToken] = useState(new AccessTokenModel(''));
+  const [authenticationContext, setAuthenticationContext] = useState(
+    new TokenModel(''),
+  );
 
   return (
-    <AuthenticationContext.Provider value={{ accessToken, setAccessToken }}>
+    <AuthenticationContext.Provider
+      value={{ authenticationContext, setAuthenticationContext }}
+    >
       {children}
     </AuthenticationContext.Provider>
   );
