@@ -2,6 +2,7 @@ import React from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import ProtectedViewsController from 'src/views/private/ProtectedViewsController/ProtectedViewsController';
 import LoginController from 'src/views/LoginView/LoginController';
+import ArticlesView from 'src/views/private/ArticlesView/ArticlesView';
 
 const AppView: React.FC = () => {
   return (
@@ -13,7 +14,9 @@ const AppView: React.FC = () => {
           path="/admin/*"
           element={
             <ProtectedViewsController>
-              <p>If you made it this far you are logged in</p>
+              <Routes>
+                <Route path="articles" element={<ArticlesView />} />
+              </Routes>
             </ProtectedViewsController>
           }
         />
