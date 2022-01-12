@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
-import TokenModel from 'src/models/authentication/token.model';
+import AuthenticationModel from 'src/models/authentication/authentication.model';
 
 export interface AuthenticationContextValues {
-  authenticationContext: TokenModel;
-  setAuthenticationContext: Dispatch<SetStateAction<TokenModel>>;
+  authenticationContext: AuthenticationModel;
+  setAuthenticationContext: Dispatch<SetStateAction<AuthenticationModel>>;
 }
