@@ -8,7 +8,7 @@ const AppController: React.FC = () => {
   const { authenticationContext } = useContext(AuthenticationContext);
   const authentication = useAuthentication();
 
-  const accessToken = authenticationContext.accessToken;
+  const accessToken = authenticationContext.token.accessToken;
 
   const interceptorId = axios.interceptors.request.use(
     (config: AxiosRequestConfig) => {

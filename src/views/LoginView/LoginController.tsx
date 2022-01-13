@@ -1,13 +1,18 @@
-import React, { useState, useContext, FormEvent } from 'react';
+import React, { useContext, useState, useEffect, FormEvent } from 'react';
 import { LoginCredentials } from 'src/views/LoginView/interfaces';
+import { Navigate } from 'react-router-dom';
 import { AuthenticationContext } from 'src/contexts/authentication/authentication.context';
+import useAuthentication from 'src/hooks/authentication/useAuthentication';
 import TokenModel from 'src/models/authentication/token.model';
 import HttpClient from 'src/libs/http-client/http-client';
 import AuthenticationRepository from 'src/data/authentication/authentication.repository';
 import LoginView from 'src/views/LoginView/LoginView';
 
 const LoginController: React.FC = () => {
-  const { setAuthenticationContext } = useContext(AuthenticationContext);
+  const { authenticationContext, setAuthenticationContext } = useContext(
+    AuthenticationContext,
+  );
+  const authentication = useAuthentication();
 
   const [authenticationRepository] = useState<AuthenticationRepository>(
     new AuthenticationRepository(HttpClient),
@@ -16,6 +21,10 @@ const LoginController: React.FC = () => {
     email: '',
     password: '',
   });
+
+  useEffect(() => {
+    authentication.refreshAccessToken();
+  }, []);
 
   const updateEmail = (email: string): void => {
     setLoginCredentials({ ...loginCredentials, email });
@@ -29,7 +38,7 @@ const LoginController: React.FC = () => {
     authenticationRepository
       .login(loginCredentials.email, loginCredentials.password)
       .then((res: TokenModel) => {
-        setAuthenticationContext(res);
+        setAuthenticationContext({ token: res, isLoggedIn: true });
       })
       .catch((error) => {
         // Todo: Error handling
@@ -39,7 +48,9 @@ const LoginController: React.FC = () => {
     event.preventDefault();
   };
 
-  return (
+  return authenticationContext.isLoggedIn ? (
+    <Navigate to="/admin/articles" />
+  ) : (
     <LoginView
       updateEmail={updateEmail}
       updatePassword={updatePassword}
