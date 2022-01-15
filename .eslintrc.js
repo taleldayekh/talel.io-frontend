@@ -4,6 +4,9 @@ module.exports = {
     es2021: true,
     'jest/globals': true,
   },
+  globals: {
+    JSX: true,
+  },
   extends: [
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
