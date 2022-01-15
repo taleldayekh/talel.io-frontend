@@ -35,11 +35,13 @@ const useAuthentication = (): UseAuthentication => {
     authenticationRepository
       .getNewAccessToken()
       .then((res: TokenModel) => {
-        setAuthenticationContext(res);
+        console.log(res);
+        setAuthenticationContext({ token: res, isLoggedIn: true });
       })
       .catch((error) => {
         // Todo: Error handling
-        console.log(error);
+        // ! Logout user?
+        console.warn(error);
       });
   };
 
