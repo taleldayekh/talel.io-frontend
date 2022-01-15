@@ -1,23 +1,24 @@
-import { RequestBody } from 'src/libs/http-client/http-client.interface';
-import { ErrorDTO } from 'src/data/error.interface';
+import { RequestBody } from 'src/libs/http-client/interfaces';
+import { Error } from 'src/data/error/interfaces';
 import axios, { AxiosResponse, AxiosError, AxiosInstance } from 'axios';
-import ErrorMapper from 'src/data/error-mapper';
+import ErrorMapper from 'src/data/error/error.mapper';
+import ErrorModel from 'src/models/error/error.model';
 import { API_V1_BASE_URL, ACCOUNTS_LOGIN } from 'src/data/api/resources';
 
 class HttpClient {
-  private static _error(error: unknown): ErrorDTO | unknown {
-    const apiError = error as AxiosError<ErrorDTO>;
+  private error(errorResponse: unknown): ErrorModel | unknown {
+    const apiError = errorResponse as AxiosError<Error>;
 
-    if (axios.isAxiosError(error) && apiError.response) {
-      const errorDTO = ErrorMapper.toErrorDTO(apiError.response.data);
-      return errorDTO;
-    } else {
+    if (axios.isAxiosError(apiError) && apiError.response) {
+      const error = ErrorMapper.toErrorModel(apiError.response.data);
       return error;
+    } else {
+      return errorResponse;
     }
   }
 
-  private static async _newAccessTokenRequest(
-    newAccessTokenResource: string,
+  private async newAccessTokenRequest(
+    resource: string,
   ): Promise<AxiosResponse> {
     /*
      * A new axios instance needs to be created when making a request
@@ -28,27 +29,26 @@ class HttpClient {
       withCredentials: true,
     });
 
-    return axiosInstance.post(`${API_V1_BASE_URL}/${newAccessTokenResource}`);
+    return axiosInstance.post(`${API_V1_BASE_URL}/${resource}`);
   }
 
   public async post(
     resource: string,
     body?: RequestBody,
-    getAccessToken?: boolean,
+    refreshAccessToken?: boolean,
   ): Promise<AxiosResponse> {
-    const requiresCookies: boolean = resource === ACCOUNTS_LOGIN;
+    const requestRequiresCookies: boolean = [ACCOUNTS_LOGIN].includes(resource);
 
     try {
-      if (getAccessToken)
-        return await HttpClient._newAccessTokenRequest(resource);
+      if (refreshAccessToken) return await this.newAccessTokenRequest(resource);
 
       return await axios.post(
         `${API_V1_BASE_URL}/${resource}`,
         body || undefined,
-        requiresCookies ? { withCredentials: true } : undefined,
+        requestRequiresCookies ? { withCredentials: true } : undefined,
       );
     } catch (error) {
-      throw HttpClient._error(error);
+      throw this.error(error);
     }
   }
 }
