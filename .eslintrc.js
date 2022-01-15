@@ -4,9 +4,18 @@ module.exports = {
     es2021: true,
     'jest/globals': true,
   },
+  globals: {
+    JSX: true,
+  },
   extends: [
-    'standard',
     'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'standard',
+    'prettier',
+
+    // 'standard',
+    // 'plugin:react/recommended',
+    // 'plugin@typescript-eslint/recommended',
     'plugin:prettier/recommended',
   ],
   parser: '@typescript-eslint/parser',
@@ -20,6 +29,7 @@ module.exports = {
   plugins: ['react', '@typescript-eslint', 'jest'],
   rules: {
     'no-use-before-define': 'off',
+    'no-unused-vars': 'off',
   },
   settings: {
     react: {

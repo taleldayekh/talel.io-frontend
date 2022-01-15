@@ -1,25 +1,54 @@
-import { ErrorDTO } from 'src/data/error.interface';
-import axios, { AxiosResponse, AxiosError } from 'axios';
-import ErrorMapper from 'src/data/error-mapper';
-import { API_V1_BASE_URL } from 'src/data/api/resources';
+import { RequestBody } from 'src/libs/http-client/interfaces';
+import { Error } from 'src/data/error/interfaces';
+import axios, { AxiosResponse, AxiosError, AxiosInstance } from 'axios';
+import ErrorMapper from 'src/data/error/error.mapper';
+import ErrorModel from 'src/models/error/error.model';
+import { API_V1_BASE_URL, ACCOUNTS_LOGIN } from 'src/data/api/resources';
 
 class HttpClient {
-  private _error(error: unknown): ErrorDTO | unknown {
-    const apiError = error as AxiosError<ErrorDTO>;
+  private error(errorResponse: unknown): ErrorModel | unknown {
+    const apiError = errorResponse as AxiosError<Error>;
 
-    if (axios.isAxiosError(error) && apiError.response) {
-      const errorDTO = ErrorMapper.toErrorDTO(apiError.response.data);
-      return errorDTO;
-    } else {
+    if (axios.isAxiosError(apiError) && apiError.response) {
+      const error = ErrorMapper.toErrorModel(apiError.response.data);
       return error;
+    } else {
+      return errorResponse;
     }
   }
 
-  public async post(resource: string, { ...rest }): Promise<AxiosResponse> {
+  private async newAccessTokenRequest(
+    resource: string,
+  ): Promise<AxiosResponse> {
+    /*
+     * A new axios instance needs to be created when making a request
+     * inside an interceptor. This is to not trigger an infinite loop.
+     */
+
+    const axiosInstance: AxiosInstance = axios.create({
+      withCredentials: true,
+    });
+
+    return axiosInstance.post(`${API_V1_BASE_URL}/${resource}`);
+  }
+
+  public async post(
+    resource: string,
+    body?: RequestBody,
+    refreshAccessToken?: boolean,
+  ): Promise<AxiosResponse> {
+    const requestRequiresCookies: boolean = [ACCOUNTS_LOGIN].includes(resource);
+
     try {
-      return await axios.post(`${API_V1_BASE_URL}/${resource}`, rest);
+      if (refreshAccessToken) return await this.newAccessTokenRequest(resource);
+
+      return await axios.post(
+        `${API_V1_BASE_URL}/${resource}`,
+        body || undefined,
+        requestRequiresCookies ? { withCredentials: true } : undefined,
+      );
     } catch (error) {
-      throw this._error(error);
+      throw this.error(error);
     }
   }
 }

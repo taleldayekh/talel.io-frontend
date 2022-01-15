@@ -1,6 +1,15 @@
-// import config from 'src/config';
+import config from 'src/config';
 
-export const API_V1_BASE_URL = 'https://api.talel.io/v1';
+const API_V1_BASE_URL = config.api.backendApiUrl;
 
 // Accounts
-export const ACCOUNTS_LOGIN = 'accounts/login';
+const ACCOUNTS_LOGIN = 'accounts/login';
+const ACCOUNTS_NEW_ACCESS_TOKEN = 'accounts/token';
+const ACCOUNTS_LOGOUT = 'accounts/logout';
+
+export {
+  API_V1_BASE_URL,
+  ACCOUNTS_LOGIN,
+  ACCOUNTS_NEW_ACCESS_TOKEN,
+  ACCOUNTS_LOGOUT,
+};
