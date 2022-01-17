@@ -34,7 +34,7 @@ export default class AuthenticationRepository {
 
   public async getNewAccessToken(): Promise<TokenModel> {
     const newAccessTokenRes: AxiosResponse<NewAccessTokenResponse> =
-      await this.httpClient.post(ACCOUNTS_NEW_ACCESS_TOKEN);
+      await this.httpClient.post(ACCOUNTS_NEW_ACCESS_TOKEN, undefined, true);
     const accessToken = AuthenticationMapper.toAccessToken(
       newAccessTokenRes.data,
     );
