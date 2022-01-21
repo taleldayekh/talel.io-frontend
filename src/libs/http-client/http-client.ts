@@ -38,10 +38,7 @@ class HttpClient {
     refreshAccessToken?: boolean,
   ): Promise<AxiosResponse> {
     const requestRequiresCookies: boolean = [ACCOUNTS_LOGIN].includes(resource);
-    console.log(API_V1_BASE_URL);
-    console.log(requestRequiresCookies);
-    console.log(resource);
-    console.log(refreshAccessToken);
+
     try {
       if (refreshAccessToken) return await this.newAccessTokenRequest(resource);
 
