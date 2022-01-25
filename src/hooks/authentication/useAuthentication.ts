@@ -4,7 +4,7 @@ import { AuthenticationContext } from 'src/contexts/authentication/authenticatio
 import TokenModel from 'src/models/authentication/token.model';
 import HttpClient from 'src/libs/http-client/http-client';
 import AuthenticationRepository from 'src/data/authentication/authentication.repository';
-import { UPLOAD_IMAGES } from 'src/data/api/resources';
+import { CREATE_ARTICLE, UPLOAD_IMAGES } from 'src/data/api/resources';
 
 const useAuthentication = (): UseAuthentication => {
   const { setAuthenticationContext } = useContext(AuthenticationContext);
@@ -14,7 +14,7 @@ const useAuthentication = (): UseAuthentication => {
   );
 
   const requestRequiresAuthentication = (requestUrl: string): boolean => {
-    const protectedResources: string[] = [UPLOAD_IMAGES];
+    const protectedResources: string[] = [CREATE_ARTICLE, UPLOAD_IMAGES];
     const resourceIsProtected = protectedResources.filter((resource) =>
       requestUrl.includes(resource),
     );
