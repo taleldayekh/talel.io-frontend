@@ -6,15 +6,11 @@ import ImageModel from 'src/models/image/image.model';
 import { UPLOAD_IMAGES } from 'src/data/api/resources';
 
 export default class AssetsRepository {
-  private httpClient: typeof HttpClient;
+  constructor(private httpClient: typeof HttpClient) {}
 
-  constructor(httpClient: typeof HttpClient) {
-    this.httpClient = httpClient;
-  }
-
-  public async uploadImage(imageFormData: FormData): Promise<ImageModel> {
+  public async uploadImage(data: FormData): Promise<ImageModel> {
     const uploadImageRes: AxiosResponse<UploadImageResponse> =
-      await this.httpClient.post(UPLOAD_IMAGES, imageFormData);
+      await this.httpClient.post(UPLOAD_IMAGES, data);
     const image = AssetsMapper.toImages(uploadImageRes.data)[0];
 
     return image;
