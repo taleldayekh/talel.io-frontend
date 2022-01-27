@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+
+  background-color: palegreen;
+}
+
+:root {
+  /* Breakpoints */
+  --breakpoint-s: 43em; /* 688px */
+  --breakpoint-m: 62em; /* 992px */
+  --breakpoint-l: 82em; /* 1312px; */
+}
