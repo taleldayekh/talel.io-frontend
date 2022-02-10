@@ -8,16 +8,18 @@ const ACCOUNTS_NEW_ACCESS_TOKEN = 'accounts/token';
 const ACCOUNTS_LOGOUT = 'accounts/logout';
 
 // Articles
-const CREATE_ARTICLE = 'articles';
+const ARTICLES_CREATE = 'articles';
+const ARTICLES_LIST_ALL = 'users/taleldayekh/articles';
 
 // Assets
-const UPLOAD_IMAGES = 'assets/images';
+const ASSETS_UPLOAD_IMAGE = 'assets/images';
 
 export {
   API_V1_BASE_URL,
   ACCOUNTS_LOGIN,
   ACCOUNTS_NEW_ACCESS_TOKEN,
   ACCOUNTS_LOGOUT,
-  CREATE_ARTICLE,
-  UPLOAD_IMAGES,
+  ARTICLES_CREATE,
+  ARTICLES_LIST_ALL,
+  ASSETS_UPLOAD_IMAGE,
 };
