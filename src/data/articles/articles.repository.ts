@@ -4,6 +4,8 @@ import {
 } from 'src/data/articles/interfaces';
 import { AxiosResponse } from 'axios';
 import HttpClient from 'src/libs/http-client/http-client';
+import ArticlesMapper from 'src/data/articles/articles.mapper';
+import ArticleViewModel from 'src/view-models/article/article.view-model';
 import { ARTICLES_CREATE, ARTICLES_LIST_ALL } from 'src/data/api/resources';
 
 export default class ArticlesRepository {
@@ -13,10 +15,13 @@ export default class ArticlesRepository {
     await this.httpClient.post(ARTICLES_CREATE, data);
   }
 
-  public async getAll(): Promise<void> {
-    const getProjectsResponse: AxiosResponse<ArticleResponse[]> =
+  public async getAll(): Promise<ArticleViewModel[]> {
+    const getArticlesResponse: AxiosResponse<ArticleResponse[]> =
       await this.httpClient.get(ARTICLES_LIST_ALL);
+    const articles = getArticlesResponse.data.map((article) =>
+      ArticlesMapper.toArticleViewModel(article),
+    );
 
-    console.log(getProjectsResponse);
+    return articles;
   }
 }
