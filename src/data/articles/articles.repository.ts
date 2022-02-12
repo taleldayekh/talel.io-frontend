@@ -5,7 +5,7 @@ import {
 import { AxiosResponse } from 'axios';
 import HttpClient from 'src/libs/http-client/http-client';
 import ArticlesMapper from 'src/data/articles/articles.mapper';
-import ArticleViewModel from 'src/view-models/article/article.view-model';
+import ArticleModel from 'src/models/article/article.model';
 import { ARTICLES_CREATE, ARTICLES_LIST_ALL } from 'src/data/api/resources';
 
 export default class ArticlesRepository {
@@ -15,11 +15,11 @@ export default class ArticlesRepository {
     await this.httpClient.post(ARTICLES_CREATE, data);
   }
 
-  public async getAll(): Promise<ArticleViewModel[]> {
+  public async getAll(): Promise<ArticleModel[]> {
     const getArticlesResponse: AxiosResponse<ArticleResponse[]> =
       await this.httpClient.get(ARTICLES_LIST_ALL);
     const articles = getArticlesResponse.data.map((article) =>
-      ArticlesMapper.toArticleViewModel(article),
+      ArticlesMapper.toArticle(article),
     );
 
     return articles;
