@@ -1,0 +1,48 @@
+/* ! Change from px */
+
+.article {
+  column-gap: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.article__meta {
+  display: flex;
+  font-family: 'Merriweather', Serif;
+  font-size: 14px;
+  grid-column: 4 / 10;
+}
+
+.article__meta__datetime {
+  font-style: italic;
+}
+
+.article__title {
+  font-family: 'Streamster', Serif;
+  font-size: 62px;
+  font-weight: 400;
+  grid-column: 4 / 10;
+  text-align: center;
+}
+
+.article__content {
+  grid-column: 4 / 10;
+}
+
+.article__content h1 {
+  font-family: 'Streamster', Serif;
+  font-size: 36px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.article__content h2 {
+  font-family: 'Merriweather', Serif;
+  font-size: 16px;
+}
+
+.article__content p {
+  font-family: 'Merriweather', Serif;
+  line-height: 28px;
+  text-align: justify;
+}
