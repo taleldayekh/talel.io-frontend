@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+
+@font-face {
+  font-family: 'Streamster';
+  src: local('Streamster'), url(../assets/fonts/Streamster.ttf) format('truetype');
+}
+
 body {
   margin: 0;
   -moz-osx-font-smoothing: grayscale;
