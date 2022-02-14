@@ -1,3 +1,5 @@
 export interface ArticleViewProps {
-  articleHTML: string;
+  title: string;
+  content: string;
+  creationDate: string;
 }
