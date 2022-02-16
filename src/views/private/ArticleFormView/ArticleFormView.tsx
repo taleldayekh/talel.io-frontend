@@ -3,11 +3,13 @@ import {
   ArticleFormViewProps,
   ArticleFormFields,
 } from 'src/views/private/ArticleFormView/interfaces';
+import { useTranslation } from 'react-i18next';
 import styles from 'src/views/private/ArticleFormView/styles/styles.module.css';
 
 const ArticleFormView: React.FC<ArticleFormViewProps> = (
   props: ArticleFormViewProps,
 ) => {
+  const { t } = useTranslation();
   const {
     articleTitle,
     articleContent,
@@ -40,7 +42,9 @@ const ArticleFormView: React.FC<ArticleFormViewProps> = (
         }
         onDrop={(e) => uploadArticleImages(e)}
       />
-      <button onClick={() => uploadArticle()}>Publish Article</button>
+      <button onClick={() => uploadArticle()}>
+        {t('admin.article-form.publish-button')}
+      </button>
     </div>
   );
 };
