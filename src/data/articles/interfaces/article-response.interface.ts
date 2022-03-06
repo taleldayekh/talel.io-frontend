@@ -6,6 +6,7 @@ export interface ArticleResponse {
   created_at: string;
   updated_at: string | null;
   title: string;
+  slug: string;
   body: string;
   html: string;
 }

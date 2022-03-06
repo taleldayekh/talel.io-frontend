@@ -23,6 +23,7 @@ export default class ArticlesMapper {
       articleResponse.created_at,
       articleResponse.updated_at,
       articleResponse.title,
+      articleResponse.slug,
       articleResponse.body,
       articleResponse.html,
     );
