@@ -19,7 +19,7 @@ export default class ArticlesRepository {
     const getArticlesResponse: AxiosResponse<ArticleResponse[]> =
       await this.httpClient.get(ARTICLES_LIST_ALL);
     const articles = getArticlesResponse.data.map((article) =>
-      ArticlesMapper.toArticle(article),
+      ArticlesMapper.toArticleModel(article),
     );
 
     return articles;
