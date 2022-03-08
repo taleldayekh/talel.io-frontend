@@ -16,7 +16,7 @@ export default class ArticlesMapper {
     };
   }
 
-  public static toArticle(articleResponse: ArticleResponse): ArticleModel {
+  public static toArticleModel(articleResponse: ArticleResponse): ArticleModel {
     return new ArticleModel(
       articleResponse.id,
       articleResponse.user_id,
@@ -34,7 +34,8 @@ export default class ArticlesMapper {
       article.title,
       article.html,
       article.createdAt,
-      article.updatedAt,
+      // TODO: Remove empty string once db always returns a value for updated at
+      article.updatedAt || '',
     );
   }
 }
