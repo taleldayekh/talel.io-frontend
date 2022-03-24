@@ -8,8 +8,8 @@ const ACCOUNTS_NEW_ACCESS_TOKEN = 'accounts/token';
 const ACCOUNTS_LOGOUT = 'accounts/logout';
 
 // Articles
-const ARTICLES_CREATE = 'articles';
-const ARTICLES_LIST_ALL = 'users/taleldayekh/articles';
+const ARTICLES = 'articles';
+const ARTICLES_LIST_ALL = 'users/marshi/articles';
 
 // Assets
 const ASSETS_UPLOAD_IMAGE = 'assets/images';
@@ -19,7 +19,7 @@ export {
   ACCOUNTS_LOGIN,
   ACCOUNTS_NEW_ACCESS_TOKEN,
   ACCOUNTS_LOGOUT,
-  ARTICLES_CREATE,
+  ARTICLES,
   ARTICLES_LIST_ALL,
   ASSETS_UPLOAD_IMAGE,
 };
