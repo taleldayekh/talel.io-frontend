@@ -32,6 +32,14 @@ class HttpClient {
     return axiosInstance.post(`${API_V1_BASE_URL}/${resource}`);
   }
 
+  public async get(resource: string): Promise<AxiosResponse> {
+    try {
+      return await axios.get(`${API_V1_BASE_URL}/${resource}`);
+    } catch (error) {
+      throw this.error(error);
+    }
+  }
+
   public async post(
     resource: string,
     body?: RequestBody,
