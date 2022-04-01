@@ -26,6 +26,7 @@ export default class ArticlesMapper {
       articleResponse.slug,
       articleResponse.body,
       articleResponse.html,
+      articleResponse.featured_image,
     );
   }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import reportWebVitals from 'src/reportWebVitals';
 import i18n from 'i18next';
 import { registerLocales } from 'src/libs/i18n/i18n';
@@ -11,13 +11,14 @@ import 'src/theme/index.css';
 
 registerLocales({ en });
 
-ReactDOM.render(
+const root = createRoot(document.getElementById('root') as HTMLElement);
+
+root.render(
   <I18nextProvider i18n={i18n}>
     <AuthenticationProvider>
       <AppController />
     </AuthenticationProvider>
   </I18nextProvider>,
-  document.getElementById('root'),
 );
 
 reportWebVitals();
