@@ -8,5 +8,6 @@ export default class ArticleModel {
     public slug: string,
     public body: string,
     public html: string,
+    public featuredImage: string,
   ) {}
 }

@@ -9,4 +9,5 @@ export interface ArticleResponse {
   slug: string;
   body: string;
   html: string;
+  featured_image: string;
 }
