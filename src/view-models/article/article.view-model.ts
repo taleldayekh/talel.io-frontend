@@ -14,7 +14,7 @@ export default class ArticleViewModel {
     this.setFormattedDates();
   }
 
-  setFormattedDates(): void {
+  private setFormattedDates(): void {
     const createdDate = new Date(this.createdAt);
     const updatedDate = new Date(this.updatedAt);
 
@@ -27,7 +27,7 @@ export default class ArticleViewModel {
     this.createdDate = this.formatDate(createdDate);
   }
 
-  formatDate(date: Date): string {
+  private formatDate(date: Date): string {
     const months = [
       'January',
       'February',
