@@ -1,46 +1,61 @@
+/* Consider targeting img with specific class */
+img {
+  height: 100%;
+  width: 100%;
+}
+
 .article {
-  column-gap: 1.5rem;
+  column-gap: 0.5em;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-}
-
-.article__meta {
-  display: flex;
-  font-family: 'Merriweather', Serif;
-  font-size: 0.875rem;
-  grid-column: 4 / 10;
-}
-
-.article__meta__datetime {
-  font-style: italic;
+  margin: 0 1em;
 }
 
 .article__title {
   font-family: 'Streamster', Serif;
-  font-size: 3.875rem;
+  font-size: 3rem;
   font-weight: 400;
-  grid-column: 4 / 10;
+  grid-column: span 12;
+  text-align: center;
+}
+
+.article__meta {
+  display: flex;
+  flex-direction: column;
+  grid-column: span 12;
+  justify-content: center;
+}
+
+.article__meta p {
+  font-family: 'Merriweather', Serif;
+  font-size: 0.875rem;
+  font-style: italic;
+  font-weight: 300;
   text-align: center;
 }
 
 .article__content {
-  grid-column: 4 / 10;
-}
-
-.article__content h1 {
-  font-family: 'Streamster', Serif;
-  font-size: 2.25rem;
-  font-weight: 400;
-  text-align: center;
-}
-
-.article__content h2 {
-  font-family: 'Merriweather', Serif;
-  font-size: 1rem;
+  column-gap: 0.5em;
+  display: grid;
+  grid-column: span 12;
+  grid-template-columns: repeat(12, 1fr);
 }
 
 .article__content p {
   font-family: 'Merriweather', Serif;
-  line-height: 1.75rem;
+  font-size: 1rem;
+  grid-column: 2 / 12;
   text-align: justify;
+}
+
+:global(p.article-image) {
+  grid-column: span 12;
+}
+
+
+
+
+
+.article__content h1 {
+  grid-column: span 12;
 }
