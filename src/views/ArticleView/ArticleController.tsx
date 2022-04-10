@@ -4,6 +4,7 @@ import HttpClient from 'src/libs/http-client/http-client';
 import { ArticlesContext } from 'src/contexts/articles/articles.context';
 import ArticlesRepository from 'src/data/articles/articles.repository';
 import ArticlesMapper from 'src/data/articles/articles.mapper';
+import ArticleStatusBarController from 'src/views/ArticleStatusBarView/ArticleStatusBarController';
 import ArticleViewModel from 'src/view-models/article/article.view-model';
 import ArticleView from 'src/views/ArticleView/ArticleView';
 
@@ -62,7 +63,12 @@ const ArticleController = (): JSX.Element => {
 
   // Todo: Navigate to 404 if article cannot be found.
   return article && article.title ? (
-    <ArticleView article={article} articleTitleRef={articleTitleRef} />
+    <>
+      <ArticleStatusBarController
+        displayArticleStatusBar={articleTitleIsVisible}
+      />
+      <ArticleView article={article} articleTitleRef={articleTitleRef} />
+    </>
   ) : (
     <p>404 Not Found</p>
   );
