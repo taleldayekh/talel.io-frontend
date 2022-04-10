@@ -2,12 +2,17 @@ import { ArticleViewProps } from 'src/views/ArticleView/interfaces';
 import { useTranslation } from 'react-i18next';
 import styles from 'src/views/ArticleView/styles/styles.module.css';
 
-const ArticleView = ({ article }: ArticleViewProps): JSX.Element => {
+const ArticleView = ({
+  article,
+  articleTitleRef,
+}: ArticleViewProps): JSX.Element => {
   const { t } = useTranslation();
 
   return (
     <div className={styles.article}>
-      <h1 className={styles.article__title}>{article.title}</h1>
+      <h1 className={styles.article__title} ref={articleTitleRef}>
+        {article.title}
+      </h1>
       <div className={styles.article__meta}>
         <p>{t('article.meta.author')}</p>
         <p>
