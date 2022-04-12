@@ -1,0 +1,19 @@
+.article-status-bar {
+  background-color: pink;
+  bottom: 0;
+  height: var(--article-status-bar-height);
+  position: fixed;
+  transform: translateY(var(--article-status-bar-height));
+  /* ! Set a max-width of desktop width */
+  width: 100%;
+}
+
+@keyframes show {
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.article-status-bar--visible {
+  animation: show 0.5s forwards;
+}

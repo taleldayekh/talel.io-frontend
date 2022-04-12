@@ -2,9 +2,9 @@ import { ArticleStatusBarControllerProps } from 'src/views/ArticleStatusBarView/
 import ArticleStatusBarView from 'src/views/ArticleStatusBarView/ArticleStatusBarView';
 
 const ArticleStatusBarController = ({
-  displayArticleStatusBar,
+  articleTitleIsVisible,
 }: ArticleStatusBarControllerProps): JSX.Element => {
-  return <ArticleStatusBarView isVisible={displayArticleStatusBar} />;
+  return <ArticleStatusBarView showStatusBar={!articleTitleIsVisible} />;
 };
 
 export default ArticleStatusBarController;

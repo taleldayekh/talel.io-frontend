@@ -5,6 +5,11 @@
   src: local('Streamster'), url(../assets/fonts/Streamster.ttf) format('truetype');
 }
 
+:root {
+  /* Article Status Bar */
+  --article-status-bar-height: 2.75em;
+}
+
 body {
   margin: 0;
   -moz-osx-font-smoothing: grayscale;

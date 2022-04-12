@@ -65,7 +65,7 @@ const ArticleController = (): JSX.Element => {
   return article && article.title ? (
     <>
       <ArticleStatusBarController
-        displayArticleStatusBar={articleTitleIsVisible}
+        articleTitleIsVisible={articleTitleIsVisible}
       />
       <ArticleView article={article} articleTitleRef={articleTitleRef} />
     </>
