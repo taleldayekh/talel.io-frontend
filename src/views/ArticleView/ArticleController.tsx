@@ -1,17 +1,21 @@
+import { HTMLElements } from 'src/shared/types';
+import { ArticleRefs, ArticleElements } from 'src/views/ArticleView/interfaces';
+import { FooterElements } from 'src/views/FooterView/interfaces';
 import { useRef, useContext, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import HttpClient from 'src/libs/http-client/http-client';
 import { ArticlesContext } from 'src/contexts/articles/articles.context';
 import ArticlesRepository from 'src/data/articles/articles.repository';
 import ArticlesMapper from 'src/data/articles/articles.mapper';
-import ArticleStatusBarController from 'src/views/ArticleStatusBarView/ArticleStatusBarController';
 import ArticleViewModel from 'src/view-models/article/article.view-model';
+import ArticleStatusBarController from 'src/views/ArticleStatusBarView/ArticleStatusBarController';
 import ArticleView from 'src/views/ArticleView/ArticleView';
+import FooterView from 'src/views/FooterView/FooterView';
 
 const ArticleController = (): JSX.Element => {
   const slug = useParams().slug;
 
-  const articleTitleRef = useRef(null);
+  const articleRefs = useRef<HTMLElements[]>([]);
 
   const { articles } = useContext(ArticlesContext);
 
@@ -22,6 +26,7 @@ const ArticleController = (): JSX.Element => {
   const [article, setArticle] = useState<ArticleViewModel>();
   const [articleTitleIsVisible, setArticleTitleIsVisible] =
     useState<boolean>(true);
+  const [footerIsVisible, setFooterIsVisible] = useState<boolean>(false);
 
   useEffect(() => {
     if (!slug) return;
@@ -44,30 +49,54 @@ const ArticleController = (): JSX.Element => {
 
   useEffect(() => {
     const intersectionObserver = new IntersectionObserver(
-      ([observerEntry]: IntersectionObserverEntry[]) => {
-        const elementIsVisible = observerEntry.isIntersecting;
+      (observerEntries: IntersectionObserverEntry[]) => {
+        observerEntries.forEach((observerEntry) => {
+          const element = observerEntry.target.id;
 
-        setArticleTitleIsVisible(elementIsVisible);
+          element === ArticleElements.articleTitle &&
+            setArticleTitleIsVisible(observerEntry.isIntersecting);
+
+          element === FooterElements.footer &&
+            setFooterIsVisible(observerEntry.isIntersecting);
+        });
       },
     );
-    const currentArticleTitleRef = articleTitleRef.current;
 
-    currentArticleTitleRef &&
-      intersectionObserver.observe(currentArticleTitleRef);
+    const articleTitleRef = articleRefs.current[ArticleRefs.articleTitle];
+    const footerRef = articleRefs.current[ArticleRefs.footer];
+
+    articleTitleRef && intersectionObserver.observe(articleTitleRef);
+    footerRef && intersectionObserver.observe(footerRef);
 
     return () => {
-      currentArticleTitleRef &&
-        intersectionObserver.unobserve(currentArticleTitleRef);
+      articleTitleRef && intersectionObserver.unobserve(articleTitleRef);
+      footerRef && intersectionObserver.unobserve(footerRef);
     };
   });
+
+  const addElementRef = (
+    element: HTMLElements | null,
+    elementType: FooterElements | ArticleElements,
+  ): void => {
+    const currentArticleRefs = articleRefs.current;
+
+    if (element && !currentArticleRefs.includes(element)) {
+      elementType === ArticleElements.articleTitle &&
+        (currentArticleRefs[ArticleRefs.articleTitle] = element);
+
+      elementType === FooterElements.footer &&
+        (currentArticleRefs[ArticleRefs.footer] = element);
+    }
+  };
 
   // Todo: Navigate to 404 if article cannot be found.
   return article && article.title ? (
     <>
-      <ArticleStatusBarController
+      {/* <ArticleStatusBarController
         articleTitleIsVisible={articleTitleIsVisible}
-      />
-      <ArticleView article={article} articleTitleRef={articleTitleRef} />
+      /> */}
+      <ArticleView article={article} addElementRef={addElementRef} />
+      <FooterView addElementRef={addElementRef} />
     </>
   ) : (
     <p>404 Not Found</p>
