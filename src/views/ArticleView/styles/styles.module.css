@@ -7,13 +7,13 @@ img {
 .article {
   column-gap: 0.5em;
   display: grid;
+  font-family: 'Merriweather', Serif;
   grid-template-columns: repeat(12, 1fr);
-  margin: 0 1em;
 }
 
 .article__title {
   font-family: 'Streamster', Serif;
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 400;
   grid-column: span 12;
   text-align: center;
@@ -27,7 +27,6 @@ img {
 }
 
 .article__meta p {
-  font-family: 'Merriweather', Serif;
   font-size: 0.875rem;
   font-style: italic;
   font-weight: 300;
@@ -42,7 +41,6 @@ img {
 }
 
 .article__content p {
-  font-family: 'Merriweather', Serif;
   font-size: 1rem;
   grid-column: 2 / 12;
   text-align: justify;
@@ -52,10 +50,27 @@ img {
   grid-column: span 12;
 }
 
-
-
-
-
 .article__content h1 {
+  font-family: 'Streamster', Serif;
+  font-size: 2.125rem;
+  font-weight: 400;
   grid-column: span 12;
+  text-align: center;
 }
+
+.article__content h1::after {
+  border-bottom: 1px solid;
+  content: '';
+  display: block;
+  height: 1px;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-1em);
+  width: 2em;
+}
+
+
+
+
+
+/* ! */
