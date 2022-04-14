@@ -2,15 +2,16 @@ import { ArticleStatusBarViewProps } from 'src/views/ArticleStatusBarView/interf
 import styles from 'src/views/ArticleStatusBarView/styles/styles.module.css';
 
 const ArticleStatusBarView = ({
-  showStatusBar,
+  articleTitleIsVisible,
+  footerIsVisible,
 }: ArticleStatusBarViewProps): JSX.Element => {
   return (
     <div
       className={`${styles['article-status-bar']} ${
-        showStatusBar && styles['article-status-bar--visible']
-      }`}
+        !articleTitleIsVisible && styles['article-status-bar--visible']
+      } ${footerIsVisible && styles['article-status-bar--hidden']}`}
     >
-      Content
+      Article Status Bar Content
     </div>
   );
 };

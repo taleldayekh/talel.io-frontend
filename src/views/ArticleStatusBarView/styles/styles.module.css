@@ -1,5 +1,7 @@
 .article-status-bar {
-  background-color: pink;
+  background-color: #fff;
+  /* ! Adjust box shadow */
+  /* ! */
   bottom: 0;
   height: var(--article-status-bar-height);
   position: fixed;
@@ -10,10 +12,24 @@
 
 @keyframes show {
   100% {
+    box-shadow: 0 0 0.125em 0.125em rgb(0 0 0 / 12%);
     transform: translateY(0);
+  }
+}
+
+@keyframes hide {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(var(--article-status-bar-height));
   }
 }
 
 .article-status-bar--visible {
   animation: show 0.5s forwards;
+}
+
+.article-status-bar--hidden {
+  animation: hide 0.5s forwards;
 }

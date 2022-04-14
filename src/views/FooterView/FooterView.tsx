@@ -2,15 +2,16 @@ import {
   FooterViewProps,
   FooterElements,
 } from 'src/views/FooterView/interfaces';
+import styles from 'src/views/FooterView/styles/styles.module.css';
 
 const FooterView = ({ addElementRef }: FooterViewProps): JSX.Element => {
   return (
     <div
       id={FooterElements.footer}
-      className="footer"
+      className={styles.footer}
       ref={(el) => addElementRef(el, FooterElements.footer)}
     >
-      This is the page footer
+      Footer content goes here
     </div>
   );
 };

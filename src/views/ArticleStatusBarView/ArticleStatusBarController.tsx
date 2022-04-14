@@ -3,8 +3,14 @@ import ArticleStatusBarView from 'src/views/ArticleStatusBarView/ArticleStatusBa
 
 const ArticleStatusBarController = ({
   articleTitleIsVisible,
+  footerIsVisible,
 }: ArticleStatusBarControllerProps): JSX.Element => {
-  return <ArticleStatusBarView showStatusBar={!articleTitleIsVisible} />;
+  return (
+    <ArticleStatusBarView
+      articleTitleIsVisible={articleTitleIsVisible}
+      footerIsVisible={footerIsVisible}
+    />
+  );
 };
 
 export default ArticleStatusBarController;

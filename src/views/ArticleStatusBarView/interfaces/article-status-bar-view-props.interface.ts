@@ -1,3 +1,4 @@
 export interface ArticleStatusBarViewProps {
-  showStatusBar: boolean;
+  articleTitleIsVisible: boolean;
+  footerIsVisible: boolean;
 }
