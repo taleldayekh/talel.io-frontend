@@ -16,6 +16,7 @@ img {
   font-size: 2.5rem;
   font-weight: 400;
   grid-column: span 12;
+  margin-top: 1.125em;
   text-align: center;
 }
 
@@ -24,6 +25,7 @@ img {
   flex-direction: column;
   grid-column: span 12;
   justify-content: center;
+  margin-bottom: 1.5rem;
 }
 
 .article__meta p {
@@ -31,6 +33,10 @@ img {
   font-style: italic;
   font-weight: 300;
   text-align: center;
+}
+
+.article__meta p:first-child {
+  margin-bottom: 0.25rem;
 }
 
 .article__content {
@@ -43,6 +49,7 @@ img {
 .article__content p {
   font-size: 1rem;
   grid-column: 2 / 12;
+  margin-bottom: 1.5rem;
   text-align: justify;
 }
 
@@ -55,6 +62,7 @@ img {
   font-size: 2.125rem;
   font-weight: 400;
   grid-column: span 12;
+  margin-bottom: 1.5rem;
   text-align: center;
 }
 
@@ -68,9 +76,3 @@ img {
   transform: translateX(-1em);
   width: 2em;
 }
-
-
-
-
-
-/* ! */
