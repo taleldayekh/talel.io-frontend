@@ -4,6 +4,10 @@
   font-family: 'Streamster';
   src: local('Streamster'), url(../assets/fonts/Streamster.ttf) format('truetype');
 }
+@font-face {
+  font-family: 'Blanka';
+  src: local('Blanka'), url(../assets//fonts/Blanka.ttf) format('truetype');
+}
 
 :root {
   /* Article Status Bar */

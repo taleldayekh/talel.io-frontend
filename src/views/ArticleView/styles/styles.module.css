@@ -53,6 +53,15 @@ img {
   text-align: justify;
 }
 
+.article__content p:nth-child(2):first-letter {
+  float: left;
+  font-family: 'Blanka', Serif;
+  font-size: 4.5em;
+  line-height: 0.8em;
+  padding-bottom: 0.125em;
+  margin-right: 0.25em;
+}
+
 :global(p.article-image) {
   grid-column: span 12;
 }
