@@ -90,9 +90,10 @@ const ArticleController = (): JSX.Element => {
   };
 
   // Todo: Navigate to 404 if article cannot be found.
-  return article && article.title ? (
+  return article ? (
     <>
       <ArticleStatusBarController
+        articleTitle={article.title}
         articleTitleIsVisible={articleTitleIsVisible}
         footerIsVisible={footerIsVisible}
       />

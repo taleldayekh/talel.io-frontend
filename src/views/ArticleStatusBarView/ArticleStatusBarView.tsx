@@ -2,6 +2,7 @@ import { ArticleStatusBarViewProps } from 'src/views/ArticleStatusBarView/interf
 import styles from 'src/views/ArticleStatusBarView/styles/styles.module.css';
 
 const ArticleStatusBarView = ({
+  articleTitle,
   articleTitleIsVisible,
   footerIsVisible,
 }: ArticleStatusBarViewProps): JSX.Element => {
@@ -11,7 +12,11 @@ const ArticleStatusBarView = ({
         !articleTitleIsVisible && styles['article-status-bar--visible']
       } ${footerIsVisible && styles['article-status-bar--hidden']}`}
     >
-      Article Status Bar Content
+      <div className={styles['article-status-bar__content']}>
+        <p className={styles['article-status-bar__content__title']}>
+          {articleTitle}
+        </p>
+      </div>
     </div>
   );
 };
