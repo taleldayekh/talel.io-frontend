@@ -1,46 +1,87 @@
+/* Consider targeting img with specific class */
+img {
+  height: 100%;
+  width: 100%;
+}
+
 .article {
-  column-gap: 1.5rem;
+  column-gap: 0.5em;
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-}
-
-.article__meta {
-  display: flex;
   font-family: 'Merriweather', Serif;
-  font-size: 0.875rem;
-  grid-column: 4 / 10;
-}
-
-.article__meta__datetime {
-  font-style: italic;
+  grid-template-columns: repeat(12, 1fr);
 }
 
 .article__title {
   font-family: 'Streamster', Serif;
-  font-size: 3.875rem;
+  font-size: 2.5rem;
   font-weight: 400;
-  grid-column: 4 / 10;
+  grid-column: span 12;
+  margin-top: 1.125em;
   text-align: center;
 }
 
+.article__meta {
+  display: flex;
+  flex-direction: column;
+  grid-column: span 12;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.article__meta p {
+  font-size: 0.875rem;
+  font-style: italic;
+  font-weight: 300;
+  text-align: center;
+}
+
+.article__meta p:first-child {
+  margin-bottom: 0.25rem;
+}
+
 .article__content {
-  grid-column: 4 / 10;
+  column-gap: 0.5em;
+  display: grid;
+  grid-column: span 12;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.article__content p {
+  font-size: 1rem;
+  grid-column: 2 / 12;
+  margin-bottom: 1.5rem;
+  text-align: justify;
+}
+
+.article__content p:nth-child(2):first-letter {
+  float: left;
+  font-family: 'Blanka', Serif;
+  font-size: 4.5em;
+  line-height: 0.8em;
+  padding-bottom: 0.125em;
+  margin-right: 0.25em;
+}
+
+:global(p.article-image) {
+  grid-column: span 12;
 }
 
 .article__content h1 {
   font-family: 'Streamster', Serif;
-  font-size: 2.25rem;
+  font-size: 2.125rem;
   font-weight: 400;
+  grid-column: span 12;
+  margin-bottom: 1.5rem;
   text-align: center;
 }
 
-.article__content h2 {
-  font-family: 'Merriweather', Serif;
-  font-size: 1rem;
-}
-
-.article__content p {
-  font-family: 'Merriweather', Serif;
-  line-height: 1.75rem;
-  text-align: justify;
+.article__content h1::after {
+  border-bottom: 1px solid;
+  content: '';
+  display: block;
+  height: 1px;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-1em);
+  width: 2em;
 }

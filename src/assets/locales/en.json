@@ -1,4 +1,10 @@
 {
+  "article": {
+    "meta": {
+      "author": "Words by:",
+      "updated": "Updated:"
+    }
+  },
   "admin": {
     "article-form": {
       "publish-button": "Publish"

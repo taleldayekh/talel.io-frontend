@@ -28,6 +28,8 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint', 'jest'],
   rules: {
+    'react/react-in-jsx-scope': 'off',
+    'react/jsx-uses-react': 'off',
     'no-use-before-define': 'off',
     'no-unused-vars': 'off',
     'no-useless-constructor': 'off',

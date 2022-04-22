@@ -4,9 +4,26 @@
   font-family: 'Streamster';
   src: local('Streamster'), url(../assets/fonts/Streamster.ttf) format('truetype');
 }
+@font-face {
+  font-family: 'Blanka';
+  src: local('Blanka'), url(../assets//fonts/Blanka.ttf) format('truetype');
+}
+
+:root {
+  /* Article Status Bar */
+  --article-status-bar-height: 2.75em;
+}
 
 body {
   margin: 0;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
 }

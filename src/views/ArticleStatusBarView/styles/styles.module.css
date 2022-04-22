@@ -1,0 +1,54 @@
+.article-status-bar {
+  background-color: #fff;
+  /* ! Adjust box shadow */
+  /* ! */
+  bottom: 0;
+  height: var(--article-status-bar-height);
+  position: fixed;
+  transform: translateY(var(--article-status-bar-height));
+  /* ! Set a max-width of desktop width */
+  width: 100%;
+}
+
+@keyframes show {
+  100% {
+    box-shadow: 0 0 0.125em 0.125em rgb(0 0 0 / 12%);
+    transform: translateY(0);
+  }
+}
+
+@keyframes hide {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(var(--article-status-bar-height));
+  }
+}
+
+.article-status-bar--visible {
+  animation: show 0.5s forwards;
+}
+
+.article-status-bar--hidden {
+  animation: hide 0.5s forwards;
+}
+
+.article-status-bar__content {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  margin: 0 1em 0 1em;
+}
+
+.article-status-bar__content__title {
+  font-family: 'Merriweather', Serif;
+  font-size: 0.75em;
+  font-style: italic;
+  font-weight: 300;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  width: 100%;
+  white-space: nowrap;
+}

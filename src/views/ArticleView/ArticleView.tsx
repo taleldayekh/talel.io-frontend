@@ -1,17 +1,33 @@
-import React from 'react';
-import { ArticleViewProps } from 'src/views/ArticleView/interfaces';
+import {
+  ArticleViewProps,
+  ArticleElements,
+} from 'src/views/ArticleView/interfaces';
+import { useTranslation } from 'react-i18next';
 import styles from 'src/views/ArticleView/styles/styles.module.css';
 
-const ArticleView: React.FC<ArticleViewProps> = (props: ArticleViewProps) => {
-  const { article } = props;
+const ArticleView = ({
+  article,
+  addElementRef,
+}: ArticleViewProps): JSX.Element => {
+  const { t } = useTranslation();
 
   return (
     <div className={styles.article}>
+      <h1
+        id={ArticleElements.articleTitle}
+        className={styles.article__title}
+        ref={(el) => addElementRef(el, ArticleElements.articleTitle)}
+      >
+        {article.title}
+      </h1>
       <div className={styles.article__meta}>
-        <p className={styles.article__meta__datetime}>{article.createdAt}</p>
-        <p className={styles.article__meta__author}></p>
+        <p>{t('article.meta.author')}</p>
+        <p>
+          {article.createdDate}
+          {article.updatedDate &&
+            ` (${t('article.meta.updated')} ${article.updatedDate})`}
+        </p>
       </div>
-      <h1 className={styles.article__title}>{article.title}</h1>
       <div
         className={styles.article__content}
         dangerouslySetInnerHTML={{ __html: article.html }}
