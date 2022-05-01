@@ -15,6 +15,7 @@ import FooterView from 'src/views/FooterView/FooterView';
 const ArticleController = (): JSX.Element => {
   const slug = useParams().slug;
 
+  const articleContentRef = useRef<HTMLDivElement | null>(null);
   const articleRefs = useRef<HTMLElements[]>([]);
 
   const { articles } = useContext(ArticlesContext);
@@ -97,7 +98,11 @@ const ArticleController = (): JSX.Element => {
         articleTitleIsVisible={articleTitleIsVisible}
         footerIsVisible={footerIsVisible}
       />
-      <ArticleView article={article} addElementRef={addElementRef} />
+      <ArticleView
+        article={article}
+        articleContentRef={articleContentRef}
+        addElementRef={addElementRef}
+      />
       <FooterView addElementRef={addElementRef} />
     </>
   ) : (

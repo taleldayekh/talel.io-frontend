@@ -7,6 +7,7 @@ import styles from 'src/views/ArticleView/styles/styles.module.css';
 
 const ArticleView = ({
   article,
+  articleContentRef,
   addElementRef,
 }: ArticleViewProps): JSX.Element => {
   const { t } = useTranslation();
@@ -30,6 +31,7 @@ const ArticleView = ({
       </div>
       <div
         className={styles.article__content}
+        ref={articleContentRef}
         dangerouslySetInnerHTML={{ __html: article.html }}
       />
     </div>
