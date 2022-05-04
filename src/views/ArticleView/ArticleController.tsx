@@ -95,6 +95,7 @@ const ArticleController = (): JSX.Element => {
     <>
       <ArticleStatusBarController
         articleTitle={article.title}
+        articleContentRef={articleContentRef}
         articleTitleIsVisible={articleTitleIsVisible}
         footerIsVisible={footerIsVisible}
       />
