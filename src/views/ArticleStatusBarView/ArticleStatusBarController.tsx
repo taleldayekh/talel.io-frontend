@@ -3,7 +3,6 @@ import ArticleStatusBarView from 'src/views/ArticleStatusBarView/ArticleStatusBa
 
 const ArticleStatusBarController = ({
   articleTitle,
-  // Todo: Consider putting article content ref inside context.
   articleContentRef,
   articleTitleIsVisible,
   footerIsVisible,
