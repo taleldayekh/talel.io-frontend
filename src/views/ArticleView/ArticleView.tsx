@@ -3,24 +3,25 @@ import {
   ArticleElements,
 } from 'src/views/ArticleView/interfaces';
 import { useTranslation } from 'react-i18next';
-import styles from 'src/views/ArticleView/styles/styles.module.css';
+import articleStyles from 'src/views/ArticleView/styles/article.styles.module.css';
 
 const ArticleView = ({
   article,
-  addElementRef,
+  articleTitleRef,
+  articleContentRef,
 }: ArticleViewProps): JSX.Element => {
   const { t } = useTranslation();
 
   return (
-    <div className={styles.article}>
+    <div className={articleStyles.article}>
       <h1
         id={ArticleElements.articleTitle}
-        className={styles.article__title}
-        ref={(el) => addElementRef(el, ArticleElements.articleTitle)}
+        className={articleStyles.article__title}
+        ref={articleTitleRef}
       >
         {article.title}
       </h1>
-      <div className={styles.article__meta}>
+      <div className={articleStyles.article__meta}>
         <p>{t('article.meta.author')}</p>
         <p>
           {article.createdDate}
@@ -29,7 +30,8 @@ const ArticleView = ({
         </p>
       </div>
       <div
-        className={styles.article__content}
+        className={articleStyles.article__content}
+        ref={articleContentRef}
         dangerouslySetInnerHTML={{ __html: article.html }}
       />
     </div>

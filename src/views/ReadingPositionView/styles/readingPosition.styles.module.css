@@ -1,0 +1,36 @@
+.reading-position {
+  display: grid;
+  grid-template-columns: 1fr;
+  height: 100%;
+  width: 100%;
+}
+
+.reading-position__content {
+  grid-column-start: 1;
+  grid-row-start: 1;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.reading-position progress[value] {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  height: 100%;
+  width: 100%;
+}
+
+.reading-position progress[value]::-webkit-progress-bar {
+  background-color: transparent;
+}
+
+.reading-position progress[value]::-webkit-progress-value {
+  background-color: rgba(0, 0, 0, 0.1)
+}
+
+.reading-position progress::-moz-progress-bar {
+  background-color: rgba(0, 0, 0, 0.1)
+}

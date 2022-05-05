@@ -1,11 +1,8 @@
-import { HTMLElements } from 'src/shared/types';
-import { ArticleElements } from 'src/views/ArticleView/interfaces';
+import { MutableRefObject } from 'react';
 import ArticleViewModel from 'src/view-models/article/article.view-model';
 
 export interface ArticleViewProps {
   article: ArticleViewModel;
-  addElementRef: (
-    element: HTMLElements | null,
-    elementType: ArticleElements,
-  ) => void;
+  articleTitleRef: MutableRefObject<HTMLHeadingElement | null>;
+  articleContentRef: MutableRefObject<HTMLDivElement | null>;
 }
