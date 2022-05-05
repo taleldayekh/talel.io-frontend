@@ -2,17 +2,15 @@ import {
   FooterViewProps,
   FooterElements,
 } from 'src/views/FooterView/interfaces';
-import styles from 'src/views/FooterView/styles/styles.module.css';
+import footerViewStyles from 'src/views/FooterView/styles/footerView.styles.module.css';
 
-const FooterView = ({ addElementRef }: FooterViewProps): JSX.Element => {
+const FooterView = ({ footerRef }: FooterViewProps): JSX.Element => {
   return (
     <div
       id={FooterElements.footer}
-      className={styles.footer}
-      ref={(el) => addElementRef(el, FooterElements.footer)}
-    >
-      Footer content goes here
-    </div>
+      className={footerViewStyles.footer}
+      ref={footerRef}
+    ></div>
   );
 };
 

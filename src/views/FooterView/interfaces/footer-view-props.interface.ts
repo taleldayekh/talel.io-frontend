@@ -1,9 +1,5 @@
-import { HTMLElements } from 'src/shared/types';
-import { FooterElements } from 'src/views/FooterView/interfaces';
+import { MutableRefObject } from 'react';
 
 export interface FooterViewProps {
-  addElementRef: (
-    element: HTMLElements | null,
-    elementType: FooterElements,
-  ) => void;
+  footerRef: MutableRefObject<HTMLDivElement | null>;
 }
