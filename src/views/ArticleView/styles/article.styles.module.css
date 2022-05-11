@@ -9,6 +9,7 @@ img {
   display: grid;
   font-family: 'Merriweather', Serif;
   grid-template-columns: repeat(12, 1fr);
+  margin: 0 auto;
 }
 
 .article__title {
@@ -49,6 +50,7 @@ img {
 .article__content p {
   font-size: 1rem;
   grid-column: 2 / 12;
+  line-height: 1.75rem;
   margin-bottom: 1.5rem;
   text-align: justify;
 }
@@ -56,10 +58,10 @@ img {
 .article__content p:nth-child(2):first-letter {
   float: left;
   font-family: 'Blanka', Serif;
-  font-size: 4.5em;
-  line-height: 0.8em;
+  font-size: 5.125em;
+  line-height: 0.8125em;
   padding-bottom: 0.125em;
-  margin-right: 0.25em;
+  margin-right: 0.125em;
 }
 
 :global(p.article-image) {
@@ -84,4 +86,18 @@ img {
   position: absolute;
   transform: translateX(-1em);
   width: 2em;
+}
+
+@media (min-width: 62em) { /* 992 px */
+  .article {
+    max-width: 86em;
+  }
+
+  .article__content p {
+    grid-column: 4 / 10;
+  }
+
+  :global(p.article-image) {
+    grid-column: span 12;
+  }
 }
