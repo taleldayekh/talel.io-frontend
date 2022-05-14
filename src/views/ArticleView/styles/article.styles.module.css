@@ -55,17 +55,13 @@ img {
   text-align: justify;
 }
 
-.article__content p:nth-child(2):first-letter {
+.article__content p:nth-child(3):first-letter {
   float: left;
   font-family: 'Blanka', Serif;
   font-size: 5.125em;
   line-height: 0.8125em;
   padding-bottom: 0.125em;
   margin-right: 0.125em;
-}
-
-:global(p.article-image) {
-  grid-column: span 12;
 }
 
 .article__content h1 {
@@ -92,12 +88,20 @@ img {
   .article {
     max-width: 86em;
   }
-
+  
   .article__content p {
     grid-column: 4 / 10;
   }
+}
 
-  :global(p.article-image) {
-    grid-column: span 12;
-  }
+:global(p.article__content__hero-image) {
+  grid-column: span 12;
+  margin-bottom: 0;
+}
+
+:global(p.article__content__hero-image-credits) {
+  font-size: 0.75em;
+  grid-column: span 12;
+  line-height: normal;
+  margin-top: 0.5rem;
 }
