@@ -23,17 +23,22 @@ export default class ArticlesMapper {
       articleResponse.created_at,
       articleResponse.updated_at,
       articleResponse.title,
+      articleResponse.meta_description,
       articleResponse.slug,
       articleResponse.body,
       articleResponse.html,
       articleResponse.featured_image,
+      articleResponse.url,
     );
   }
 
   public static toArticleViewModel(article: ArticleModel): ArticleViewModel {
     return new ArticleViewModel(
       article.title,
+      article.description,
+      article.featuredImage,
       article.html,
+      article.url,
       article.createdAt,
       // TODO: Remove empty string once db always returns a value for updated at
       article.updatedAt || '',
