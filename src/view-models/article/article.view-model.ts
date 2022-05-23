@@ -6,7 +6,10 @@ export default class ArticleViewModel {
 
   constructor(
     public title: string,
+    public description: string,
+    public featuredImage: string,
     public html: string,
+    public url: string,
     private createdAt: string,
     private updatedAt: string,
   ) {

@@ -8,6 +8,8 @@ export interface ArticleResponse {
   title: string;
   slug: string;
   body: string;
+  meta_description: string;
   html: string;
   featured_image: string;
+  url: string;
 }

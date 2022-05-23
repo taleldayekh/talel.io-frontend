@@ -7,6 +7,7 @@ import { ArticlesContext } from 'src/contexts/articles/articles.context';
 import ArticlesRepository from 'src/data/articles/articles.repository';
 import ArticlesMapper from 'src/data/articles/articles.mapper';
 import ArticleViewModel from 'src/view-models/article/article.view-model';
+import HeadMeta from 'src/components/HeadMeta/HeadMeta';
 import ArticleStatusBarController from 'src/views/ArticleStatusBarView/ArticleStatusBarController';
 import ArticleView from 'src/views/ArticleView/ArticleView';
 import FooterView from 'src/views/FooterView/FooterView';
@@ -74,6 +75,27 @@ const ArticleController = (): JSX.Element => {
   // Todo: Navigate to 404 if article cannot be found.
   return article ? (
     <>
+      <HeadMeta
+        title={article.title}
+        description={article.description}
+        canonical={`articles/${slug}`}
+        og={{
+          type: 'article',
+          title: article.title,
+          description: article.description,
+          image: article.featuredImage,
+          imageAlt: 'alt for image',
+          url: article.url,
+        }}
+        // Todo: Make enum
+        twitter={{
+          card: 'summary_large_image',
+          title: article.title,
+          description: article.description,
+          image: article.featuredImage,
+          imageAlt: 'alt for image',
+        }}
+      />
       <ArticleStatusBarController
         articleTitle={article.title}
         articleContentRef={articleContentRef}

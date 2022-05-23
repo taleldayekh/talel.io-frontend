@@ -3,6 +3,7 @@ import { ArticleFormFields } from 'src/views/private/ArticleFormView/interfaces'
 import HttpClient from 'src/libs/http-client/http-client';
 import AssetsRepository from 'src/data/assets/assets.repository';
 import ArticlesRepository from 'src/data/articles/articles.repository';
+import HeadMeta from 'src/components/HeadMeta/HeadMeta';
 import ArticleFormView from 'src/views/private/ArticleFormView/ArticleFormView';
 
 const ArticleFormController: React.FC = () => {
@@ -56,13 +57,21 @@ const ArticleFormController: React.FC = () => {
   };
 
   return (
-    <ArticleFormView
-      articleTitle={article.title}
-      articleContent={article.content}
-      updateArticle={updateArticle}
-      uploadArticleImages={uploadArticleImages}
-      uploadArticle={uploadArticle}
-    />
+    <>
+      <HeadMeta
+        title="Add Article"
+        description="Add article"
+        canonical="admin/articles"
+        disableRobots
+      />
+      <ArticleFormView
+        articleTitle={article.title}
+        articleContent={article.content}
+        updateArticle={updateArticle}
+        uploadArticleImages={uploadArticleImages}
+        uploadArticle={uploadArticle}
+      />
+    </>
   );
 };
 

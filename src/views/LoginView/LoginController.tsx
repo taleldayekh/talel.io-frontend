@@ -6,6 +6,7 @@ import useAuthentication from 'src/hooks/authentication/useAuthentication';
 import TokenModel from 'src/models/authentication/token.model';
 import HttpClient from 'src/libs/http-client/http-client';
 import AuthenticationRepository from 'src/data/authentication/authentication.repository';
+import HeadMeta from 'src/components/HeadMeta/HeadMeta';
 import LoginView from 'src/views/LoginView/LoginView';
 
 const LoginController: React.FC = () => {
@@ -51,11 +52,19 @@ const LoginController: React.FC = () => {
   return authenticationContext.isLoggedIn ? (
     <Navigate to="/admin/articles" />
   ) : (
-    <LoginView
-      updateEmail={updateEmail}
-      updatePassword={updatePassword}
-      login={login}
-    />
+    <>
+      <HeadMeta
+        title="Login"
+        description="Login"
+        canonical="login"
+        disableRobots
+      />
+      <LoginView
+        updateEmail={updateEmail}
+        updatePassword={updatePassword}
+        login={login}
+      />
+    </>
   );
 };
 
