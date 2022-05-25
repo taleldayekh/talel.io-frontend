@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ArticlesProvider } from 'src/contexts/articles/articles.context';
 import HomeView from 'src/views/HomeView/HomeView';
 import ArticlesController from 'src/views/ArticlesView/ArticlesController';
@@ -10,7 +10,7 @@ import ArticleFormController from 'src/views/private/ArticleFormView/ArticleForm
 
 const AppView: React.FC = () => {
   return (
-    <HashRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
         <Route path="/" element={<HomeView />} />
         <Route
@@ -36,7 +36,7 @@ const AppView: React.FC = () => {
           }
         />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 
