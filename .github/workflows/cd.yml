@@ -38,11 +38,11 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install Dependencies
-        run: yarn install
+        run: npm install
 
       - name: Deploy
         run: |
           git config --global user.email ${{ secrets.TALEL_GITHUB_EMAIL }}
           git config --global user.name "taleldayekh"
           git remote set-url origin https://${{ secrets.GHPAGES_DEPLOYMENT_TOKEN }}@github.com/${{ github.repository }}
-          yarn deploy
+          npm run deploy
