@@ -10,7 +10,7 @@ import ArticleFormController from 'src/views/private/ArticleFormView/ArticleForm
 
 const AppView: React.FC = () => {
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomeView />} />
         <Route
