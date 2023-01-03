@@ -1,1 +1,1 @@
-export * from './text-field-type.enum';
+export * from 'components/TextField/enums/text-field-type.enum';

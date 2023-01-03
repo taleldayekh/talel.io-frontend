@@ -1,7 +1,7 @@
-import { ChangeEvent } from "react";
-import { TextFieldType } from "../enums"
+import { ChangeEvent } from 'react';
+import { TextFieldType } from 'components/TextField/enums';
 
 export interface TextFieldProps {
-    type?: TextFieldType;
     onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+    type?: TextFieldType;
 }

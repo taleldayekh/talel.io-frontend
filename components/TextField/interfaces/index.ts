@@ -1,1 +1,1 @@
-export * from './text-field-props.interface';
+export * from 'components/TextField/interfaces/text-field-props.interface';

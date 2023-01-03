@@ -1,5 +1,5 @@
-import Login from "./Login/Login"
+import LoginController from 'pages/Login/LoginController';
 
 export default function Home() {
-  return <Login/>
+  return <LoginController/>
 }
