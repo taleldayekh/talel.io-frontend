@@ -1,6 +1,6 @@
 import { LoginSchema } from 'infrastructure/repositories/auth/schemas';
 
-export class LoginMapper {
+export default class LoginMapper {
     public static fromResponseToAccessToken(loginResponse: LoginSchema): string {
         // ! Remove
         console.log(loginResponse)

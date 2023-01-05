@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from 'react';
 import AuthRepository from 'infrastructure/repositories/auth/auth.repository';
-import { LoginMapper } from 'pages/Login/mappers';
+import LoginMapper from 'pages/Login/mappers/login.mapper';
 import Login from 'pages/Login/Login';
 
 export default function LoginController() {
