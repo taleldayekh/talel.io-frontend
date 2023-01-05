@@ -1,9 +1,12 @@
-import { useState, ChangeEvent } from 'react';
+import { useContext, useState, ChangeEvent } from 'react';
 import AuthRepository from 'infrastructure/repositories/auth/auth.repository';
+import { AuthContext } from 'contexts/auth/auth.context';
 import LoginMapper from 'pages/Login/mappers/login.mapper';
 import Login from 'pages/Login/Login';
 
 export default function LoginController() {
+    const { authValues, setAuthValues } = useContext(AuthContext)
+
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
@@ -18,13 +21,14 @@ export default function LoginController() {
     }
 
     const login = async (): Promise<void> => {
-        const loginRes = await AuthRepository.login(email, password);
-        const accessToken = LoginMapper.fromResponseToAccessToken(loginRes.data);
+        // const loginRes = await AuthRepository.login(email, password);
+        // const accessToken = LoginMapper.fromResponseToAccessToken(loginRes.data);
 
-        // TODO: Set authentication context.
-        // ! Remove
-        console.log('set authentication token here')
-        console.log(accessToken);
+        // ! Test
+        setAuthValues({
+            token: 'test token',
+            isLoggedIn: true
+        })
     }
 
     return <Login updateEmailInput={updateEmailInput} updatePasswordInput={updatePasswordInput} loginAction={login} />
