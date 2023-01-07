@@ -1,5 +1,5 @@
-import routeGuard from 'hooks/routeGuard';
+import withRouteGuard from 'HOCs/withRouteGuard';
 
-export default routeGuard(function Admin() {
+export default withRouteGuard(function Admin() {
     return <>This is the admin index page</>
 })

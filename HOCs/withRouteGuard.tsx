@@ -2,7 +2,7 @@ import { useContext, useEffect, FC, ReactElement } from 'react';
 import { useRouter } from 'next/router';
 import { AuthContext } from 'contexts/auth/auth.context';
 
-const routeGuard = (Component: FC) => (props: ReactElement) => {
+const withRouteGuard = (Component: FC) => (props: ReactElement) => {
     const router = useRouter();
 
     const { authValues } = useContext(AuthContext);
@@ -20,4 +20,4 @@ const routeGuard = (Component: FC) => (props: ReactElement) => {
     )
 }
 
-export default routeGuard;
+export default withRouteGuard;
