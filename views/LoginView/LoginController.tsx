@@ -1,20 +1,25 @@
 import { useContext, useState, useEffect, ChangeEvent } from 'react';
 import { useRouter } from 'next/router';
 import { AuthContext } from 'contexts/auth/auth.context';
-import AuthRepository from 'infrastructure/repositories/auth/auth.repository';
-import { HttpResponse } from 'libs/http-client/interfaces';
-import { LoginSchema } from 'infrastructure/repositories/auth/schemas';
+import useAuth from 'hooks/auth/useAuth';
 import { LoginControllerProps } from 'views/LoginView/interfaces';
-import LoginMapper from 'views/LoginView/mappers/login.mapper';
 
 export default function LoginController(props: LoginControllerProps) {
     const router = useRouter();
+    const auth = useAuth();
 
-    const {authValues, setAuthValues} = useContext(AuthContext);
+    const { authValues } = useContext(AuthContext);
     const isLoggedIn = authValues.isLoggedIn;
 
     useEffect(() => {
-        // TODO: Instead of checking isLoggedIn, check if there is a valid access token.
+        try {
+            auth.refreshAccessToken();
+        } catch (error) {
+            console.warn('No current logged in user')
+        }
+    }, [])
+
+    useEffect(() => {
         if (isLoggedIn) {
             router.push('/admin');
         }
@@ -34,16 +39,11 @@ export default function LoginController(props: LoginControllerProps) {
     }
 
     const login = (): void => {
-        AuthRepository.login(email, password).then((loginRes: HttpResponse<LoginSchema>) => {
-            const accessToken = LoginMapper.fromResponseDataToAccessToken(loginRes.data);
-
-            setAuthValues({
-                token: accessToken,
-                isLoggedIn: true
-            })
-        }).catch((error) => {
-            // TODO: Handle error
-        })
+        try {
+            auth.login(email, password);
+        } catch (error) {
+            // TODO: Display error component
+        }
     }
 
     return props.render(updateEmailInput, updatePasswordInput, login);
