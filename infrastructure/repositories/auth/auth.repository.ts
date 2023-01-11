@@ -1,5 +1,5 @@
 import { HttpResponse } from 'libs/http-client/interfaces';
-import { LoginSchema } from 'infrastructure/repositories/auth/schemas';
+import { LoginSchema, NewAccessTokenSchema } from 'infrastructure/repositories/auth/schemas';
 import HttpClient from 'libs/http-client/http-client';
 
 export default class AuthRepository {
@@ -10,5 +10,9 @@ export default class AuthRepository {
         }
 
         return await HttpClient.post('/accounts/login', loginData);
+    }
+
+    public static async getNewAccessToken(): Promise<HttpResponse<NewAccessTokenSchema>> {
+        return await HttpClient.post('/accounts/token');
     }
 }

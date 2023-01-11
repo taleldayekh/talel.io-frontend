@@ -19,9 +19,9 @@ class HttpClient {
     }
 
     // TODO: Replace any type.
-    async post(resource: string, body: any): Promise<HttpResponse<any>> {
+    async post(resource: string, body?: any): Promise<HttpResponse<any>> {
         try {
-            const postRes = await this.axiosInstance.post(resource, body)
+            const postRes = await this.axiosInstance.post(resource, body, { withCredentials: true})
 
             return {
                 status: postRes.status,
