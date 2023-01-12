@@ -12,11 +12,9 @@ export default function LoginController(props: LoginControllerProps) {
     const isLoggedIn = authValues.isLoggedIn;
 
     useEffect(() => {
-        try {
-            auth.refreshAccessToken();
-        } catch (error) {
+        auth.refreshAccessToken().catch(() => {
             console.warn('No current logged in user')
-        }
+        })
     }, [])
 
     useEffect(() => {
@@ -38,9 +36,9 @@ export default function LoginController(props: LoginControllerProps) {
         setPassword(password);
     }
 
-    const login = (): void => {
+    const login = async (): Promise<void> => {
         try {
-            auth.login(email, password);
+            await auth.login(email, password);
         } catch (error) {
             // TODO: Display error component
         }

@@ -8,30 +8,33 @@ import AuthMapper from 'hooks/auth/mappers/auth.mapper';
 export default function useAuth() {
     const { setAuthValues } = useContext(AuthContext);
 
-    const login = (email: string, password: string): void => {
-        AuthRepository.login(email, password).then((loginRes: HttpResponse<LoginSchema>) => {
+    const login = async (email: string, password: string): Promise<void> => {
+        try {
+            const loginRes: HttpResponse<LoginSchema> = await AuthRepository.login(email, password);
             const accessToken = AuthMapper.fromResponseDataToAccessToken(loginRes.data);
 
             setAuthValues({
                 token: accessToken,
-                isLoggedIn: true
+                isLoggedIn: true,
             })
-        }).catch((error) => {
-            throw(error)
-        })
+        } catch (error) {
+            throw error;
+        }
     }
 
-    const refreshAccessToken = (): void => {
-        AuthRepository.getNewAccessToken().then((newAccessTokenRes: HttpResponse<NewAccessTokenSchema>) => {
+    const refreshAccessToken = async (): Promise<void> => {
+        try {
+            const newAccessTokenRes: HttpResponse<NewAccessTokenSchema> = await AuthRepository.getNewAccessToken();
             const accessToken = AuthMapper.fromResponseDataToAccessToken(newAccessTokenRes.data);
-
+            
             setAuthValues({
                 token: accessToken,
-                isLoggedIn: true
+                isLoggedIn: true,
             })
-        }).catch((error) => {
-            throw(error)
-        })
+
+        } catch (error) {
+            throw error;
+        }
     }
 
     return {

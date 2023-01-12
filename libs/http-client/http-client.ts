@@ -9,7 +9,7 @@ class HttpClient {
         this.axiosInstance = axios.create({baseURL})
     }
 
-    async get(resource: string): Promise<AxiosResponse> {
+    public async get(resource: string): Promise<AxiosResponse> {
         try {
             return await this.axiosInstance.get(resource);
         } catch (error) {
@@ -19,7 +19,7 @@ class HttpClient {
     }
 
     // TODO: Replace any type.
-    async post(resource: string, body?: any): Promise<HttpResponse<any>> {
+    public async post(resource: string, body?: any): Promise<HttpResponse<any>> {
         try {
             const postRes = await this.axiosInstance.post(resource, body, { withCredentials: true})
 
