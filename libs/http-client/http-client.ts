@@ -1,12 +1,35 @@
-import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { HttpResponse } from 'libs/http-client/interfaces';
+import { RequestInterceptionEvents } from 'libs/http-client/enums';
 import config from 'config';
 
 class HttpClient {
     private readonly axiosInstance: AxiosInstance;
+    private requestInterceptorCallbacks = new Map();
 
     constructor(baseURL: string) {
-        this.axiosInstance = axios.create({baseURL})
+        this.axiosInstance = axios.create({baseURL});
+        this.initializeRequestInterceptor();
+    }
+
+    private initializeRequestInterceptor(): void {
+        this.axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
+            const getToken = this.requestInterceptorCallbacks.get(RequestInterceptionEvents.TOKEN);
+
+            if (getToken) {
+                const token = getToken();
+
+                // !
+                console.log(token)
+            }
+
+            return config;
+        })
+    }
+
+    // TODO: Consider types for the callbacks
+    public onRequestInterception(event: RequestInterceptionEvents, callback: () => any): void {
+        this.requestInterceptorCallbacks.set(event, callback);
     }
 
     public async get(resource: string): Promise<AxiosResponse> {
