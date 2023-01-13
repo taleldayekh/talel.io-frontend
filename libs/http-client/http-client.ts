@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosHeaders, AxiosResponse } from 'axios';
 import { HttpResponse } from 'libs/http-client/interfaces';
 import { RequestInterceptionEvents } from 'libs/http-client/enums';
 import config from 'config';
@@ -19,8 +19,9 @@ class HttpClient {
             if (getToken) {
                 const token = getToken();
 
-                // !
-                console.log(token)
+                if (token.length) {
+                    (config.headers as AxiosHeaders).set('Authorization', `Bearer ${token}`);
+                }
             }
 
             return config;
