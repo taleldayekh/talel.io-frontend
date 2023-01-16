@@ -29,7 +29,7 @@ export default function ReadingPositionIndicatorController({ contentRef, setEndP
         return () => {
             window.removeEventListener('scroll', updateContentOffsetTop);
         };
-    }, [contentRef, contentHeight]);
+    }, [contentRef, contentHeight, contentOffsetTop]);
 
     // TODO: What should be included in the dependency array?
     useEffect(() => {
@@ -42,7 +42,7 @@ export default function ReadingPositionIndicatorController({ contentRef, setEndP
         return () => {
             window.removeEventListener('resize', updateViewportHeight);
         };
-    })
+    }, [viewportHeight])
 
     useEffect(() => {
         const outOfViewContentHeight = contentHeight - viewportHeight;

@@ -1,0 +1,26 @@
+.reading-position-indicator {
+    height: 100%;
+    width: 100%;
+}
+
+.reading-position-indicator progress[value] {
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    height: 100%;
+    width: 100%;
+}
+
+/* Progress bar container */
+.reading-position-indicator progress[value]::-webkit-progress-bar {
+    background-color: transparent;
+}
+
+/* Progress bar value */
+.reading-position-indicator progress[value]::-webkit-progress-value {
+    background-color: brown;
+}
+
+.reading-position-indicator progress[value]::-moz-progress-bar {
+    background-color: brown;
+}

@@ -3,7 +3,7 @@ import { ReadingPositionIndicatorProps } from 'components/ReadingPositionIndicat
 import ReadingPositionIndicatorController from 'components/ReadingPositionIndicator/ReadingPositionIndicatorController';
 import styles from 'components/ReadingPositionIndicator/reading-position-indicator.module.css';
 
-export default function ReadingPositionIndicator({ contentRef }: ReadingPositionIndicatorProps) {
+export default function ReadingPositionIndicator({ contentRef, className }: ReadingPositionIndicatorProps) {
     const [endPosition, setEndPosition] = useState<number>(0);
     const [currentPosition, setCurrentPosition] = useState<number>(0);
 
@@ -13,9 +13,8 @@ export default function ReadingPositionIndicator({ contentRef }: ReadingPosition
             setEndPosition={setEndPosition}
             setCurrentPosition={setCurrentPosition}
             render={() => (
-                <div>
+                <div className={`${className} ${styles['reading-position-indicator']}`}>
                     <progress 
-                        // className={styles['reading-position']} 
                         max={endPosition} 
                         value={currentPosition}
                     />
