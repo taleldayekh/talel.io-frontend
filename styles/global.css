@@ -1,0 +1,4 @@
+body {
+    margin: 0; /* This is needed */
+    background-color: pink; /* Should probably be part of a wrapper div somewhere */
+}

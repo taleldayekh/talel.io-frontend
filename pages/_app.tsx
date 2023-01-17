@@ -3,6 +3,7 @@ import { AppProps } from 'next/app';
 import { AuthProvider, AuthContext } from 'contexts/auth/auth.context';
 import httpClient from 'libs/http-client/http-client';
 import { RequestInterceptionEvents } from 'libs/http-client/enums';
+import 'styles/global.css';
 
 function AppController({ children }: PropsWithChildren) {
   const { authValues } = useContext(AuthContext);
