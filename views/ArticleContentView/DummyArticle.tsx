@@ -6,7 +6,11 @@ interface DummyArt {
 
 export default function DummyArticle({articleTitleRef}: DummyArt) {
     return (
-        <div ref={articleTitleRef}>
+        <div>
+            <div ref={articleTitleRef}>
+                <h1>This is the title of the article</h1>
+            </div>
+
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac aliquam turpis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed semper ipsum elit, sed commodo lacus iaculis ut. Quisque pretium semper ex. Phasellus varius at nisi ut fermentum. Fusce eget sapien in urna imperdiet porttitor eu a est. Nam imperdiet ipsum lectus. Morbi lorem neque, cursus dignissim fermentum sit amet, pharetra ut nibh. Proin sed molestie tortor, vel placerat odio. Quisque velit lorem, euismod id ex sed, tincidunt aliquet lacus. Quisque fermentum non ante auctor posuere. Suspendisse porta condimentum tempor. Ut congue, sapien eu egestas egestas, nisi orci consectetur lectus, vel pretium elit turpis ac arcu. Pellentesque eget arcu ut purus tempus sollicitudin. Mauris et nunc non orci ultrices convallis a malesuada enim. In non nisi tincidunt, blandit risus at, semper odio.</p>
             <br/>
             <p>Aliquam vel massa accumsan tortor ullamcorper commodo. Sed cursus feugiat tortor nec sollicitudin. Donec suscipit ex eu risus venenatis pharetra. Donec feugiat elit turpis, ac facilisis arcu pharetra nec. Maecenas lobortis pellentesque magna et porta. Curabitur maximus ipsum vel massa lobortis, bibendum consectetur magna sollicitudin. Fusce sed ligula pharetra, suscipit nibh eget, malesuada erat. Sed nec bibendum dolor. Curabitur in euismod diam, in efficitur nibh. Pellentesque congue sed eros et ullamcorper. Ut dictum, orci eget aliquet luctus, nisl mi feugiat sapien, nec lobortis nulla mi id odio.</p>
