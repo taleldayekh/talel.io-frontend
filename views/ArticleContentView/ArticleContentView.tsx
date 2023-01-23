@@ -2,12 +2,13 @@ import  { useRef, useState, useEffect } from 'react';
 import ArticleContentController from 'views/ArticleContentView/ArticleContentController';
 import ReadingPositionIndicator from 'components/ReadingPositionIndicator/ReadingPositionIndicator';
 import Footer from 'components/Footer/Footer';
+import { ArticleContentViewProps } from 'views/ArticleContentView/interfaces';
 import styles from 'views/ArticleContentView/article-content-view.module.css';
 // !
 import Article from 'components/Article/Article';
 // !
 
-export default function ArticleContentView() {
+export default function ArticleContentView({ slug }: ArticleContentViewProps) {
     const articleContentRef = useRef<HTMLDivElement | null>(null);
     const articleTitleRef = useRef<HTMLDivElement | null>(null);
     const footerRef = useRef<HTMLDivElement | null>(null);
@@ -28,7 +29,8 @@ export default function ArticleContentView() {
     }, [isInitialPageLoad, articleTitleIsInView])
 
     return (
-        <ArticleContentController 
+        <ArticleContentController
+            slug={slug} 
             articleTitleRef={articleTitleRef} 
             footerRef={footerRef}
             setArticleTitleIsInView={setArticleTitleIsInView}

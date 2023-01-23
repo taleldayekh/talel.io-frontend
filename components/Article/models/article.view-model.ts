@@ -1,9 +1,18 @@
 export default class ArticleViewModel {
-    constructor() {
-        //
+    public createdAt = '';
+    public updatedAt = '';
+
+    constructor(
+        public title: string,
+        public featuredImage: string,
+        public html: string,
+        private createdDate: Date,
+        private updatedDate: Date,
+    ) {
+        this.formatDates();
     }
 
-    private formatDate(): void {
+    private formatDates(): void {
         //
     }
 }
