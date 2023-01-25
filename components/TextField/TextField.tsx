@@ -3,9 +3,13 @@ import { TextFieldType } from 'components/TextField/enums';
 
 export default function TextField({
     onChange,
-    type
+    onDrop,
+    type,
+    multiple
 }: TextFieldProps) {
     const textFieldType = type ? type : TextFieldType.TEXT
 
-    return <input type={textFieldType} onChange={onChange}></input>
+    return (
+        multiple ? <textarea onChange={onChange} onDrop={onDrop}/> : <input type={textFieldType} onChange={onChange}/>
+    )
 }
