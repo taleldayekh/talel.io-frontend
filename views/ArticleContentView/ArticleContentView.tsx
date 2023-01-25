@@ -3,16 +3,16 @@ import ArticleContentController from 'views/ArticleContentView/ArticleContentCon
 import ReadingPositionIndicator from 'components/ReadingPositionIndicator/ReadingPositionIndicator';
 import Footer from 'components/Footer/Footer';
 import { ArticleContentViewProps } from 'views/ArticleContentView/interfaces';
-import styles from 'views/ArticleContentView/article-content-view.module.css';
-// !
+import ArticleViewModel from 'components/Article/models/article.view-model';
 import Article from 'components/Article/Article';
-// !
+import styles from 'views/ArticleContentView/article-content-view.module.css';
 
 export default function ArticleContentView({ slug }: ArticleContentViewProps) {
     const articleContentRef = useRef<HTMLDivElement | null>(null);
     const articleTitleRef = useRef<HTMLDivElement | null>(null);
     const footerRef = useRef<HTMLDivElement | null>(null);
 
+    const [article, setArticle] = useState<ArticleViewModel | undefined>(undefined);
     const [articleTitleIsInView, setArticleTitleIsInView] = useState<boolean>(true);
     const [footerIsInView, setFooterIsInView] = useState<boolean>(false);
     const [isInitialPageLoad, setIsInitialPageLoad] = useState<boolean>(true);
@@ -31,8 +31,10 @@ export default function ArticleContentView({ slug }: ArticleContentViewProps) {
     return (
         <ArticleContentController
             slug={slug} 
+            article={article}
             articleTitleRef={articleTitleRef} 
             footerRef={footerRef}
+            setArticle={setArticle}
             setArticleTitleIsInView={setArticleTitleIsInView}
             setFooterIsInView={setFooterIsInView}
             render={() => (
@@ -46,7 +48,7 @@ export default function ArticleContentView({ slug }: ArticleContentViewProps) {
                     </div>
 
                     {/* !! */}
-                    <Article articleContentRef={articleContentRef} articleTitleRef={articleTitleRef}/>
+                    { article !== undefined && <Article article={article} articleContentRef={articleContentRef} articleTitleRef={articleTitleRef}/>}
                     <Footer footerRef={footerRef}/>
                 </>
         )}/>

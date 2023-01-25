@@ -3,15 +3,16 @@ import ArticlesRepository from 'infrastructure/repositories/articles/articles.re
 import { ArticleContentControllerProps } from 'views/ArticleContentView/interfaces';
 import { ArticleIds } from 'components/Article/enums';
 import { FooterIds } from 'components/Footer/enums';
+import ArticleMapper from 'views/ArticleContentView/mappers/article.mapper';
 
-export default function ArticleContentController({ slug, articleTitleRef, footerRef, setArticleTitleIsInView, setFooterIsInView, render }: ArticleContentControllerProps) {
+export default function ArticleContentController({ slug, article, articleTitleRef, footerRef, setArticle, setArticleTitleIsInView, setFooterIsInView, render }: ArticleContentControllerProps) {
     useEffect(() => {
-        if (slug === undefined) return
+        if (!slug || article) return;
 
-        ArticlesRepository.getArticle(slug).then(articleRes => {
-            console.log(articleRes)
-        }).catch(error => {
-            console.log(error)
+        ArticlesRepository.getArticle(slug).then((articleRes) => {
+            const article = ArticleMapper.fromResponseToArticleViewModel(articleRes.data);
+            setArticle(article);
+        }).catch((error) => {
             // TODO: Error handling
         })
     })
