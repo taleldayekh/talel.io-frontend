@@ -7,6 +7,8 @@ export const isValidImageType = (imageFile: File): Promise<boolean> => {
         const fileReader = new FileReader();
 
         fileReader.onload = () => {
+            let isValidImageType = false;
+
             if (fileReader.result instanceof ArrayBuffer) {
                 const fileHeader = new Uint8Array(fileReader.result);
 
@@ -14,11 +16,17 @@ export const isValidImageType = (imageFile: File): Promise<boolean> => {
                 const isPng = pngMagicNumberHeader.every((header: number, index: number) => header === fileHeader[index]);
                 const isJpeg = jpegMagicNumberHeader.every((header: number, index: number) => header === fileHeader[index]);
 
-                resolve(isGif || isPng || isJpeg);
-                return;
+                if (isGif || isPng || isJpeg) {
+                    isValidImageType = true;
+                }
             }
 
-            resolve(false)
+            if (isValidImageType) {
+                resolve(true)
+            } else {
+                // TODO: Pass error to an error model
+                reject(new Error('Not a valid image file'))
+            }
         }
 
         fileReader.onerror = reject;
@@ -26,4 +34,15 @@ export const isValidImageType = (imageFile: File): Promise<boolean> => {
         // Reads the first 8 bytes
         fileReader.readAsArrayBuffer(imageFile.slice(0, 8));
     })
+}
+
+export const isValidImageSize = (imageFile: File) => {
+    const maxImageMbSize = 2;
+    const imageMbSize = imageFile.size / (1024 * 1024);
+    const isValidImageSize = imageMbSize < maxImageMbSize;
+
+    if (!isValidImageSize) {
+        // TODO: Pass error to an error model
+        throw new Error('Image size exceeds 2MB');
+    }
 }
