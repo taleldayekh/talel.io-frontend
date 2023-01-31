@@ -1,10 +1,30 @@
-import { DragEvent } from 'react';
+import { ChangeEvent, DragEvent } from 'react';
 import AssetsRepository from 'infrastructure/repositories/assets/assets.repository';
 import { ArticleAdminControllerProps } from 'views/ArticleAdminView/interfaces';
+import { ArticleFormFields } from 'views/ArticleAdminView/enums';
 import { isValidImageType, isValidImageSize } from 'utils/image/image-validators';
 
-export default function ArticleAdminController(props: ArticleAdminControllerProps) {
-    const uploadImagesOnDrop = async (event: DragEvent<HTMLTextAreaElement>) => {
+export default function ArticleAdminController({ article, setArticle, render }: ArticleAdminControllerProps) {
+    const updateArticle = (formField: ArticleFormFields, text: string): void => {
+        setArticle({...article, [formField]: text});
+    }
+
+    const updateArticleTitle = (event: ChangeEvent<HTMLInputElement>): void => {
+        const articleTitle = event.target.value;
+        updateArticle(ArticleFormFields.TITLE, articleTitle);
+    }
+
+    const updateArticleDescription = (event: ChangeEvent<HTMLTextAreaElement>): void => {
+        const articleDescription = event.target.value;
+        updateArticle(ArticleFormFields.DESCRIPTION, articleDescription);
+    }
+
+    const updateArticleContent = (event: ChangeEvent<HTMLTextAreaElement>): void => {
+        const articleContent = event.target.value;
+        updateArticle(ArticleFormFields.CONTENT, articleContent);
+    }
+
+    const uploadImagesOnDrop = async (event: DragEvent<HTMLTextAreaElement>): Promise<void> => {
         event.preventDefault();
 
         const imageFiles = Array.from(event.dataTransfer.files);
@@ -30,11 +50,14 @@ export default function ArticleAdminController(props: ArticleAdminControllerProp
                 } else {
                     imageMarkdownString = imageMarkdownString + '\r\n' + '\r\n' + imageMarkdownSyntax;
                 }
+
+                updateArticle(ArticleFormFields.CONTENT, imageMarkdownString);
             } catch (error) {
+                // TODO: Set error for display in UI.
                 console.log(error)
             }
         }
     }
 
-    return props.render(uploadImagesOnDrop);
+    return render(updateArticleTitle, updateArticleDescription, updateArticleContent, uploadImagesOnDrop);
 }

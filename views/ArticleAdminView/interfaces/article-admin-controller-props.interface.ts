@@ -1,7 +1,13 @@
-import { DragEvent, ReactElement } from 'react';
+import { Dispatch, SetStateAction, ChangeEvent, DragEvent, ReactElement } from 'react';
+import { Article } from 'views/ArticleAdminView/interfaces';
 
 export interface ArticleAdminControllerProps {
+    article: Article;
+    setArticle: Dispatch<SetStateAction<Article>>;
     render: (
-        uploadImageOnDrop: (event: DragEvent<HTMLTextAreaElement>) => void,
+        updateArticleTitle: (event: ChangeEvent<HTMLInputElement>) => void,
+        updateArticleDescription: (event: ChangeEvent<HTMLTextAreaElement>) => void,
+        updateArticleContent: (event: ChangeEvent<HTMLTextAreaElement>) => void,
+        uploadImagesOnDrop: (event: DragEvent<HTMLTextAreaElement>) => void,
     ) => ReactElement;
 }
