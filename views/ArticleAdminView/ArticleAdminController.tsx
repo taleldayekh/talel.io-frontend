@@ -1,5 +1,6 @@
-import { ChangeEvent, DragEvent } from 'react';
+import { ChangeEvent, DragEvent, FormEvent } from 'react';
 import AssetsRepository from 'infrastructure/repositories/assets/assets.repository';
+import ArticlesRepository from 'infrastructure/repositories/articles/articles.repository';
 import { ArticleAdminControllerProps } from 'views/ArticleAdminView/interfaces';
 import { ArticleFormFields } from 'views/ArticleAdminView/enums';
 import { isValidImageType, isValidImageSize } from 'utils/image/image-validators';
@@ -59,5 +60,17 @@ export default function ArticleAdminController({ article, setArticle, render }: 
         }
     }
 
-    return render(updateArticleTitle, updateArticleDescription, updateArticleContent, uploadImagesOnDrop);
+    const submitArticle = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
+        event.preventDefault();
+
+        try {
+            // TODO: Ensure all fields are present and not empty stings before making request.
+            // TODO: Clear fields, in a final block?
+            await ArticlesRepository.createArticle(article.title, article.description, article.content)
+        } catch (error) {
+            // TODO: Set error for display in the UI.
+        }
+    }
+
+    return render(updateArticleTitle, updateArticleDescription, updateArticleContent, uploadImagesOnDrop, submitArticle);
 }

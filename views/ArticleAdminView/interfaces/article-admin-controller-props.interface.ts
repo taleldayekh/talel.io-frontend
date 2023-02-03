@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, ChangeEvent, DragEvent, ReactElement } from 'react';
+import { Dispatch, SetStateAction, ChangeEvent, DragEvent, FormEvent, ReactElement } from 'react';
 import { Article } from 'views/ArticleAdminView/interfaces';
 
 export interface ArticleAdminControllerProps {
@@ -9,5 +9,6 @@ export interface ArticleAdminControllerProps {
         updateArticleDescription: (event: ChangeEvent<HTMLTextAreaElement>) => void,
         updateArticleContent: (event: ChangeEvent<HTMLTextAreaElement>) => void,
         uploadImagesOnDrop: (event: DragEvent<HTMLTextAreaElement>) => void,
+        submitArticle: (event: FormEvent<HTMLFormElement>) => Promise<void>,
     ) => ReactElement;
 }

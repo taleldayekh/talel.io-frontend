@@ -10,11 +10,17 @@ export default function ArticleAdminView() {
         content: '',
     });
 
-    return <ArticleAdminController article={article} setArticle={setArticle} render={(updateArticleTitle, updateArticleDescription, updateArticleContent, uploadImagesOnDrop) => (
+    return <ArticleAdminController article={article} setArticle={setArticle} render={(updateArticleTitle, updateArticleDescription, updateArticleContent, uploadImagesOnDrop, submitArticle) => (
         <>
-            <TextField onChange={updateArticleTitle}/>
-            <TextField multiple onChange={updateArticleDescription}/>
-            <TextField multiple onChange={updateArticleContent} onDrop={uploadImagesOnDrop}/>
+            <form onSubmit={submitArticle}>
+                <TextField onChange={updateArticleTitle}/>
+                <TextField multiple onChange={updateArticleDescription}/>
+                <TextField multiple onChange={updateArticleContent} onDrop={uploadImagesOnDrop}/>
+                {/* TODO: Create separate button component */}
+                {/* TODO: Submit article should happen in the form */}
+                {/* TODO: Replace by custom button */}
+                <input type="submit" value="Submit"/>
+            </form>
         </>
     )}/>
 }
