@@ -1,3 +1,5 @@
-export default function Home() {
-  return <>This is index</>
+import ArticlesView from 'views/ArticlesView/ArticlesView';
+
+export default function Index() {
+  return <ArticlesView/>
 }
