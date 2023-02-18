@@ -1,81 +1,83 @@
-import { useEffect } from 'react';
 import { PaginationControllerProps } from 'components/Pagination/interfaces';
 
-export default function PaginationController({ count, page, paginationRange, setPaginationRange, onChange, render }: PaginationControllerProps) {
-    useEffect(() => {
-        const defaultBoundary = 5;
+export default function PaginationController({ count, page, onChange, defaultTruncationBoundary, firstPage, setVisiblePaginationRange, render }: PaginationControllerProps) {
+    const isPageWithinBoundaryFromStart = (page: number, defaultTruncationBoundary: number): boolean => {
+        // Between 1 - 4
+        return page > 0 && !(page > defaultTruncationBoundary - 1);
+    }
 
-        setPaginationRange({
-            boundaryStart: 0,
-            boundaryEnd: defaultBoundary,
+    const isPageWithinBoundaryFromEnd = (page: number, count: number, defaultTruncationBoundary: number): boolean => {
+        // Between e.g. 6 - 9
+        return page > (count - defaultTruncationBoundary + 1) && page <= count;
+    }
+
+    const updateTruncatedPaginationRange = (activePage: number) => {
+        // 3 pages range
+        setVisiblePaginationRange({
+            start: activePage - 2,
+            end: activePage + 1,
         })
-    }, [])
+    }
 
     const onPrevClicked = () => {
         const prevPage = page - 1;
+        const pageIsWithinBoundaryFromStart = isPageWithinBoundaryFromStart(page, defaultTruncationBoundary);
+        const pageIsWithinBoundaryFromEnd = isPageWithinBoundaryFromEnd(page, count, defaultTruncationBoundary)
 
-        if (prevPage < 1) {
-            onChange(page)
-        } else {
-            const boundaryStart = paginationRange.boundaryStart - 1;
-
-            if (boundaryStart >= 0) {
-                setPaginationRange({
-                    boundaryStart: boundaryStart,
-                    boundaryEnd: paginationRange.boundaryEnd - 1,
-                })
-            }
-
+        if (prevPage > 0) {
             onChange(prevPage)
+        }
+
+        if (!pageIsWithinBoundaryFromStart && !pageIsWithinBoundaryFromEnd) {
+            updateTruncatedPaginationRange(prevPage)
         }
     }
 
     const onNextClicked = () => {
         const nextPage = page + 1;
 
-        if (nextPage > count) {
-            onChange(page)
-        } else {
-            const boundaryEnd = paginationRange.boundaryEnd + 1;
+        // ! Error
+        const pageIsWithinBoundaryFromStart = isPageWithinBoundaryFromStart(page, defaultTruncationBoundary);
+        const pageIsWithinBoundaryFromEnd = isPageWithinBoundaryFromEnd(page, count, defaultTruncationBoundary)
 
-            if (boundaryEnd < count) {
-                setPaginationRange({
-                    boundaryStart: paginationRange.boundaryStart + 1,
-                    boundaryEnd: boundaryEnd,
-                })
-            }
-
+        if (nextPage <= count) {
             onChange(nextPage)
+        }
+
+        if (!pageIsWithinBoundaryFromStart && !pageIsWithinBoundaryFromEnd) {
+            updateTruncatedPaginationRange(nextPage)
         }
     }
 
     const onPageClicked = (page: number) => {
-        if (page === count) {
-            // TODO: Should have the number 5 globally available and as the default boundary
-            setPaginationRange({
-                boundaryStart: count - 1 -5,
-                boundaryEnd: count - 1,
-            })
+        onChange(page);
+
+        const pageIsWithinBoundaryFromStart = isPageWithinBoundaryFromStart(page, defaultTruncationBoundary);
+        const pageIsWithinBoundaryFromEnd = isPageWithinBoundaryFromEnd(page, count, defaultTruncationBoundary);
+
+        if (
+            !pageIsWithinBoundaryFromStart &&
+            !pageIsWithinBoundaryFromEnd
+        ) {
+            // Update truncated pages
+            updateTruncatedPaginationRange(page)
         }
 
-
-
-        if (page === paginationRange.boundaryEnd && page < count - 1) {
-            setPaginationRange({
-                boundaryStart: paginationRange.boundaryStart + 1,
-                boundaryEnd: paginationRange.boundaryEnd + 1
+        // use firstPage variable
+        if (pageIsWithinBoundaryFromStart || page === firstPage) {
+            setVisiblePaginationRange({
+                start: firstPage,
+                end: defaultTruncationBoundary
             })
         }
-
-        if (page -1 === paginationRange.boundaryStart && page > 1) {
-            setPaginationRange({
-                boundaryStart: paginationRange.boundaryStart - 1,
-                boundaryEnd: paginationRange.boundaryEnd - 1
+        // Maybe create some default end and first page variable
+        if (pageIsWithinBoundaryFromEnd || page === count) {
+            setVisiblePaginationRange({
+                start: count - defaultTruncationBoundary,
+                end: count - 1
             })
         }
-
-        onChange(page)
     }
 
-    return render(onPrevClicked, onNextClicked, onPageClicked);
+    return render(onPrevClicked, onNextClicked, onPageClicked, isPageWithinBoundaryFromStart, isPageWithinBoundaryFromEnd)
 }
