@@ -35,6 +35,7 @@ export default function Pagination({ count, page, onChange }: PaginationProps) {
     const paginationRangeEnd = isPageWithinBoundaryFromEnd ? count - 1 : visiblePaginationRange.end;
 
     const pages = [...Array(count).keys()];
+    const firstPage = 1;
 
     return (
         <PaginationController
@@ -44,29 +45,24 @@ export default function Pagination({ count, page, onChange }: PaginationProps) {
             isPageWithinBoundaryFromStart={isPageWithinBoundaryFromStart}
             isPageWithinBoundaryFromEnd={isPageWithinBoundaryFromEnd}
             setVisiblePaginationRange={setVisiblePaginationRange}
-            render={(onPrevClicked, onNextClicked) => (
+            render={(onPrevClicked, onNextClicked, onPageClicked) => (
                 <>
                     <button onClick={onPrevClicked}>Prev</button>
                     {/* First page button */}
-                    <button style={{backgroundColor: page === 1 ? 'orange' : ''}}>1</button>{!isPageWithinBoundaryFromStart && '...'}
+                    <button onClick={() => onPageClicked(firstPage)} style={{backgroundColor: page === 1 ? 'orange' : ''}}>{firstPage}</button>{!isPageWithinBoundaryFromStart && '...'}
                     {
-                        pages.slice(paginationRangeStart, paginationRangeEnd).map((activePage, index) => {
+                        pages.slice(paginationRangeStart, paginationRangeEnd).map((pageFromRange, index) => {
+                            const activePage = pageFromRange + 1;
+
                             return (
-                                <button 
-                                    style={{backgroundColor: page === activePage + 1 ? 'orange' : ''}} 
-                                    key={index}>
-                                        {activePage + 1}
+                                <button onClick={() => onPageClicked(activePage)} style={{backgroundColor: page === activePage ? 'orange' : ''}} key={index}>
+                                    {pageFromRange + 1}
                                 </button>
                             )
                         })
                     }
-
-
-
                     {/* Last page button */}
-                    {!isPageWithinBoundaryFromEnd && '...'}<button
-                        style={{backgroundColor: page === count ? 'orange' : ''}}
-                    >{count}</button>
+                    {!isPageWithinBoundaryFromEnd && '...'}<button onClick={() => onPageClicked(count)} style={{backgroundColor: page === count ? 'orange' : ''}}>{count}</button>
                     <button onClick={onNextClicked}>Next</button>
                 </>
             )}
