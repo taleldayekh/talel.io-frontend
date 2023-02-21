@@ -1,4 +1,4 @@
 export interface PaginationRange {
-    boundaryStart: number;
-    boundaryEnd: number;
+    start: number;
+    end: number;
 }
