@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { PaginationProps, PaginationRange } from 'components/Pagination/interfaces';
 import PaginationController from 'components/Pagination/PaginationController';
+import styles from 'components/Pagination/pagination.module.css';
 
 export default function Pagination({ count, page, onChange }: PaginationProps) {
     /**
@@ -38,7 +39,7 @@ export default function Pagination({ count, page, onChange }: PaginationProps) {
                     <>
                         <button onClick={onPrevClicked}>{'<'}</button>
                         {/* First page button */}
-                        <button onClick={() => onPageClicked(firstPage)}>
+                        <button className={`${page === firstPage && styles['pagination__page-button--active']}`} onClick={() => onPageClicked(firstPage)}>
                             {firstPage}
                         </button>{!pageIsWithinBoundaryFromStart && '...'}
                         {
@@ -50,14 +51,14 @@ export default function Pagination({ count, page, onChange }: PaginationProps) {
                                 const activePage = pageInRange + 1
 
                                 return (
-                                    <button key={index} onClick={() => onPageClicked(activePage)}>
+                                    <button className={`${page === activePage && styles['pagination__page-button--active']}`} key={index} onClick={() => onPageClicked(activePage)}>
                                         { activePage}
                                     </button>
                                 )
                             })
                         }
                         {/* Last page button */}
-                        {!pageIsWithinBoundaryFromEnd && '...'}<button onClick={() => onPageClicked(count)}>
+                        {!pageIsWithinBoundaryFromEnd && '...'}<button className={`${page === count && styles['pagination__page-button--active']}`} onClick={() => onPageClicked(count)}>
                             {count}
                         </button>
                         <button onClick={onNextClicked}>{'>'}</button>
