@@ -1,4 +1,18 @@
+@font-face {
+    font-family: 'Mona Sans';
+    src: 
+        local('Mona Sans'),
+        url(../assets/fonts/Mona-Sans.ttf);
+}
+
+@font-face {
+    font-family: 'Blanka';
+    src: 
+        local('Blanka'),
+        url(../assets/fonts/Blanka.ttf);
+}
+
 body {
-    margin: 0; /* This is needed */
-    background-color: pink; /* Should probably be part of a wrapper div somewhere */
+    font-family: 'Mona Sans', Serif;
+    margin: 0;
 }
