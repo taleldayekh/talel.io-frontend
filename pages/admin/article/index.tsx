@@ -1,5 +1,6 @@
+import withRouteGuard from 'HOCs/withRouteGuard';
 import ArticleAdminView from 'views/ArticleAdminView/ArticleAdminView';
 
-export default function ArticleAdmin() {
+export default withRouteGuard(function ArticleAdmin() {
     return <ArticleAdminView/>
-}
+})
