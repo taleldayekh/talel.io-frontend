@@ -1,0 +1,9 @@
+.article-admin__form__title,
+.article-admin__form__description,
+.article-admin__form__body {
+    width: 500px;
+}
+
+.article-admin__form__body {
+    height: 800px;
+}
