@@ -103,6 +103,7 @@ export default function ArticleAdminController({
       await ArticlesRepository.createArticle(
         article.title,
         article.description,
+        article.featuredImageUrl,
         article.content,
       );
 
