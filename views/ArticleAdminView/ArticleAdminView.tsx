@@ -1,3 +1,4 @@
+import Button from 'components/Button/Button';
 import TextField from 'components/TextField/TextField';
 import { useState } from 'react';
 import ArticleAdminController from 'views/ArticleAdminView/ArticleAdminController';
@@ -25,7 +26,7 @@ export default function ArticleAdminView() {
         submitArticle,
       ) => (
         <>
-          <form>
+          <form onSubmit={submitArticle}>
             <p>Title</p>
             <TextField
               className={styles['article-admin__form__title']}
@@ -46,16 +47,11 @@ export default function ArticleAdminView() {
               onChange={updateArticleContent}
               onDrop={uploadImagesOnDrop}
             />
+            <br />
+            <Button>Publish</Button>
           </form>
         </>
       )}
     />
   );
 }
-
-//           <form onSubmit={submitArticle}>
-//             {/* TODO: Create separate button component */}
-//             {/* TODO: Submit article should happen in the form */}
-//             {/* TODO: Replace by custom button */}
-//             <br />
-//             <input type="submit" value="Submit" />

@@ -51,7 +51,9 @@ export default function ArticleAdminController({
     return imageSrc;
   };
 
-  const uploadFeaturedImage = async (event: ChangeEvent<HTMLInputElement>) => {
+  const uploadFeaturedImage = async (
+    event: ChangeEvent<HTMLInputElement>,
+  ): Promise<void> => {
     const imageFiles = event.target.files;
 
     if (imageFiles) {
@@ -98,15 +100,16 @@ export default function ArticleAdminController({
     event.preventDefault();
 
     try {
-      // TODO: Ensure all fields are present and not empty stings before making request.
-      // TODO: Clear fields?
       await ArticlesRepository.createArticle(
         article.title,
         article.description,
         article.content,
       );
+
+      // TODO: Clear article state
     } catch (error) {
-      // TODO: Set error for display in the UI.
+      // TODO: Error handling
+      console.log(error);
     }
   };
 
