@@ -1,26 +1,46 @@
-import { HttpResponse } from 'libs/http-client/interfaces';
-import { ArticleMetaSchema, ArticleSchema, ArticlesSchema, ArticleUserSchema } from 'infrastructure/repositories/articles/schemas';
+import {
+  CreateArticleResponseSchema,
+  GetArticleResponseSchema,
+  GetArticlesResponseSchema,
+} from 'infrastructure/repositories/articles/schemas';
 import HttpClient from 'libs/http-client/http-client';
+import { HttpResponse } from 'libs/http-client/interfaces';
 
 export default class ArticlesRepository {
-    public static async getArticles(page?: number, limit?: number): Promise<HttpResponse<ArticleUserSchema & ArticlesSchema>> {
-        const paginationQueryParams = (!!page && !!limit) ? `?page${page}&limit=${limit}` : '';
+  public static async createArticle(
+    title: string,
+    description: string,
+    featuredImageUrl: string,
+    content: string,
+  ): Promise<HttpResponse<CreateArticleResponseSchema>> {
+    const createArticleData = {
+      title,
+      meta_description: description,
+      featured_image: featuredImageUrl,
+      content,
+    };
 
-        return await HttpClient.get(`/users/taleldayekh/articles${paginationQueryParams.length ? paginationQueryParams : ''}`)
-    }
+    return await HttpClient.post('/articles', createArticleData);
+  }
 
-    public static async getArticle(slug: string): Promise<HttpResponse<ArticleMetaSchema & ArticleSchema>> {
-        return await HttpClient.get(`/articles/${slug}`);
-    }
+  public static async getArticle(
+    slug: string,
+  ): Promise<HttpResponse<GetArticleResponseSchema>> {
+    return await HttpClient.get(`/articles/${slug}`);
+  }
 
-    // TODO: Check if return type includes meta and add return type.
-    public static async createArticle(title: string, description: string, content: string) {
-        const createArticleData = {
-            title,
-            meta_description: description,
-            body: content,
-        }
+  public static async getArticles(
+    page?: number,
+    limit?: number,
+  ): Promise<HttpResponse<GetArticlesResponseSchema>> {
+    const paginationQueryParams =
+      !!page && !!limit ? `?page${page}&limit=${limit}` : '';
 
-        return await HttpClient.post('/articles', createArticleData)
-    }
+    // TODO: Store dev and prod user in config
+    return await HttpClient.get(
+      `/users/talel/articles${
+        paginationQueryParams.length ? paginationQueryParams : ''
+      }`,
+    );
+  }
 }
