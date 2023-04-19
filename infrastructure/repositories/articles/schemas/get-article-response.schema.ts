@@ -1,9 +1,9 @@
 import {
   ArticleMetaSchema,
-  ArticleResponseSchema,
+  ArticleSchema,
 } from 'infrastructure/repositories/articles/schemas/';
 
 export interface GetArticleResponseSchema {
   meta: ArticleMetaSchema;
-  article: ArticleResponseSchema;
+  article: Omit<ArticleSchema, 'user_id'>;
 }
