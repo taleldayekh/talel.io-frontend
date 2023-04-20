@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
-import ArticleContentView from 'views/ArticleContentView/ArticleContentView';
+import ArticleView from 'views/ArticleView/ArticleView';
 
 export default function Article() {
-    const router = useRouter();
-    const { slug } = router.query;
+  const router = useRouter();
+  const { slug } = router.query;
 
-    return <ArticleContentView slug={slug as string}/>
+  return <ArticleView slug={slug as string} />;
 }
