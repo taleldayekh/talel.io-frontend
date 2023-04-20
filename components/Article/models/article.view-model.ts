@@ -38,11 +38,14 @@ export default class ArticleViewModel {
   private setDates(): void {
     const articleWasUpdated =
       this.updatedDate.getTime() > this.createdDate.getTime();
-    const hoursSincePublish =
-      Math.abs(Date.now() - this.createdDate.getTime()) / (1000 * 60 * 60);
+    const hoursSincePublish = Math.floor(
+      Math.abs(Date.now() - this.createdDate.getTime()) / (1000 * 60 * 60),
+    );
 
-    if (hoursSincePublish < 24) {
-      this.createdAt = `${hoursSincePublish} ago`;
+    if (hoursSincePublish < 1) {
+      this.createdAt = 'Published now';
+    } else if (hoursSincePublish < 24) {
+      this.createdAt = `Published ${hoursSincePublish} hours ago`;
     } else {
       this.createdAt = this.formatDate(this.createdDate);
     }
