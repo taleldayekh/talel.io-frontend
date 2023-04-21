@@ -1,9 +1,11 @@
 import { ArticleIds } from 'components/Article/enums';
 import { FooterIds } from 'components/Footer/enums';
+import ArticlesRepository from 'infrastructure/repositories/articles/articles.repository';
 import { useEffect } from 'react';
-import { ArticleContentControllerProps } from 'views/ArticleContentView/interfaces';
+import { ArticleControllerProps } from 'views/ArticleView/interfaces';
+import ArticleMapper from 'views/ArticleView/mappers/article.mapper';
 
-export default function ArticleContentController({
+export default function ArticleController({
   slug,
   article,
   articleTitleRef,
@@ -12,21 +14,23 @@ export default function ArticleContentController({
   setArticleTitleIsInView,
   setFooterIsInView,
   render,
-}: ArticleContentControllerProps) {
+}: ArticleControllerProps) {
   useEffect(() => {
     if (!slug || article) return;
 
-    // ArticlesRepository.getArticle(slug)
-    //   .then((articleRes) => {
-    //     const article = ArticleMapper.fromResponseToArticleViewModel(
-    //       articleRes.data,
-    //     );
-    //     setArticle(article);
-    //   })
-    //   .catch((error) => {
-    //     // TODO: Error handling
-    //   });
-  });
+    ArticlesRepository.getArticle(slug)
+      .then((articleRes) => {
+        const article = ArticleMapper.fromResponseToArticleViewModel(
+          articleRes.data,
+        );
+
+        setArticle(article);
+      })
+      .catch((error) => {
+        // TODO: Error handling
+        console.log(error);
+      });
+  }, [slug, article, setArticle]);
 
   useEffect(() => {
     const intersectionObserver = new IntersectionObserver(
