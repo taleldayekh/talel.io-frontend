@@ -54,21 +54,29 @@ export default function ArticleView({ slug }: ArticleViewProps) {
                   styles['article-reading-position-indicator-bar--visible']
                 }
                 ${
+                  footerIsInView &&
+                  styles['article-reading-position-indicator-bar--hidden']
+                }
+                ${
                   !isInitialPageLoad &&
                   styles['article-reading-position-indicator-bar--reappear']
                 }
               `}
           >
-            <ReadingPositionIndicator contentRef={articleContentRef} />
+            <ReadingPositionIndicator contentRef={articleContentRef.current} />
           </div>
           {article && (
-            <Article
-              article={article}
-              articleTitleRef={articleTitleRef}
-              articleContentRef={articleContentRef}
-            />
+            <>
+              <Article
+                article={article}
+                articleTitleRef={articleTitleRef}
+                articleContentRef={articleContentRef}
+              />
+              {/* Ensures footer is not in view
+              before article becomes available */}
+              <Footer footerRef={footerRef} />
+            </>
           )}
-          <Footer footerRef={footerRef} />
         </>
       )}
     />
