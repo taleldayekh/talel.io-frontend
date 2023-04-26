@@ -104,8 +104,7 @@
 }
 
 /* Drop cap styles */
-/* TODO: Should become second p after API changes */
-.article__content__md p:nth-child(3):first-letter {
+.article__content__md p:nth-child(2):first-letter {
     background-clip: text;
     background-image: linear-gradient(30deg, #829df3, #81c9a0);
     color: transparent;
@@ -115,18 +114,4 @@
     line-height: 0.8125em;
     padding-bottom: 0.125em;
     margin-right: 0.125em;
-}
-
-
-
-
-
-
-
-
-
-
-/* ! Remove after API change */
-.article__content__md p:first-child {
-    display: none;
 }
