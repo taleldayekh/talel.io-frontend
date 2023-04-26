@@ -1,57 +1,57 @@
-import { useEffect, useState } from 'react';
 import { ReadingPositionIndicatorControllerProps } from 'components/ReadingPositionIndicator/interfaces';
+import { useEffect, useState } from 'react';
 
-export default function ReadingPositionIndicatorController({ contentRef, setEndPosition, setCurrentPosition, render }: ReadingPositionIndicatorControllerProps) {
-    const [contentHeight, setContentHeight] = useState<number>(0);
-    const [contentOffsetTop, setContentOffsetTop] = useState<number>(0);
-    const [viewportHeight, setViewportHeight] = useState<number>(0);
+export default function ReadingPositionIndicatorController({
+  contentRef,
+  setEndPosition,
+  setCurrentPosition,
+  render,
+}: ReadingPositionIndicatorControllerProps) {
+  const [contentHeight, setContentHeight] = useState<number>(0);
+  const [contentOffsetTop, setContentOffsetTop] = useState<number>(0);
+  const [viewportHeight, setViewportHeight] = useState<number>(0);
 
-    // TODO: Comment on window not accessible...
-    useEffect(() => {
-        setViewportHeight(window.innerHeight)
-    }, [])
+  useEffect(() => {
+    setViewportHeight(window.innerHeight);
+  }, []);
 
-    // TODO: Should contentOffsetTop be included in the dependency array?
-    useEffect(() => {
-        const content = contentRef.current;
+  useEffect(() => {
+    if (!contentRef) return;
 
-        if (!content) return;
+    setContentHeight(contentRef.clientHeight);
 
-        setContentHeight(content.clientHeight)
+    const updateContentOffsetTop = (): void => {
+      const offsetTop = contentRef.getBoundingClientRect().top;
+      setContentOffsetTop(-offsetTop);
+    };
 
-        const updateContentOffsetTop = (): void => {
-            const offsetTop = content.getBoundingClientRect().top;
-            setContentOffsetTop(-offsetTop);
-        };
+    window.addEventListener('scroll', updateContentOffsetTop);
 
-        window.addEventListener('scroll', updateContentOffsetTop);
+    return () => {
+      window.removeEventListener('scroll', updateContentOffsetTop);
+    };
+  });
 
-        return () => {
-            window.removeEventListener('scroll', updateContentOffsetTop);
-        };
-    }, [contentRef, contentHeight, contentOffsetTop]);
+  useEffect(() => {
+    const updateViewportHeight = (): void => {
+      setViewportHeight(window.innerHeight);
+    };
 
-    // TODO: What should be included in the dependency array?
-    useEffect(() => {
-        const updateViewportHeight = (): void => {
-            setViewportHeight(window.innerHeight);
-        }
+    window.addEventListener('resize', updateViewportHeight);
 
-        window.addEventListener('resize', updateViewportHeight);
+    return () => {
+      window.removeEventListener('resize', updateViewportHeight);
+    };
+  });
 
-        return () => {
-            window.removeEventListener('resize', updateViewportHeight);
-        };
-    }, [viewportHeight])
+  useEffect(() => {
+    const outOfViewContentHeight = contentHeight - viewportHeight;
+    setEndPosition(outOfViewContentHeight);
+  });
 
-    useEffect(() => {
-        const outOfViewContentHeight = contentHeight - viewportHeight;
-        setEndPosition(outOfViewContentHeight);
-    }, [contentHeight, viewportHeight]);
+  useEffect(() => {
+    setCurrentPosition(contentOffsetTop);
+  });
 
-    useEffect(() => {
-        setCurrentPosition(contentOffsetTop);
-    }, [contentOffsetTop]);
-
-    return render();
+  return render();
 }
