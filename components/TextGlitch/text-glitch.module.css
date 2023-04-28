@@ -1,0 +1,37 @@
+.text-glitch {
+    margin: 0;
+    position: relative;
+}
+
+.text-glitch span {
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+
+.text-glitch span:first-child {
+    transform: translateX(2px);
+    z-index: 2;
+}
+
+.text-glitch span:last-child {
+    color: var(--talelio-page-bg-dark);
+    background-color: var(--talelio-page-bg-dark);
+    z-index: 1;
+}
+
+.text-glitch--top span:first-child {
+    clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+}
+
+.text-glitch--top span:last-child {
+    clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+}
+
+.text-glitch--bottom span:first-child {
+    clip-path: polygon(100% 56%, 100% 100%, 0 100%, 0 56%);
+}
+
+.text-glitch--bottom span:last-child {
+    clip-path: polygon(100% 56%, 100% 100%, 0 100%, 0 56%);
+}
