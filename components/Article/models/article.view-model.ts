@@ -1,6 +1,10 @@
 export default class ArticleViewModel {
   public createdAt = '';
   public updatedAt = '';
+  public featuredImageDimensions = {
+    width: 4000,
+    height: 2094,
+  };
 
   constructor(
     public title: string,

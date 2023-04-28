@@ -1,117 +1,141 @@
 .article {
-    background-color: #212126;
+  background-color: var(--talelio-page-bg-dark);
 }
 
 .article__hero__gradient {
-    height: 70vh;
-    position: absolute;
-    width: 100%;
-    z-index: 1;
+  height: 70vh;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
 }
 
 .article__hero__gradient::after {
-    background: linear-gradient(transparent 82%, #212126);
-    content: '';
-    height: 100%;
-    position: absolute;
-    width: 100%;
+  background: linear-gradient(transparent 82%, var(--talelio-page-bg-dark));
+  content: '';
+  height: 100%;
+  position: absolute;
+  width: 100%;
 }
 
 .article__hero__image {
-    height: 70vh;
+  height: 70vh;
 }
 
 .article__hero__image img {
-    animation: reveal-hero 1s;
-    height: 100%;
-    mask: url('../../assets/images/subtract.svg');
-    mask-position: left bottom;
-    mask-repeat: no-repeat;
-    mask-size: cover;
-    object-fit: cover;
-    width: 100%;
+  animation: reveal-hero 1s;
+  height: 100%;
+  mask: url('../../assets/images/subtract.svg');
+  mask-position: left bottom;
+  mask-repeat: no-repeat;
+  mask-size: cover;
+  object-fit: cover;
+  width: 100%;
 }
 
 @keyframes reveal-hero {
-    0% {
-        opacity: 0;
-        transform: translateY(-40px);
-    }
-    10% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 100;
-        transform: translateY(0);
-    }
+  0% {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  10% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100;
+    transform: translateY(0);
+  }
+}
+
+.article__details {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 120px 0 80px 0;
+}
+
+.article__details__title {
+  color: var(--talelio-neon-blue);
+  font-family: Streamster, Serif;
+  font-size: 102px;
+  font-weight: 100;
+  margin: 0 0 20px 0;
+  text-shadow:
+    0 0 20px var(--talelio-neon-blue-glow),
+    0 0 20px var(--talelio-neon-blue-glow),
+    0 0 40px var(--talelio-neon-blue-glow);
+}
+
+.article__details__meta {
+  color: var(--talelio-text-gray);
+  font-family: JetBrains, monospace;
+  font-size: 18px;
 }
 
 .article__content {
-    column-gap: 8px;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    margin: 0 auto;
-    max-width: 1460px;
+  column-gap: 8px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  margin: 0 auto;
+  max-width: 1460px;
 }
 
 .article__content__table-of-contents,
 .article__content__md {
-    grid-column: 1 / 13;
+  grid-column: 1 / 13;
 }
 
 .article__content__md p {
-    color: #d5dce4;
-    font-size: 16px;
-    font-weight: 300;
-    line-height: 1.7;
-    margin: 0;
-    padding-top: 24px;
-    text-align: justify;
+  color: var(--talelio-text-white);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.7;
+  margin: 0;
+  padding-top: 24px;
+  text-align: justify;
 }
 
 .article__content h1 {
-    color: #d5dce4;
-    font-family: 'Streamster', Serif;
-    font-size: 42px;
-    font-weight: 300;
-    margin: 0;
-    padding-top: 48px;
-    text-align: center;
+  color: var(--talelio-text-white);
+  font-size: 26px;
+  font-weight: 300;
+  margin: 0;
+  padding-top: 48px;
+  text-align: center;
 }
 
 .article__content h1::after {
-    border-bottom: 1px solid #d5dce4;
-    content: '';
-    display: block;
-    margin: 24px 0 24px 50%;
-    position: relative;
-    transform: translateX(-50%);
-    width: 66px;
+  border-bottom: 1px solid var(--talelio-text-white);
+  content: '';
+  display: block;
+  margin: 24px 0 24px 50%;
+  position: relative;
+  transform: translateX(-50%);
+  width: 66px;
 }
 
 @media (min-width: 768px) {
-    .article__content__table-of-contents {
-        grid-column: 1 / 3;
-    }
-
-    .article__content__md {
-        grid-column: 4 / 12;
-    }
-
-    .article__content__md p {
-        font-size: 20px;
-    }
+  .article__content__table-of-contents {
+    grid-column: 1 / 3;
+  }
+  
+  .article__content__md {
+    grid-column: 3 / 11;
+  }
+  
+  .article__content__md p {
+    font-size: 20px;
+  }
 }
 
 /* Drop cap styles */
 .article__content__md p:nth-child(2):first-letter {
-    background-clip: text;
-    background-image: linear-gradient(30deg, #829df3, #81c9a0);
-    color: transparent;
-    float: left;
-    font-family: 'Blanka', Serif;
-    font-size: 5.125em;
-    line-height: 0.8125em;
-    padding-bottom: 0.125em;
-    margin-right: 0.125em;
+  background-clip: text;
+  background-image: linear-gradient(30deg, #829df3, #81c9a0);
+  color: transparent;
+  float: left;
+  font-family: 'Blanka', Serif;
+  font-size: 5.125em;
+  line-height: 0.8125em;
+  padding-bottom: 0.125em;
+  margin-right: 0.125em;
 }

@@ -17,7 +17,7 @@ export default class ArticlesRepository {
       title,
       meta_description: description,
       featured_image: featuredImageUrl,
-      content,
+      body: content,
     };
 
     return await HttpClient.post('/articles', createArticleData);
