@@ -1,4 +1,18 @@
 @font-face {
+    font-family: 'Blanka';
+    src: 
+        local('Blanka'),
+        url(../assets/fonts/Blanka.ttf);
+}
+
+@font-face {
+    font-family: 'JetBrains';
+    src:
+        local('JetBrains'),
+        url(../assets/fonts//JetBrainsMono.ttf);
+}
+
+@font-face {
     font-family: 'Mona Sans';
     src: 
         local('Mona Sans'),
@@ -6,10 +20,10 @@
 }
 
 @font-face {
-    font-family: 'Blanka';
-    src: 
-        local('Blanka'),
-        url(../assets/fonts/Blanka.ttf);
+    font-family: 'Streamster';
+    src:
+        local('Streamster'),
+        url(../assets//fonts//Streamster.ttf);
 }
 
 body {
