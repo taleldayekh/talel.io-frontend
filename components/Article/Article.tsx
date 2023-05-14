@@ -48,10 +48,12 @@ export default function Article({
               </div>
             </div>
             <div className={styles.article__content} ref={articleContentRef}>
-              <div
-                className={`${styles['article__content__toc']}`}
-                dangerouslySetInnerHTML={{ __html: article.tableOfContents }}
-              />
+              <div className={styles.article__content__toc}>
+                <h2>Table of Contents</h2>
+                <div
+                  dangerouslySetInnerHTML={{ __html: article.tableOfContents }}
+                />
+              </div>
               <div
                 className={styles.article__content__md}
                 dangerouslySetInnerHTML={{ __html: article.html }}
