@@ -1,3 +1,5 @@
+import DOMPurify from 'dompurify';
+
 export default class ArticleViewModel {
   public createdAt = '';
   public updatedAt = '';
@@ -10,9 +12,12 @@ export default class ArticleViewModel {
     public title: string,
     public featuredImageUrl: string,
     public html: string,
+    public tableOfContents: string,
     private createdDate: Date,
     private updatedDate: Date,
   ) {
+    this.html = DOMPurify.sanitize(html);
+    this.tableOfContents = DOMPurify.sanitize(tableOfContents);
     this.setDates();
   }
 
