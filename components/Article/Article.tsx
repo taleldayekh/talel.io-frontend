@@ -35,16 +35,18 @@ export default function Article({
                 >
                   {article.title}
                 </h1>
-                <TextGlitch
-                  className={styles.article__details__meta}
-                  text={article.createdAt}
-                  glitchPosition={GlitchPositions.TOP}
-                />
-                <TextGlitch
-                  className={styles.article__details__meta}
-                  text="Words by Talel Dayekh"
-                  glitchPosition={GlitchPositions.BOTTOM}
-                />
+                <div className={styles.article__details__meta}>
+                  <TextGlitch
+                    className={styles['article__details__meta__created-at']}
+                    text={article.createdAt}
+                    glitchPosition={GlitchPositions.TOP}
+                  />
+                  <TextGlitch
+                    className={styles['article__details__meta__author']}
+                    text="Words by Talel Dayekh"
+                    glitchPosition={GlitchPositions.BOTTOM}
+                  />
+                </div>
               </div>
             </div>
             <div className={styles.article__content} ref={articleContentRef}>
