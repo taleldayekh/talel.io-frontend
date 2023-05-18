@@ -74,12 +74,12 @@
   font-family: Streamster, Serif;
   font-size: 6.375rem;
   font-weight: 100;
-  margin: 0 0 1.25em 0;
+  margin: 0 0 20px 0;
   text-align: center;
   text-shadow:
-    0 0 1.25em var(--talelio-neon-blue-glow),
-    0 0 1.25em var(--talelio-neon-blue-glow),
-    0 0 2.5em var(--talelio-neon-blue-glow);
+    0 0 20px var(--talelio-neon-blue-glow),
+    0 0 20px var(--talelio-neon-blue-glow),
+    0 0 40px var(--talelio-neon-blue-glow);
 }
 
 .article__content {
@@ -140,7 +140,7 @@
   font-size: 1.625rem;
   font-weight: 300;
   margin: 0;
-  padding-top: 3em;
+  padding-top: 48px;
   text-align: center;
 }
 
@@ -148,10 +148,10 @@
   border-bottom: 1px solid var(--talelio-text-white);
   content: '';
   display: block;
-  margin: 1.5em 0 1.5em 50%;
+  margin: 24px 0 24px 50%;
   position: relative;
   transform: translateX(-50%);
-  width: 4.125em;
+  width: 66px;
 }
 
 /* Desktop breakpoint */
