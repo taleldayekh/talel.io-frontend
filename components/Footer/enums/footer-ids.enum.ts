@@ -1,3 +1,3 @@
 export enum FooterIds {
-    FOOTER = 'footer-element',
+  FOOTER = 'footer-element',
 }
