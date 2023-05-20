@@ -7,6 +7,7 @@ export interface ArticleSchema {
   slug: string;
   body: string;
   html: string;
+  table_of_contents: string;
   featured_image: string | null;
   meta_description: string;
   url: string;

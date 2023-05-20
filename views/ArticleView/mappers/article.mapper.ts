@@ -20,6 +20,7 @@ export default class ArticleMapper {
       articleResData.article.title,
       featuredImageUrl,
       articleResData.article.html,
+      articleResData.article.table_of_contents,
       createdDate,
       updatedDate,
     );
