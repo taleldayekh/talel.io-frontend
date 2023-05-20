@@ -77,9 +77,9 @@
   margin: 0 0 20px 0;
   text-align: center;
   text-shadow:
-    0 0 20px var(--talelio-neon-blue-glow),
-    0 0 20px var(--talelio-neon-blue-glow),
-    0 0 40px var(--talelio-neon-blue-glow);
+  0 0 20px var(--talelio-neon-blue-glow),
+  0 0 20px var(--talelio-neon-blue-glow),
+  0 0 40px var(--talelio-neon-blue-glow);
 }
 
 .article__content {
@@ -159,17 +159,17 @@
   .article__details__meta {
     margin: 0;
   }
-
+  
   .article__content {
     padding: 0;
   }
-
+  
   .article__content__toc {
     grid-column: 1 / 4;
     margin: 3em 0 0 1.25em;
     text-align: left;
   }
-
+  
   .article__content__toc ul {
     padding-right: 0.5em;
   }
