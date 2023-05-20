@@ -15,8 +15,12 @@ export interface ArticleAdminControllerProps {
     updateArticleTitle: (event: ChangeEvent<HTMLInputElement>) => void,
     updateArticleDescription: (event: ChangeEvent<HTMLTextAreaElement>) => void,
     updateArticleContent: (event: ChangeEvent<HTMLTextAreaElement>) => void,
-    uploadFeaturedImage: (event: ChangeEvent<HTMLInputElement>) => void,
-    uploadImagesOnDrop: (event: DragEvent<HTMLTextAreaElement>) => void,
+    uploadFeaturedImage: (
+      event: ChangeEvent<HTMLInputElement>,
+    ) => Promise<void>,
+    uploadImagesOnDrop: (
+      event: DragEvent<HTMLTextAreaElement>,
+    ) => Promise<void>,
     submitArticle: (event: FormEvent<HTMLFormElement>) => Promise<void>,
   ) => ReactElement;
 }
