@@ -1,10 +1,12 @@
+'use client'
 import { AuthContext, AuthProvider } from 'contexts/auth/auth.context';
 import { RequestInterceptionEvents } from 'libs/http-client/enums';
 import httpClient from 'libs/http-client/http-client';
-import { AppProps } from 'next/app';
 import { PropsWithChildren, useContext, useEffect } from 'react';
 import 'styles/colors.css';
 import 'styles/global.css';
+
+import ArticlesView from 'views/ArticlesView/ArticlesView';
 
 function AppController({ children }: PropsWithChildren) {
   const { authValues } = useContext(AuthContext);
@@ -22,11 +24,12 @@ function AppController({ children }: PropsWithChildren) {
   return <>{children}</>;
 }
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App() {
   return (
     <AuthProvider>
       <AppController>
-        <Component {...pageProps} />
+        {/* TODO: Temporarily redirect to be replaced with index page */}
+        <ArticlesView/>
       </AppController>
     </AuthProvider>
   );

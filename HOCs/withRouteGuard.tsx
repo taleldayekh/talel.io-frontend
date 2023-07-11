@@ -1,5 +1,5 @@
 import { useContext, useEffect, FC, ReactElement } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { AuthContext } from 'contexts/auth/auth.context';
 
 const withRouteGuard = (Component: FC) => (props: ReactElement) => {

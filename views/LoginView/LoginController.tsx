@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect, ChangeEvent } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { AuthContext } from 'contexts/auth/auth.context';
 import useAuth from 'hooks/auth/useAuth';
 import { LoginControllerProps } from 'views/LoginView/interfaces';
