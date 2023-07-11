@@ -1,23 +1,22 @@
-import { useContext, useEffect, FC, ReactElement } from 'react';
-import { useRouter } from 'next/navigation';
 import { AuthContext } from 'contexts/auth/auth.context';
+import { useRouter } from 'next/navigation';
+import { FC, ReactElement, useContext, useEffect } from 'react';
 
-const withRouteGuard = (Component: FC) => (props: ReactElement) => {
-    const router = useRouter();
+// TODO: Remove any and fix type error
+const withRouteGuard: any = (Component: FC) => (props: ReactElement) => {
+  const router = useRouter();
 
-    const { authValues } = useContext(AuthContext);
+  const { authValues } = useContext(AuthContext);
 
-    const isLoggedIn = authValues.isLoggedIn;
+  const isLoggedIn = authValues.isLoggedIn;
 
-    useEffect(() => {
-        if (!isLoggedIn) {
-            router.push('/login');
-        }
-    })
+  useEffect(() => {
+    if (!isLoggedIn) {
+      router.push('/login');
+    }
+  });
 
-    return (
-        isLoggedIn ? <Component {...props}/> : <></>
-    )
-}
+  return isLoggedIn ? <Component {...props} /> : <></>;
+};
 
 export default withRouteGuard;
