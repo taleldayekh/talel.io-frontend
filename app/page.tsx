@@ -1,10 +1,8 @@
-'use client'
+'use client';
 import { AuthContext, AuthProvider } from 'contexts/auth/auth.context';
 import { RequestInterceptionEvents } from 'libs/http-client/enums';
 import httpClient from 'libs/http-client/http-client';
 import { PropsWithChildren, useContext, useEffect } from 'react';
-import 'styles/colors.css';
-import 'styles/global.css';
 
 import ArticlesView from 'views/ArticlesView/ArticlesView';
 
@@ -29,7 +27,7 @@ export default function App() {
     <AuthProvider>
       <AppController>
         {/* TODO: Temporarily redirect to be replaced with index page */}
-        <ArticlesView/>
+        <ArticlesView />
       </AppController>
     </AuthProvider>
   );
