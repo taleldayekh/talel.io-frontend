@@ -1,4 +1,5 @@
 'use client';
+
 import withRouteGuard from 'HOCs/withRouteGuard';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';

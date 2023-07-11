@@ -1,4 +1,5 @@
 'use client';
+
 import withRouteGuard from 'HOCs/withRouteGuard';
 import ArticleAdminView from 'views/ArticleAdminView/ArticleAdminView';
 

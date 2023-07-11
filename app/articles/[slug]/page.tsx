@@ -1,4 +1,5 @@
 'use client';
+
 import ArticleView from 'views/ArticleView/ArticleView';
 
 // TODO: Typing
