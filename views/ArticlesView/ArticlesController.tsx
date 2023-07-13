@@ -1,4 +1,4 @@
-import ArticlesRepository from 'infrastructure/repositories/articles/articles.repository';
+import { ArticlesRepository } from 'infrastructure/repositories/articles/articles.repository';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { ArticlesControllerProps } from 'views/ArticlesView/interfaces';

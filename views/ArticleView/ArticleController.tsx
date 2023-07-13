@@ -1,6 +1,6 @@
 import { ArticleIds } from 'components/Article/enums';
 import { FooterIds } from 'components/Footer/enums';
-import ArticlesRepository from 'infrastructure/repositories/articles/articles.repository';
+import { ArticlesRepository } from 'infrastructure/repositories/articles/articles.repository';
 import { useEffect } from 'react';
 import { ArticleControllerProps } from 'views/ArticleView/interfaces';
 import ArticleMapper from 'views/ArticleView/mappers/article.mapper';

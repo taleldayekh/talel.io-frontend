@@ -1,3 +1,4 @@
+'use client';
 // ! Disabled rule due to indent spaces error in className
 /* eslint-disable indent */
 import Article from 'components/Article/Article';
