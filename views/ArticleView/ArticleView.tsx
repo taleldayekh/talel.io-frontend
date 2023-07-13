@@ -2,7 +2,6 @@
 // ! Disabled rule due to indent spaces error in className
 /* eslint-disable indent */
 import Article from 'components/Article/Article';
-import ArticleViewModel from 'components/Article/models/article.view-model';
 import Footer from 'components/Footer/Footer';
 import ReadingPositionIndicator from 'components/ReadingPositionIndicator/ReadingPositionIndicator';
 import { useEffect, useRef, useState } from 'react';
@@ -10,14 +9,11 @@ import ArticleController from 'views/ArticleView/ArticleController';
 import styles from 'views/ArticleView/article-view.module.css';
 import { ArticleViewProps } from 'views/ArticleView/interfaces';
 
-export default function ArticleView({ slug }: ArticleViewProps) {
+export default function ArticleView({ article }: ArticleViewProps) {
   const articleTitleRef = useRef<HTMLDivElement | null>(null);
   const articleContentRef = useRef<HTMLDivElement | null>(null);
   const footerRef = useRef<HTMLDivElement | null>(null);
 
-  const [article, setArticle] = useState<ArticleViewModel | undefined>(
-    undefined,
-  );
   const [articleTitleIsInView, setArticleTitleIsInView] =
     useState<boolean>(true);
   const [footerIsInView, setFooterIsInView] = useState<boolean>(false);
@@ -36,13 +32,10 @@ export default function ArticleView({ slug }: ArticleViewProps) {
     }
   }, [articleTitleIsInView, isInitialPageLoad]);
 
-  return (
+  return article ? (
     <ArticleController
-      slug={slug}
-      article={article}
       articleTitleRef={articleTitleRef}
       footerRef={footerRef}
-      setArticle={setArticle}
       setArticleTitleIsInView={setArticleTitleIsInView}
       setFooterIsInView={setFooterIsInView}
       render={() => (
@@ -81,5 +74,5 @@ export default function ArticleView({ slug }: ArticleViewProps) {
         </>
       )}
     />
-  );
+  ) : <p>LOADING...</p>;
 }

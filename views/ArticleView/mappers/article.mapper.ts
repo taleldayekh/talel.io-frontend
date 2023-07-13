@@ -1,5 +1,7 @@
 import ArticleViewModel from 'components/Article/models/article.view-model';
 import { GetArticleResponseSchema } from 'infrastructure/repositories/articles/schemas';
+import { DocumentHead } from 'interfaces';
+import { MetaOpenGraphImageSizes, MetaOpenGraphType } from 'enums';
 
 export default class ArticleMapper {
   public static fromResponseToArticleViewModel(
@@ -24,5 +26,30 @@ export default class ArticleMapper {
       createdDate,
       updatedDate,
     );
+  }
+
+  public static fromResponseToDocumentHead(articleResData: GetArticleResponseSchema): DocumentHead {
+    const article = articleResData.article;
+
+    return {
+      title: article.title,
+      description: article.meta_description,
+      openGraph: {
+        title: article.title,
+        description: article.meta_description,
+        url: article.url,
+        siteName: 'https://www.talel.io/',
+        images: [
+          {
+            // TODO: Consider using URL to a default featured image if none is provided
+            url: article.featured_image || '',
+            width: MetaOpenGraphImageSizes.LI_WIDTH,
+            height: MetaOpenGraphImageSizes.LI_HEIGHT,
+            alt: `${article.title} Open Graph Image`
+          }
+        ]
+      },
+      type: MetaOpenGraphType.ARTICLE
+    }
   }
 }

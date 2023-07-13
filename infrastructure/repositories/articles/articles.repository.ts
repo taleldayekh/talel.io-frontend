@@ -30,12 +30,6 @@ export class ArticlesRepository {
     return await HttpClient.post('/articles', createArticleData);
   }
 
-  public static async getArticle(
-    slug: string,
-  ): Promise<HttpResponse<GetArticleResponseSchema>> {
-    return await HttpClient.get(`/articles/${slug}`);
-  }
-
   public static async getArticles(
     page?: number,
     limit?: number,

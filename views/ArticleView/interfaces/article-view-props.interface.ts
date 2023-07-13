@@ -1,3 +1,5 @@
+import ArticleViewModel from "components/Article/models/article.view-model";
+
 export interface ArticleViewProps {
-  slug: string;
+  article: ArticleViewModel | undefined;
 }
