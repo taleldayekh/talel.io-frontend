@@ -1,5 +1,3 @@
-import DOMPurify from 'dompurify';
-
 export default class ArticleViewModel {
   public createdAt = '';
   public updatedAt = '';
@@ -16,8 +14,8 @@ export default class ArticleViewModel {
     private createdDate: Date,
     private updatedDate: Date,
   ) {
-    this.html = DOMPurify.sanitize(html);
-    this.tableOfContents = DOMPurify.sanitize(tableOfContents);
+    this.html = html;
+    this.tableOfContents = tableOfContents;
     this.setDates();
   }
 

@@ -74,5 +74,7 @@ export default function ArticleView({ article }: ArticleViewProps) {
         </>
       )}
     />
-  ) : <p>LOADING...</p>;
+  ) : (
+    <p>LOADING...</p>
+  );
 }

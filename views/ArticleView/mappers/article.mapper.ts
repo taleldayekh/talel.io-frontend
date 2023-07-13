@@ -1,7 +1,7 @@
 import ArticleViewModel from 'components/Article/models/article.view-model';
+import { MetaOpenGraphImageSizes, MetaOpenGraphType } from 'enums';
 import { GetArticleResponseSchema } from 'infrastructure/repositories/articles/schemas';
 import { DocumentHead } from 'interfaces';
-import { MetaOpenGraphImageSizes, MetaOpenGraphType } from 'enums';
 
 export default class ArticleMapper {
   public static fromResponseToArticleViewModel(
@@ -28,7 +28,9 @@ export default class ArticleMapper {
     );
   }
 
-  public static fromResponseToDocumentHead(articleResData: GetArticleResponseSchema): DocumentHead {
+  public static fromResponseToDocumentHead(
+    articleResData: GetArticleResponseSchema,
+  ): DocumentHead {
     const article = articleResData.article;
 
     return {
@@ -45,11 +47,11 @@ export default class ArticleMapper {
             url: article.featured_image || '',
             width: MetaOpenGraphImageSizes.LI_WIDTH,
             height: MetaOpenGraphImageSizes.LI_HEIGHT,
-            alt: `${article.title} Open Graph Image`
-          }
-        ]
+            alt: `${article.title} Open Graph Image`,
+          },
+        ],
       },
-      type: MetaOpenGraphType.ARTICLE
-    }
+      type: MetaOpenGraphType.ARTICLE,
+    };
   }
 }

@@ -1,13 +1,13 @@
-import { Metadata } from 'next';
 import { getArticle } from 'infrastructure/repositories/articles/articles.repository';
+import { Metadata } from 'next';
 import ArticleView from 'views/ArticleView/ArticleView';
 import ArticleMapper from 'views/ArticleView/mappers/article.mapper';
 
 type Props = {
   params: {
-    slug: string
-  }
-}
+    slug: string;
+  };
+};
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = params;
@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     const articleRes = await getArticle(slug);
     documentHead = ArticleMapper.fromResponseToDocumentHead(articleRes.data);
-  } catch(error) {
+  } catch (error) {
     // TODO: Error handling
   }
 
@@ -31,7 +31,10 @@ export default async function Article({ params }: Props) {
 
   try {
     const articleRes = await getArticle(slug);
-    article = ArticleMapper.fromResponseToArticleViewModel(articleRes.data);
+    article = Object.assign(
+      {},
+      ArticleMapper.fromResponseToArticleViewModel(articleRes.data),
+    );
   } catch (error) {
     // TODO: Error handling
   }
