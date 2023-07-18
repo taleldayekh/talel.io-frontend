@@ -135,6 +135,11 @@
   text-align: justify;
 }
 
+.article__content__md p img {
+  width: calc(100% + 2.75em);
+  margin-left: -1.375em;
+}
+
 .article__content h1 {
   color: var(--talelio-text-white);
   font-size: 1.625rem;
@@ -180,6 +185,11 @@
   
   .article__content__md p {
     font-size: 1.25rem;
+  }
+
+  .article__content__md p img {
+    width: 114%;
+    margin-left: -7%;
   }
 }
 
