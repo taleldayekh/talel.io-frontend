@@ -160,6 +160,58 @@
   margin-left: -1.375em;
 }
 
+/* Table */
+.article__content__md table {
+  border-spacing: 0;
+  color: var(--talelio-text-white);
+  font-size: 1rem;
+  line-height: 1.7;
+  padding-top: 1.5em;
+  text-align: center;
+  width: 100%;
+}
+
+.article__content__md thead tr th {
+  border: solid 1px var(--talelio-text-gray);
+  border-top: solid 2px var(--talelio-text-gray);
+  font-weight: 500;
+}
+
+.article__content__md thead tr th:first-of-type {
+  border-left: solid 2px var(--talelio-text-gray);
+  border-top-left-radius: 8px;
+}
+
+.article__content__md thead tr th:last-of-type {
+  border-right: solid 2px var(--talelio-text-gray);
+  border-top-right-radius: 8px;
+}
+
+.article__content__md tbody tr td {
+  border: solid 1px var(--talelio-text-gray);
+  border-bottom: none;
+}
+
+.article__content__md tbody tr td:first-of-type {
+  border-left: solid 2px var(--talelio-text-gray);
+}
+
+.article__content__md tbody tr td:last-of-type {
+  border-right: solid 2px var(--talelio-text-gray);
+}
+
+.article__content__md tbody tr:last-of-type td {
+  border-bottom: solid 2px var(--talelio-text-gray);
+}
+
+.article__content__md tbody tr:last-of-type td:first-of-type {
+  border-bottom-left-radius: 8px;
+}
+
+.article__content__md tbody tr:last-of-type td:last-of-type {
+  border-bottom-right-radius: 8px;
+}
+
 .article__content h1 {
   color: var(--talelio-text-white);
   font-size: 1.625rem;
@@ -182,60 +234,6 @@
 .article__content strong {
   font-weight: 500;
 }
-
-
-
-
-
-
-
-
-
-
-/* ! Experimental */
-.article__content table {
-  color: var(--talelio-text-white);
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-}
-
-.article__content th:first-of-type {
-  border-top-left-radius: 10px;
-}
-
-.article__content th:last-of-type {
-  border-top-right-radius: 10px;
-}
-
-.article__content td:first-of-type {
-  border-bottom-left-radius: 10px;
-}
-
-.article__content td:last-of-type {
-  border-bottom-right-radius: 10px;
-}
-
-.article__content table th {
-  border: solid 2px var(--talelio-text-gray);
-  height: 28px;
-  font-weight: 500;
-}
-
-.article__content table td {
-  border: solid 1px var(--talelio-text-gray);
-  text-align: center;
-  height: 28px;
-}
-
-
-
-
-
-
-
-
-
 
 /* Desktop breakpoint */
 @media (min-width: 48em) {
@@ -286,6 +284,11 @@
   .article__content__md p img {
     width: 114%;
     margin-left: -7%;
+  }
+
+  /* Table */
+  .article__content__md table {
+    padding-top: 1.875em;
   }
 }
 
