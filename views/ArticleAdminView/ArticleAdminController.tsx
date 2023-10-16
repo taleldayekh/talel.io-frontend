@@ -1,4 +1,4 @@
-import ArticlesRepository from 'infrastructure/repositories/articles/articles.repository';
+import { ArticlesRepository } from 'infrastructure/repositories/articles/articles.repository';
 import AssetsRepository from 'infrastructure/repositories/assets/assets.repository';
 import { ChangeEvent, DragEvent, FormEvent } from 'react';
 import {

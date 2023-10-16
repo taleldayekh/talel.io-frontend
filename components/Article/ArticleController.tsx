@@ -49,7 +49,7 @@ export default function ArticleController({
         anchor.removeEventListener('click', smoothScroll);
       });
     };
-  }, [tableOfContentsHTML]);
+  });
 
   return render();
 }

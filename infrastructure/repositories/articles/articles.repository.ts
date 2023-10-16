@@ -5,8 +5,15 @@ import {
 } from 'infrastructure/repositories/articles/schemas';
 import HttpClient from 'libs/http-client/http-client';
 import { HttpResponse } from 'libs/http-client/interfaces';
+import { cache } from 'react';
 
-export default class ArticlesRepository {
+export const getArticle = cache(
+  async (slug: string): Promise<HttpResponse<GetArticleResponseSchema>> => {
+    return await HttpClient.get(`/articles/${slug}`);
+  },
+);
+
+export class ArticlesRepository {
   public static async createArticle(
     title: string,
     description: string,
@@ -21,12 +28,6 @@ export default class ArticlesRepository {
     };
 
     return await HttpClient.post('/articles', createArticleData);
-  }
-
-  public static async getArticle(
-    slug: string,
-  ): Promise<HttpResponse<GetArticleResponseSchema>> {
-    return await HttpClient.get(`/articles/${slug}`);
   }
 
   public static async getArticles(
