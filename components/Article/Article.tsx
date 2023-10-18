@@ -5,8 +5,9 @@ import { ArticleProps } from 'components/Article/interfaces';
 import TextGlitch from 'components/TextGlitch/TextGlitch';
 import { GlitchPositions } from 'components/TextGlitch/enums';
 import Image from 'next/image';
+import { memo } from 'react';
 
-export default function Article({
+function Article({
   article,
   articleContentRef,
   articleTitleRef,
@@ -67,3 +68,5 @@ export default function Article({
     />
   );
 }
+
+export default memo(Article);

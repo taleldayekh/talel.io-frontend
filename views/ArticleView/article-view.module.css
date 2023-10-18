@@ -1,7 +1,7 @@
 .article-reading-position-indicator-bar {
     background-color: white; /* Define globally */
     bottom: 0;
-    height: 40px; /* Define globally */
+    height: 34px; /* Define globally */
     position: fixed;
     transform: translateY(40px); /* Define globally */
     width: 100%;
