@@ -224,6 +224,13 @@
   text-decoration: none;
 }
 
+/* highlight.js */
+.article__content__md :global(.hljs) {
+  background: transparent;
+  font-family: 'JetBrains ExtraLight', monospace;
+  font-size: 1.125em;
+}
+
 .article__content h1 {
   color: var(--talelio-text-white);
   font-size: 1.625rem;

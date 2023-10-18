@@ -9,7 +9,14 @@
     font-family: 'JetBrains';
     src:
         local('JetBrains'),
-        url(../assets/fonts//JetBrainsMono.ttf);
+        url(../assets/fonts/JetBrainsMono.ttf);
+}
+
+@font-face {
+    font-family: 'JetBrains ExtraLight';
+    src:
+        local('JetBrains ExtraLight'),
+        url(../assets/fonts/JetBrainsMono-ExtraLight.ttf);
 }
 
 @font-face {

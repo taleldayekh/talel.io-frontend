@@ -2,6 +2,7 @@
 
 import config from 'config';
 import { AuthContext, AuthProvider } from 'contexts/auth/auth.context';
+import 'highlight.js/styles/github-dark-dimmed.css';
 import { RequestInterceptionEvents } from 'libs/http-client/enums';
 import httpClient from 'libs/http-client/http-client';
 import Script from 'next/script';
