@@ -145,7 +145,8 @@
 }
 
 .article__content__md p,
-.article__content__md ul li {
+.article__content__md ul li,
+.article__content__md ol li {
   color: var(--talelio-text-white);
   font-size: 1rem;
   font-weight: 300;
@@ -153,6 +154,16 @@
   margin: 0;
   padding-top: 1.5em;
   text-align: justify;
+}
+
+.article__content__md ul,
+.article__content__md ol {
+  margin: 0;
+}
+
+.article__content__md ul li:not(:first-child),
+.article__content__md ol li:not(:first-child) {
+  padding-top: 0;
 }
 
 .article__content__md p img {
@@ -296,7 +307,8 @@
   }
   
   .article__content__md p,
-  .article__content__md ul li {
+  .article__content__md ul li,
+  .article__content__md ol li {
     font-size: 1.25rem;
   }
 
