@@ -4,7 +4,6 @@ import { ArticleIds } from 'components/Article/enums';
 import { ArticleProps } from 'components/Article/interfaces';
 import TextGlitch from 'components/TextGlitch/TextGlitch';
 import { GlitchPositions } from 'components/TextGlitch/enums';
-import Image from 'next/image';
 import { memo } from 'react';
 
 function Article({
@@ -20,7 +19,7 @@ function Article({
           <main className={styles.article}>
             <div className={styles.article__hero__gradient} />
             <div className={styles.article__hero__image}>
-              <Image
+              <img
                 src={article.featuredImageUrl}
                 alt={`${article.title} Hero Image`}
                 width={article.featuredImageDimensions.width}
