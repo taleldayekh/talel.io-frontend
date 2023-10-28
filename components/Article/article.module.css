@@ -240,10 +240,11 @@
 /* highlight.js */
 .article__content__md :global(.hljs) {
   background: transparent;
+  border-left: solid 2px var(--talelio-loading);
   font-family: 'JetBrains ExtraLight', monospace;
-  font-size: 1.125em;
-  padding-bottom: 0;
-  padding-top: 1.5em;
+  font-size: 1rem;
+  margin-top: 1.5em;
+  padding: 0 0 0 18px;
 }
 
 .article__content__md pre {
@@ -316,7 +317,8 @@
   
   .article__content__md p,
   .article__content__md ul li,
-  .article__content__md ol li {
+  .article__content__md ol li,
+  .article__content__md :global(.hljs) {
     font-size: 1.25rem;
   }
 
