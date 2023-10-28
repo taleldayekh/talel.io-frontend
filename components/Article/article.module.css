@@ -288,6 +288,7 @@
     grid-column: 1 / 4;
     height: calc(100vh - 6.25em); /* Footer hight + top value */
     margin: 3em 1.375em 0 0.75em;
+    overflow: auto;
     position: sticky;
     text-align: left;
     top: 2em;
