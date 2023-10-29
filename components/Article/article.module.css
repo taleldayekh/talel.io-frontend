@@ -124,7 +124,7 @@
 }
 
 .article__content__toc ul li a:hover {
-  color: var(--talelio-text-gray);
+  color: var(--talelio-neon-blue);
 }
 
 /* TOC subheading */
@@ -145,7 +145,8 @@
 }
 
 .article__content__md p,
-.article__content__md ul li {
+.article__content__md ul li,
+.article__content__md ol li {
   color: var(--talelio-text-white);
   font-size: 1rem;
   font-weight: 300;
@@ -153,6 +154,16 @@
   margin: 0;
   padding-top: 1.5em;
   text-align: justify;
+}
+
+.article__content__md ul,
+.article__content__md ol {
+  margin: 0;
+}
+
+.article__content__md ul li:not(:first-child),
+.article__content__md ol li:not(:first-child) {
+  padding-top: 0;
 }
 
 .article__content__md p img {
@@ -164,7 +175,7 @@
 .article__content__md table {
   border-spacing: 0;
   color: var(--talelio-text-white);
-  font-size: 1rem;
+  font-size: 0.875rem;
   line-height: 1.7;
   padding-top: 1.5em;
   text-align: center;
@@ -190,6 +201,8 @@
 .article__content__md tbody tr td {
   border: solid 1px var(--talelio-text-gray);
   border-bottom: none;
+  padding: 0.25em 0.375em 0.25em 0.375em;
+  text-align: left;
 }
 
 .article__content__md tbody tr td:first-of-type {
@@ -210,6 +223,32 @@
 
 .article__content__md tbody tr:last-of-type td:last-of-type {
   border-bottom-right-radius: 8px;
+}
+
+.article__content__md a {
+  color: var(--talelio-text-white);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.375em;
+}
+
+.article__content__md a:hover {
+  box-shadow: inset 0 -0.5em 0 0 var(--talelio-neon-blue-glow-highlight);
+  text-decoration: none;
+}
+
+/* highlight.js */
+.article__content__md :global(.hljs) {
+  background: transparent;
+  border-left: solid 2px var(--talelio-loading);
+  font-family: 'JetBrains ExtraLight', monospace;
+  font-size: 1rem;
+  margin-top: 1.5em;
+  padding: 0 0 0 18px;
+}
+
+.article__content__md pre {
+  margin: 0;
 }
 
 .article__content h1 {
@@ -249,6 +288,7 @@
     grid-column: 1 / 4;
     height: calc(100vh - 6.25em); /* Footer hight + top value */
     margin: 3em 1.375em 0 0.75em;
+    overflow: auto;
     position: sticky;
     text-align: left;
     top: 2em;
@@ -277,7 +317,9 @@
   }
   
   .article__content__md p,
-  .article__content__md ul li {
+  .article__content__md ul li,
+  .article__content__md ol li,
+  .article__content__md :global(.hljs) {
     font-size: 1.25rem;
   }
 

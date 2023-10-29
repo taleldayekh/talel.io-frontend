@@ -1,4 +1,5 @@
 import { ArticleControllerProps } from 'components/Article/interfaces';
+import hljs from 'highlight.js';
 import { useEffect } from 'react';
 
 const getTableOfContentsAnchors = (
@@ -24,6 +25,10 @@ export default function ArticleController({
   tableOfContentsHTML,
   render,
 }: ArticleControllerProps) {
+  useEffect(() => {
+    hljs.highlightAll();
+  }, []);
+
   useEffect(() => {
     // TODO: Typing
     const smoothScroll = (event: any): void => {

@@ -2,6 +2,7 @@
 
 import config from 'config';
 import { AuthContext, AuthProvider } from 'contexts/auth/auth.context';
+import 'highlight.js/styles/github-dark-dimmed.css';
 import { RequestInterceptionEvents } from 'libs/http-client/enums';
 import httpClient from 'libs/http-client/http-client';
 import Script from 'next/script';
@@ -29,6 +30,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body>
+        <a rel="me" href="https://mastodon.social/@talelio">
+          Mastodon
+        </a>
         {config.analytics.gaMeasurementId && (
           <>
             <Script

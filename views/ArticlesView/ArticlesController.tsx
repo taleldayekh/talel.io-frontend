@@ -14,7 +14,7 @@ export default function ArticlesController({
         const articles = articlesRes.data;
         const latestArticleSlug = articles.articles[0].slug;
 
-        router.push(`/articles/${latestArticleSlug}`);
+        router.push(`/articles/${latestArticleSlug}`, { scroll: false });
       })
       .catch((error) => {
         // TODO: Error handling
