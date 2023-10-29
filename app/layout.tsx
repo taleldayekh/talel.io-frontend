@@ -30,6 +30,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body>
+        <a rel="me" href="https://mastodon.social/@talelio">
+          Mastodon
+        </a>
         {config.analytics.gaMeasurementId && (
           <>
             <Script
