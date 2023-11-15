@@ -26,6 +26,9 @@ function Article({
                 height={article.featuredImageDimensions.height}
               />
             </div>
+            <p className={styles['article__images-notice']}>
+              Illustrations and photography by Talel Dayekh unless noted
+            </p>
             <div className={styles.article__details}>
               <div>
                 <h1
