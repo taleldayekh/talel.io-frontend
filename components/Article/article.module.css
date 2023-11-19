@@ -186,7 +186,7 @@
   color: var(--talelio-text-white);
   font-size: 0.875rem;
   line-height: 1.7;
-  padding-top: 1.5em;
+  padding-top: 1.714285em;
   text-align: center;
   width: 100%;
 }
@@ -232,6 +232,11 @@
 
 .article__content__md tbody tr:last-of-type td:last-of-type {
   border-bottom-right-radius: 8px;
+}
+
+.article__content__md tbody tr td s {
+  text-decoration-color: var(--talelio-text-red);
+  text-decoration-thickness: 2px;
 }
 
 .article__content__md a {
@@ -345,7 +350,7 @@
 
   /* Table */
   .article__content__md table {
-    padding-top: 1.875em;
+    padding: 2.89286em 0 0.75em 0;
   }
 }
 
