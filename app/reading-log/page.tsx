@@ -5,7 +5,7 @@ async function getReadingLogSheetData() {
   const auth = await google.auth.getClient({
     credentials: {
       client_email: process.env.GCP_CLIENT_EMAIL,
-      private_key: process.env.GCP_PRIVATE_KEY,
+      private_key: process.env.GCP_PRIVATE_KEY!.replace(/\n/g, '\n'),
     },
     scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
   });
