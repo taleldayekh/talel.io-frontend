@@ -1,0 +1,11 @@
+.reading-log {
+    background-color: orange;
+    height: 100%;
+    width: 100%;
+}
+
+.reading-log__table {
+    width: 800px;
+    margin: auto;
+    height: 100%;
+}

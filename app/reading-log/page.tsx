@@ -1,5 +1,6 @@
 import { google } from 'googleapis';
 import ReadingLogView from 'views/ReadingLogView/ReadingLogView';
+import ReadingLogMapper from 'views/ReadingLogView/mappers/reading-log.mapper';
 
 async function getReadingLogSheetData() {
   const auth = await google.auth.getClient({
@@ -20,18 +21,26 @@ async function getReadingLogSheetData() {
     range: 'Reading Log!A:C',
   });
 
-  return res.data.values;
+  return res.data.values as string[][] | null | undefined;
 }
 
 export default async function ReadingLog() {
-  const readingLogData = await getReadingLogSheetData();
+  let readingLogEntries = undefined;
 
-  // TODO: Mapper
-  // const readingLogEntires
+  try {
+    const readingLogSheetData = await getReadingLogSheetData();
 
-  return readingLogData ? (
+    if (readingLogSheetData) {
+      readingLogEntries =
+        ReadingLogMapper.fromSheetDataToReadingLogEntries(readingLogSheetData);
+    }
+  } catch (error) {
+    // TODO: Error handling
+  }
+
+  return readingLogEntries ? (
     <>
-      <ReadingLogView readingLogEntries={readingLogData} />
+      <ReadingLogView readingLogEntries={readingLogEntries} />
     </>
   ) : (
     <p>No data</p>
