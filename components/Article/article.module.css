@@ -24,7 +24,7 @@
 .article__hero__image img {
   animation: reveal-hero 1s;
   height: 100%;
-  mask: url('../../assets/images/subtract.svg');
+  mask: url('../../assets/images/article-hero-mask.svg');
   mask-position: left bottom;
   mask-repeat: no-repeat;
   mask-size: cover;
@@ -251,6 +251,14 @@
   text-decoration: none;
 }
 
+.article__content__md hr {
+  border-color: var(--talelio-text-white);
+  margin: 0 auto;
+  margin-bottom: 1.5em;
+  margin-top: 3em;
+  width: 66px;
+}
+
 /* highlight.js */
 .article__content__md :global(.hljs) {
   background: transparent;
@@ -351,6 +359,11 @@
   /* Table */
   .article__content__md table {
     padding: 2.89286em 0 0.75em 0;
+  }
+
+  .article__content__md hr {
+    margin-bottom: 2.125em;
+    margin-top: 4em;
   }
 }
 
