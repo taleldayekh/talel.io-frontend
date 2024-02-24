@@ -162,7 +162,6 @@
   line-height: 1.7;
   margin: 0;
   padding-top: 1.5em;
-  text-align: justify;
 }
 
 .article__content__md ul,
@@ -349,6 +348,7 @@
   .article__content__md ol li,
   .article__content__md :global(.hljs) {
     font-size: 1.25rem;
+    text-align: justify;
   }
 
   .article__content__md p img {
