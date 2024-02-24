@@ -1,4 +1,5 @@
 import { getArticle } from 'infrastructure/repositories/articles/articles.repository';
+import type { Viewport } from 'next';
 import { Metadata } from 'next';
 import ArticleView from 'views/ArticleView/ArticleView';
 import ArticleMapper from 'views/ArticleView/mappers/article.mapper';
@@ -7,6 +8,10 @@ type Props = {
   params: {
     slug: string;
   };
+};
+
+export const viewport: Viewport = {
+  themeColor: '#00111A',
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
