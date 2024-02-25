@@ -34,6 +34,7 @@
 }
 
 body {
+    background-color: var(--talelio-page-bg-dark);
     font-family: 'Mona Sans', Serif;
     margin: 0;
 }
