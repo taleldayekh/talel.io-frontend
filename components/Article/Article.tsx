@@ -1,19 +1,24 @@
 import ArticleController from 'components/Article/ArticleController';
 import styles from 'components/Article/article.module.css';
-import { ArticleIds } from 'components/Article/enums';
-import { ArticleProps } from 'components/Article/interfaces';
+import { ArticleContentType, ArticleIds } from 'components/Article/enums';
+import { ArticleContent, ArticleProps } from 'components/Article/interfaces';
 import TextGlitch from 'components/TextGlitch/TextGlitch';
 import { GlitchPositions } from 'components/TextGlitch/enums';
-import { memo } from 'react';
+import { memo, useState } from 'react';
 
 function Article({
   article,
   articleContentRef,
   articleTitleRef,
 }: ArticleProps) {
+  // TODO: Typing
+  const [articleContent, setArticleContent] = useState<ArticleContent[]>([]);
+
   return (
     <ArticleController
+      articleHTML={article.html}
       tableOfContentsHTML={article.tableOfContents}
+      setArticleContent={setArticleContent}
       render={() => (
         <>
           <main className={styles.article}>
@@ -59,10 +64,20 @@ function Article({
                   dangerouslySetInnerHTML={{ __html: article.tableOfContents }}
                 />
               </div>
-              <div
-                className={styles.article__content__md}
-                dangerouslySetInnerHTML={{ __html: article.html }}
-              />
+              <div className={styles.article__content__md}>
+                {articleContent.map((content: ArticleContent, index) => {
+                  if (content.type === ArticleContentType.DEFAULT) {
+                    return (
+                      <div
+                        key={index}
+                        dangerouslySetInnerHTML={{ __html: content.content }}
+                      />
+                    );
+                  } else {
+                    return <></>;
+                  }
+                })}
+              </div>
             </div>
           </main>
         </>
