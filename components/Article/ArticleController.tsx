@@ -3,6 +3,7 @@ import {
   ArticleContent,
   ArticleControllerProps,
 } from 'components/Article/interfaces';
+import { Image } from 'components/ImageSlider/interfaces';
 import hljs from 'highlight.js';
 import { useEffect } from 'react';
 
@@ -54,9 +55,19 @@ export default function ArticleController({
           currentContent = '';
         }
 
+        const documentForImgs = parser.parseFromString(
+          htmlContent,
+          'text/html',
+        );
+        const imgs = documentForImgs.querySelectorAll('img');
+        const imgContent: Image[] = Array.from(imgs).map((img) => ({
+          src: img.src,
+          alt: img.alt,
+        }));
+
         articleContent.push({
           type: ArticleContentType.GALLERY,
-          content: htmlContent,
+          content: imgContent,
         });
       } else {
         currentContent += htmlContent;
