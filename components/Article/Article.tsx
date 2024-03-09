@@ -2,6 +2,7 @@ import ArticleController from 'components/Article/ArticleController';
 import styles from 'components/Article/article.module.css';
 import { ArticleContentType, ArticleIds } from 'components/Article/enums';
 import { ArticleContent, ArticleProps } from 'components/Article/interfaces';
+import ImageSlider from 'components/ImageSlider/ImageSlider';
 import TextGlitch from 'components/TextGlitch/TextGlitch';
 import { GlitchPositions } from 'components/TextGlitch/enums';
 import { memo, useState } from 'react';
@@ -11,7 +12,6 @@ function Article({
   articleContentRef,
   articleTitleRef,
 }: ArticleProps) {
-  // TODO: Typing
   const [articleContent, setArticleContent] = useState<ArticleContent[]>([]);
 
   return (
@@ -24,6 +24,7 @@ function Article({
           <main className={styles.article}>
             <div className={styles.article__hero__gradient} />
             <div className={styles.article__hero__image}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={article.featuredImageUrl}
                 alt={`${article.title} Hero Image`}
@@ -66,15 +67,19 @@ function Article({
               </div>
               <div className={styles.article__content__md}>
                 {articleContent.map((content: ArticleContent, index) => {
-                  if (content.type === ArticleContentType.DEFAULT) {
-                    return (
-                      <div
-                        key={index}
-                        dangerouslySetInnerHTML={{ __html: content.content }}
-                      />
-                    );
-                  } else {
-                    return <></>;
+                  /* eslint-disable indent */
+                  switch (content.type) {
+                    case ArticleContentType.DEFAULT:
+                      return (
+                        <div
+                          key={index}
+                          dangerouslySetInnerHTML={{ __html: content.content }}
+                        />
+                      );
+                    case ArticleContentType.GALLERY:
+                      return (
+                        <ImageSlider key={index} images={content.content} />
+                      );
                   }
                 })}
               </div>
