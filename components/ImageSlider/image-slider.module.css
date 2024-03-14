@@ -1,0 +1,53 @@
+.image-slider__images {
+    display: flex;
+}
+
+.image-slider__images--transition {
+    transition: all 0.5s;
+}
+
+.image-slider__images img {
+    display: block;
+    height: auto;
+    object-fit: cover;
+    width: 100%;
+}
+
+.indicator {
+    display: flex;
+}
+
+.indicator span {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    /* background-color: orange; */
+}
+
+.indicator__dot--active {
+    background-color: green;
+}
+
+.indicator__dot {
+    background-color: red;
+}
+
+
+
+
+
+/* .image-slider__images {
+    display: flex;
+    overflow: hidden;
+}
+.image-slider__images--transition {
+    transition: all 0.5s;
+}
+
+.image-slider__images img {
+    display: block;
+    height: auto;
+    object-fit: cover;
+    width: 100%;
+
+} */
