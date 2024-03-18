@@ -6,9 +6,9 @@ export default function ImageSliderController({
   sliderImages,
   setSliderImages,
   setIsTransitionEnabled,
-  setTransformStyles,
+  setIsButtonEnabled,
   setPositionStyles,
-  setIsButtonDisabled,
+  setTransformStyles,
   render,
 }: ImageSliderControllerProps) {
   // TODO: Create enum for slide direction
@@ -33,7 +33,7 @@ export default function ImageSliderController({
 
       setTimeout(() => {
         setIsTransitionEnabled(true);
-        setIsButtonDisabled(false);
+        setIsButtonEnabled(true);
       }, 50);
     };
 
@@ -80,7 +80,7 @@ export default function ImageSliderController({
     setPositionStyles({
       justifyContent: 'flex-start',
     });
-    setIsButtonDisabled(true);
+    setIsButtonEnabled(false);
   };
 
   const onPrevClick = (): void => {
@@ -100,7 +100,7 @@ export default function ImageSliderController({
     setPositionStyles({
       justifyContent: 'flex-end',
     });
-    setIsButtonDisabled(true);
+    setIsButtonEnabled(false);
   };
 
   return render(onNextClick, onPrevClick);

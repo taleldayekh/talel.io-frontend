@@ -11,9 +11,8 @@ export interface ImageSliderControllerProps {
   sliderImages: Image[];
   setSliderImages: Dispatch<SetStateAction<Image[]>>;
   setIsTransitionEnabled: Dispatch<SetStateAction<boolean>>;
-  // TODO: Typing
-  setTransformStyles: Dispatch<SetStateAction<any>>;
-  setPositionStyles: Dispatch<SetStateAction<any>>;
-  setIsButtonDisabled: Dispatch<SetStateAction<boolean>>;
+  setIsButtonEnabled: Dispatch<SetStateAction<boolean>>;
+  setPositionStyles: Dispatch<SetStateAction<Record<string, string>>>;
+  setTransformStyles: Dispatch<SetStateAction<Record<string, string>>>;
   render: (onNextClick: () => void, onPrevClick: () => void) => ReactElement;
 }
