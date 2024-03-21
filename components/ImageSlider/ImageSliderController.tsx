@@ -1,30 +1,33 @@
 import { ImageSliderControllerProps } from 'components/ImageSlider/interfaces';
-import { useEffect, useState } from 'react';
+import { TouchEvent, useEffect, useState } from 'react';
+import { SlideDirections } from 'components/ImageSlider/enums';
 
 export default function ImageSliderController({
   sliderElementRef,
   sliderImages,
   setSliderImages,
+  setCurrentSlide,
   setIsTransitionEnabled,
   setIsButtonEnabled,
   setPositionStyles,
   setTransformStyles,
   render,
 }: ImageSliderControllerProps) {
-  // TODO: Create enum for slide direction
-  const [slideDirection, setSlideDirection] = useState<string | undefined>(
+  const [slideDirection, setSlideDirection] = useState<SlideDirections | undefined>(
     undefined,
   );
+  const [swipeStartValue, setSwipeStartValue] = useState<number | null>(null);
+  const [swipeEndValue, setSwipeEndValue] = useState<number | null>(null);
 
   useEffect(() => {
     const onTransitionEnd = (): void => {
       if (!slideDirection) return;
 
-      if (slideDirection === 'next') {
+      if (slideDirection === SlideDirections.NEXT) {
         appendFirstImage();
       }
 
-      if (slideDirection === 'prev') {
+      if (slideDirection === SlideDirections.PREV) {
         prependLastImage();
       }
 
@@ -66,14 +69,15 @@ export default function ImageSliderController({
 
   const onNextClick = (): void => {
     if (!slideDirection) {
-      setSlideDirection('next');
+      setSlideDirection(SlideDirections.NEXT);
     }
 
-    if (slideDirection === 'prev') {
+    if (slideDirection === SlideDirections.PREV) {
       prependLastImage();
-      setSlideDirection('next');
+      setSlideDirection(SlideDirections.NEXT);
     }
 
+    setCurrentSlide((prevSlide) => (prevSlide + 1) % sliderImages.length);
     setTransformStyles({
       transform: 'translate(-100%)',
     });
@@ -85,15 +89,16 @@ export default function ImageSliderController({
 
   const onPrevClick = (): void => {
     if (!slideDirection) {
-      setSlideDirection('prev');
+      setSlideDirection(SlideDirections.PREV);
       appendFirstImage();
     }
 
-    if (slideDirection === 'next') {
+    if (slideDirection === SlideDirections.NEXT) {
       appendFirstImage();
-      setSlideDirection('prev');
+      setSlideDirection(SlideDirections.PREV);
     }
 
+    setCurrentSlide((prevSlide) => (prevSlide - 1 + sliderImages.length) % sliderImages.length);
     setTransformStyles({
       transform: 'translate(100%)',
     });
@@ -103,5 +108,37 @@ export default function ImageSliderController({
     setIsButtonEnabled(false);
   };
 
-  return render(onNextClick, onPrevClick);
+  const updateSwipeStartValue = (event: TouchEvent<HTMLDivElement>): void => {
+    setSwipeEndValue(null);
+    setSwipeStartValue(event.targetTouches[0].clientX);
+  }
+
+  const updateSwipeEndValue = (event: TouchEvent<HTMLDivElement>): void => {
+    setSwipeEndValue(event.targetTouches[0].clientX);
+  }
+
+  const onSwipeEnd = (): void => {
+    if (!swipeStartValue || !swipeEndValue) return;
+  
+    const minSwipeDistance = 50;
+    const swipeDistance = swipeStartValue - swipeEndValue;
+    const isLeftSwipe = swipeDistance > minSwipeDistance;
+    const isRightSwipe = swipeDistance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      onNextClick();
+    }
+
+    if (isRightSwipe) {
+      onPrevClick();
+    }
+  }
+
+  return render(
+      onNextClick, 
+      onPrevClick, 
+      updateSwipeStartValue,
+      updateSwipeEndValue,
+      onSwipeEnd
+    );
 }
