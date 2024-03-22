@@ -180,6 +180,14 @@
   margin-left: -1.375em;
 }
 
+/*
+  The HTML generated from Markdown wraps images in a <p> tag,
+  padding top is needed to align with the non-slider images.
+*/
+.article__content__image-slider {
+  padding-top: 1.5em;
+}
+
 /* Table */
 .article__content__md table {
   border-spacing: 0;
@@ -356,6 +364,10 @@
   .article__content__image-slider {
     width: 114%;
     margin-left: -7%;
+  }
+
+  .article__content__image-slider {
+    padding-top: 1.875em;
   }
 
   /* Table */
