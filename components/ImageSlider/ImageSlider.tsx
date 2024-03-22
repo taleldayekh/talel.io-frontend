@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /* eslint-disable @next/next/no-img-element */
 import { Arrow } from 'components/Icons';
 import ImageSliderController from 'components/ImageSlider/ImageSliderController';
@@ -35,8 +36,19 @@ export default function ImageSlider({ images }: ImageSliderProps) {
       setIsButtonEnabled={setIsButtonEnabled}
       setPositionStyles={setPositionStyles}
       setTransformStyles={setTransformStyles}
-      render={(onNextClick, onPrevClick, updateSwipeStartValue, updateSwipeEndValue, onSwipeEnd) => (
-        <div className={styles['image-slider']} onTouchStart={updateSwipeStartValue} onTouchMove={updateSwipeEndValue} onTouchEnd={isButtonEnabled ? onSwipeEnd : undefined}>
+      render={(
+        onNextClick,
+        onPrevClick,
+        updateSwipeStartValue,
+        updateSwipeEndValue,
+        onSwipeEnd,
+      ) => (
+        <div
+          className={styles['image-slider']}
+          onTouchStart={updateSwipeStartValue}
+          onTouchMove={updateSwipeEndValue}
+          onTouchEnd={isButtonEnabled ? onSwipeEnd : undefined}
+        >
           <div
             className={`${styles['image-slider__images']} ${
               isTransitionEnabled
@@ -51,27 +63,68 @@ export default function ImageSlider({ images }: ImageSliderProps) {
             ))}
           </div>
           <div className={styles['image-slider__interactions']}>
-            <div className={styles['image-slider__interactions__slide-indicator']}>
-              <div className={styles['image-slider__interactions__slide-indicator__shadow-wrapper']}>
+            <div
+              className={styles['image-slider__interactions__slide-indicator']}
+            >
+              <div
+                className={
+                  styles[
+                    'image-slider__interactions__slide-indicator__shadow-wrapper'
+                  ]
+                }
+              >
                 {sliderImages.map((_, index: number) => (
                   <div
                     key={index}
-                    className={(
-                      `${styles['image-slider__interactions__slide-indicator__dot']} 
-                       ${index === currentSlide ? styles['image-slider__interactions__slide-indicator__pill'] : null} 
-                       ${index === 0 && currentSlide !== index ? styles['image-slider__interactions__slide-indicator__dot--small'] : null} 
-                       ${index === sliderImages.length - 1 && currentSlide !== index ? styles['image-slider__interactions__slide-indicator__dot--small'] : null}
-                      `
-                    )}
+                    className={`${
+                      styles['image-slider__interactions__slide-indicator__dot']
+                    } 
+                       ${
+                         index === currentSlide
+                           ? styles[
+                               'image-slider__interactions__slide-indicator__pill'
+                             ]
+                           : null
+                       } 
+                       ${
+                         index === 0 && currentSlide !== index
+                           ? styles[
+                               'image-slider__interactions__slide-indicator__dot--small'
+                             ]
+                           : null
+                       } 
+                       ${
+                         index === sliderImages.length - 1 &&
+                         currentSlide !== index
+                           ? styles[
+                               'image-slider__interactions__slide-indicator__dot--small'
+                             ]
+                           : null
+                       }
+                      `}
                   ></div>
                 ))}
               </div>
             </div>
-            <button onClick={isButtonEnabled ? onPrevClick : undefined}>
-              <Arrow className={styles['image-slider__interactions__button-icon']} direction={'left'} size={8} />
+            <button
+              onClick={isButtonEnabled ? onPrevClick : undefined}
+              aria-label="View previous slide"
+            >
+              <Arrow
+                className={styles['image-slider__interactions__button-icon']}
+                direction={'left'}
+                size={8}
+              />
             </button>
-            <button onClick={isButtonEnabled ? onNextClick: undefined}>
-              <Arrow className={styles['image-slider__interactions__button-icon']} direction={'right'} size={8} />
+            <button
+              onClick={isButtonEnabled ? onNextClick : undefined}
+              aria-label="View next slide"
+            >
+              <Arrow
+                className={styles['image-slider__interactions__button-icon']}
+                direction={'right'}
+                size={8}
+              />
             </button>
           </div>
         </div>
@@ -79,4 +132,3 @@ export default function ImageSlider({ images }: ImageSliderProps) {
     />
   );
 }
- 

@@ -1,6 +1,6 @@
+import { SlideDirections } from 'components/ImageSlider/enums';
 import { ImageSliderControllerProps } from 'components/ImageSlider/interfaces';
 import { TouchEvent, useEffect, useState } from 'react';
-import { SlideDirections } from 'components/ImageSlider/enums';
 
 export default function ImageSliderController({
   sliderElementRef,
@@ -13,9 +13,9 @@ export default function ImageSliderController({
   setTransformStyles,
   render,
 }: ImageSliderControllerProps) {
-  const [slideDirection, setSlideDirection] = useState<SlideDirections | undefined>(
-    undefined,
-  );
+  const [slideDirection, setSlideDirection] = useState<
+    SlideDirections | undefined
+  >(undefined);
   const [swipeStartValue, setSwipeStartValue] = useState<number | null>(null);
   const [swipeEndValue, setSwipeEndValue] = useState<number | null>(null);
 
@@ -98,7 +98,10 @@ export default function ImageSliderController({
       setSlideDirection(SlideDirections.PREV);
     }
 
-    setCurrentSlide((prevSlide) => (prevSlide - 1 + sliderImages.length) % sliderImages.length);
+    setCurrentSlide(
+      (prevSlide) =>
+        (prevSlide - 1 + sliderImages.length) % sliderImages.length,
+    );
     setTransformStyles({
       transform: 'translate(100%)',
     });
@@ -111,15 +114,15 @@ export default function ImageSliderController({
   const updateSwipeStartValue = (event: TouchEvent<HTMLDivElement>): void => {
     setSwipeEndValue(null);
     setSwipeStartValue(event.targetTouches[0].clientX);
-  }
+  };
 
   const updateSwipeEndValue = (event: TouchEvent<HTMLDivElement>): void => {
     setSwipeEndValue(event.targetTouches[0].clientX);
-  }
+  };
 
   const onSwipeEnd = (): void => {
     if (!swipeStartValue || !swipeEndValue) return;
-  
+
     const minSwipeDistance = 50;
     const swipeDistance = swipeStartValue - swipeEndValue;
     const isLeftSwipe = swipeDistance > minSwipeDistance;
@@ -132,13 +135,13 @@ export default function ImageSliderController({
     if (isRightSwipe) {
       onPrevClick();
     }
-  }
+  };
 
   return render(
-      onNextClick, 
-      onPrevClick, 
-      updateSwipeStartValue,
-      updateSwipeEndValue,
-      onSwipeEnd
-    );
+    onNextClick,
+    onPrevClick,
+    updateSwipeStartValue,
+    updateSwipeEndValue,
+    onSwipeEnd,
+  );
 }

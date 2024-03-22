@@ -4,7 +4,7 @@ import {
   MutableRefObject,
   ReactElement,
   SetStateAction,
-  TouchEvent
+  TouchEvent,
 } from 'react';
 
 export interface ImageSliderControllerProps {
@@ -17,7 +17,7 @@ export interface ImageSliderControllerProps {
   setPositionStyles: Dispatch<SetStateAction<Record<string, string>>>;
   setTransformStyles: Dispatch<SetStateAction<Record<string, string>>>;
   render: (
-    onNextClick: () => void, 
+    onNextClick: () => void,
     onPrevClick: () => void,
     updateSwipeStartValue: (event: TouchEvent<HTMLDivElement>) => void,
     updateSwipeEndValue: (event: TouchEvent<HTMLDivElement>) => void,

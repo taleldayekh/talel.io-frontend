@@ -181,8 +181,8 @@
 }
 
 /*
-  The HTML generated from Markdown wraps images in a <p> tag,
-  padding top is needed to align with the non-slider images.
+The HTML generated from Markdown wraps images in a <p> tag,
+padding top is needed to align with the non-slider images.
 */
 .article__content__image-slider {
   padding-top: 1.5em;
@@ -311,7 +311,7 @@
     margin: 2.125em 2.125em 0 0;
     text-align: right;
   }
-
+  
   .article__details__meta {
     margin: 0;
   }
@@ -329,20 +329,20 @@
     text-align: left;
     top: 2em;
   }
-
+  
   .article__content__toc :global(.toc) {
     opacity: 0.5;
     transition: opacity 0.5s ease-in-out;
   }
-
+  
   .article__content__toc :global(.toc):hover {
     opacity: 1;
   }
-
+  
   .article__content__toc ul {
     padding-right: 0.5em;
   }
-
+  
   /* TOC subheading */
   .article__content__toc li ul li {
     margin-left: 0.75em;
@@ -359,22 +359,22 @@
     font-size: 1.25rem;
     text-align: justify;
   }
-
+  
   .article__content__md p img,
   .article__content__image-slider {
     width: 114%;
     margin-left: -7%;
   }
-
+  
   .article__content__image-slider {
     padding-top: 1.875em;
   }
-
+  
   /* Table */
   .article__content__md table {
     padding: 2.89286em 0 0.75em 0;
   }
-
+  
   .article__content__md hr {
     margin-bottom: 2.125em;
     margin-top: 4em;

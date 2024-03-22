@@ -78,7 +78,10 @@ function Article({
                       );
                     case ArticleContentType.GALLERY:
                       return (
-                        <div key={index} className={styles['article__content__image-slider']}>
+                        <div
+                          key={index}
+                          className={styles['article__content__image-slider']}
+                        >
                           <ImageSlider images={content.content} />
                         </div>
                       );
