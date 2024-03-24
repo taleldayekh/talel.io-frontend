@@ -1,24 +1,30 @@
 import ArticleController from 'components/Article/ArticleController';
 import styles from 'components/Article/article.module.css';
-import { ArticleIds } from 'components/Article/enums';
-import { ArticleProps } from 'components/Article/interfaces';
+import { ArticleContentType, ArticleIds } from 'components/Article/enums';
+import { ArticleContent, ArticleProps } from 'components/Article/interfaces';
+import ImageSlider from 'components/ImageSlider/ImageSlider';
 import TextGlitch from 'components/TextGlitch/TextGlitch';
 import { GlitchPositions } from 'components/TextGlitch/enums';
-import { memo } from 'react';
+import { memo, useState } from 'react';
 
 function Article({
   article,
   articleContentRef,
   articleTitleRef,
 }: ArticleProps) {
+  const [articleContent, setArticleContent] = useState<ArticleContent[]>([]);
+
   return (
     <ArticleController
+      articleHTML={article.html}
       tableOfContentsHTML={article.tableOfContents}
+      setArticleContent={setArticleContent}
       render={() => (
         <>
           <main className={styles.article}>
             <div className={styles.article__hero__gradient} />
             <div className={styles.article__hero__image}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={article.featuredImageUrl}
                 alt={`${article.title} Hero Image`}
@@ -59,10 +65,29 @@ function Article({
                   dangerouslySetInnerHTML={{ __html: article.tableOfContents }}
                 />
               </div>
-              <div
-                className={styles.article__content__md}
-                dangerouslySetInnerHTML={{ __html: article.html }}
-              />
+              <div className={styles.article__content__md}>
+                {articleContent.map((content: ArticleContent, index) => {
+                  /* eslint-disable indent */
+                  switch (content.type) {
+                    case ArticleContentType.DEFAULT:
+                      return (
+                        <div
+                          key={index}
+                          dangerouslySetInnerHTML={{ __html: content.content }}
+                        />
+                      );
+                    case ArticleContentType.GALLERY:
+                      return (
+                        <div
+                          key={index}
+                          className={styles['article__content__image-slider']}
+                        >
+                          <ImageSlider images={content.content} />
+                        </div>
+                      );
+                  }
+                })}
+              </div>
             </div>
           </main>
         </>
