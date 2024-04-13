@@ -4,23 +4,26 @@ import {
   MutableRefObject,
   ReactElement,
   SetStateAction,
-  TouchEvent,
 } from 'react';
 
 export interface ImageSliderControllerProps {
-  sliderElementRef: MutableRefObject<any>;
+  imagesWrapperRef: MutableRefObject<any>;
+  numberOfImagesInViewport: number;
   sliderImages: Image[];
   setSliderImages: Dispatch<SetStateAction<Image[]>>;
-  setCurrentSlide: Dispatch<SetStateAction<number>>;
+  setNumberOfImagesInViewport: Dispatch<SetStateAction<number>>;
   setIsTransitionEnabled: Dispatch<SetStateAction<boolean>>;
   setIsButtonEnabled: Dispatch<SetStateAction<boolean>>;
-  setPositionStyles: Dispatch<SetStateAction<Record<string, string>>>;
   setTransformStyles: Dispatch<SetStateAction<Record<string, string>>>;
+  setPositionStyles: Dispatch<SetStateAction<Record<string, string>>>;
+  // setCurrentSlide: Dispatch<SetStateAction<number>>;
   render: (
     onNextClick: () => void,
     onPrevClick: () => void,
-    updateSwipeStartValue: (event: TouchEvent<HTMLDivElement>) => void,
-    updateSwipeEndValue: (event: TouchEvent<HTMLDivElement>) => void,
-    onSwipeEnd: () => void,
-  ) => ReactElement;
+  ) => // onNextClick: () => void,
+  // onPrevClick: () => void,
+  // updateSwipeStartValue: (event: TouchEvent<HTMLDivElement>) => void,
+  // updateSwipeEndValue: (event: TouchEvent<HTMLDivElement>) => void,
+  // onSwipeEnd: () => void,
+  ReactElement;
 }

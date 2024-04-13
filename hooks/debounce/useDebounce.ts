@@ -1,6 +1,6 @@
 import { useCallback, useRef } from 'react';
 
-export default function useDebounce<F extends (args: any[]) => F>(
+export default function useDebounce<F extends (...args: any[]) => any>(
   func: F,
   delay: number,
 ) {
