@@ -8,19 +8,19 @@ export default function ArticlesController({
 }: ArticlesControllerProps) {
   const router = useRouter();
 
-  useEffect(() => {
-    ArticlesRepository.getArticles()
-      .then((articlesRes) => {
-        const articles = articlesRes.data;
-        const latestArticleSlug = articles.articles[0].slug;
+  // useEffect(() => {
+  //   ArticlesRepository.getArticles()
+  //     .then((articlesRes) => {
+  //       const articles = articlesRes.data;
+  //       const latestArticleSlug = articles.articles[0].slug;
 
-        router.push(`/articles/${latestArticleSlug}`, { scroll: false });
-      })
-      .catch((error) => {
-        // TODO: Error handling
-        console.log(error);
-      });
-  });
+  //       router.push(`/articles/${latestArticleSlug}`, { scroll: false });
+  //     })
+  //     .catch((error) => {
+  //       // TODO: Error handling
+  //       console.log(error);
+  //     });
+  // });
 
   return render();
 }
