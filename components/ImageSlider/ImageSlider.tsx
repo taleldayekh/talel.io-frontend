@@ -16,7 +16,7 @@ export default function ImageSlider({ images, multiple }: ImageSliderProps) {
 
   // States for managing slider interactions
   const [isTransitionEnabled, setIsTransitionEnabled] = useState<boolean>(true);
-  const [isButtonEnabled, setIsButtonEnabled] = useState<boolean>(true);
+  const [isControlsEnabled, setIsControlsEnabled] = useState<boolean>(true);
 
   // States for inline CSS
   const [imageStyles, setImageStyles] = useState<Record<string, string>>({});
@@ -38,27 +38,33 @@ export default function ImageSlider({ images, multiple }: ImageSliderProps) {
     if (!numberOfImagesInViewport) return;
 
     const imageWidth = multiple ? 100 / numberOfImagesInViewport : 100;
+    const multipleImagesStyle = {
+      borderRadius: '8px',
+      padding: '.2vw',
+    };
 
     const styles = {
       flex: `0 0 ${imageWidth}%`,
       maxWidth: `${imageWidth}%`,
+      ...(multiple && multipleImagesStyle),
     };
 
     setImageStyles(styles);
   }, [numberOfImagesInViewport, multiple]);
 
-  // TODO: Typing
-  const imagesWrapperRef = useRef<any>(null);
+  const imagesWrapperRef = useRef<HTMLDivElement>(null);
 
   return (
     <ImageSliderController
+      multiple={multiple}
       imagesWrapperRef={imagesWrapperRef}
       sliderImages={sliderImages}
       setSliderImages={setSliderImages}
       numberOfImagesInViewport={numberOfImagesInViewport}
       setNumberOfImagesInViewport={setNumberOfImagesInViewport}
+      setCurrentSlideIndex={setCurrentSlideIndex}
       setIsTransitionEnabled={setIsTransitionEnabled}
-      setIsButtonEnabled={setIsButtonEnabled}
+      setIsControlsEnabled={setIsControlsEnabled}
       setTransformStyles={setTransformStyles}
       setPositionStyles={setPositionStyles}
       render={(onNextClick, onPrevClick, calculateNumberOfSlides) => (
@@ -96,6 +102,7 @@ export default function ImageSlider({ images, multiple }: ImageSliderProps) {
               numberOfSlides={calculateNumberOfSlides()}
               currentSlideIndex={currentSlideIndex}
               multiple={multiple}
+              isDisabled={!isControlsEnabled}
             />
           </div>
         </>
