@@ -67,13 +67,23 @@ export default function ImageSlider({ images, multiple }: ImageSliderProps) {
       setIsControlsEnabled={setIsControlsEnabled}
       setTransformStyles={setTransformStyles}
       setPositionStyles={setPositionStyles}
-      render={(onNextClick, onPrevClick, calculateNumberOfSlides) => (
+      render={(
+        onNextClick,
+        onPrevClick,
+        updateSwipeStartValue,
+        updateSwipeEndValue,
+        onSwipeEnd,
+        calculateNumberOfSlides,
+      ) => (
         <>
           <div
             className={`
               ${styles['image-slider']} 
               ${multiple ? styles['image-slider--multiple'] : null}
             `}
+            onTouchStart={updateSwipeStartValue}
+            onTouchMove={updateSwipeEndValue}
+            onTouchEnd={isControlsEnabled ? onSwipeEnd : undefined}
           >
             <div
               ref={imagesWrapperRef}

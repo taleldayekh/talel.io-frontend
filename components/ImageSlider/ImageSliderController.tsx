@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, TouchEvent } from 'react';
 import { ImageSliderControllerProps } from 'components/ImageSlider/interfaces';
 import useDebounce from 'hooks/debounce/useDebounce';
 import { SlideDirections } from 'components/ImageSlider/enums';
@@ -22,6 +22,8 @@ export default function ImageSliderController({
   >(undefined);
 
   // States for swipe gestures
+  const [swipeStartValue, setSwipeStartValue] = useState<number | null>(null);
+  const [swipeEndValue, setSwipeEndValue] = useState<number | null>(null);
 
   const isFirstUpdateOfImagesInViewport = useRef(true);
 
@@ -38,6 +40,7 @@ export default function ImageSliderController({
 
     const handleResize = (): void => {
       debouncedUpdateNumberOfImagesInViewport();
+      setCurrentSlideIndex(0);
     };
 
     window.addEventListener('resize', handleResize);
@@ -176,6 +179,31 @@ export default function ImageSliderController({
     setSliderImages(sliderImagesCopy);
   };
 
+  const updateSwipeStartValue = (event: TouchEvent<HTMLDivElement>): void => {
+    setSwipeStartValue(event.targetTouches[0].clientX);
+  };
+
+  const updateSwipeEndValue = (event: TouchEvent<HTMLDivElement>): void => {
+    setSwipeEndValue(event.targetTouches[0].clientX);
+  };
+
+  const onSwipeEnd = (): void => {
+    if (!swipeStartValue || !swipeEndValue) return;
+
+    const minSwipeDistance = 50;
+    const swipeDistance = swipeStartValue - swipeEndValue;
+    const isLeftSwipe = swipeDistance > minSwipeDistance;
+    const isRightSwipe = swipeDistance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      onNextClick();
+    }
+
+    if (isRightSwipe) {
+      onPrevClick();
+    }
+  };
+
   const updateCurrentSlideIndex = (slideDirection: SlideDirections): void => {
     const numberOfSlides = calculateNumberOfSlides();
 
@@ -197,37 +225,17 @@ export default function ImageSliderController({
     return sliderImages.length / (numberOfImagesInViewport || 1);
   };
 
-  return render(onNextClick, onPrevClick, calculateNumberOfSlides);
+  return render(
+    onNextClick,
+    onPrevClick,
+    updateSwipeStartValue,
+    updateSwipeEndValue,
+    onSwipeEnd,
+    calculateNumberOfSlides,
+  );
 }
-
-// const [slideDirection, setSlideDirection] = useState<
-//   SlideDirections | undefined
-// >(undefined);
-// const [swipeStartValue, setSwipeStartValue] = useState<number | null>(null);
-// const [swipeEndValue, setSwipeEndValue] = useState<number | null>(null);
 
 // const updateSwipeStartValue = (event: TouchEvent<HTMLDivElement>): void => {
 //   setSwipeEndValue(null);
 //   setSwipeStartValue(event.targetTouches[0].clientX);
-// };
-
-// const updateSwipeEndValue = (event: TouchEvent<HTMLDivElement>): void => {
-//   setSwipeEndValue(event.targetTouches[0].clientX);
-// };
-
-// const onSwipeEnd = (): void => {
-//   if (!swipeStartValue || !swipeEndValue) return;
-
-//   const minSwipeDistance = 50;
-//   const swipeDistance = swipeStartValue - swipeEndValue;
-//   const isLeftSwipe = swipeDistance > minSwipeDistance;
-//   const isRightSwipe = swipeDistance < -minSwipeDistance;
-
-//   if (isLeftSwipe) {
-//     onNextClick();
-//   }
-
-//   if (isRightSwipe) {
-//     onPrevClick();
-//   }
 // };
