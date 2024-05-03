@@ -1,3 +1,5 @@
+'use client'
+
 import ImageSlider from 'components/ImageSlider/ImageSlider';
 import ArticlesController from 'views/ArticlesView/ArticlesController';
 
@@ -65,7 +67,7 @@ export default function ArticlesView() {
     <ArticlesController
       render={() => (
         <div>
-          <ImageSlider images={images} />
+          <ImageSlider images={images} multiple />
         </div>
       )}
     />
