@@ -1,4 +1,4 @@
-'use client';
+// TODO: Server component, make requests here
 
 import ArticlesView from 'views/ArticlesView/ArticlesView';
 

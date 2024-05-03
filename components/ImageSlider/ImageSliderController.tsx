@@ -67,7 +67,7 @@ export default function ImageSliderController({
        */
       setIsTransitionEnabled(false);
       setTransformStyles({
-        transform: 'translateX(0)',
+        translate: '0',
       });
 
       setTimeout(() => {
@@ -127,7 +127,7 @@ export default function ImageSliderController({
 
     updateCurrentSlideIndex(SlideDirections.NEXT);
     setTransformStyles({
-      transform: 'translateX(-100%',
+      translate: '-100%',
     });
     setPositionStyles({
       justifyContent: 'flex-start',
@@ -150,7 +150,7 @@ export default function ImageSliderController({
 
     updateCurrentSlideIndex(SlideDirections.PREV);
     setTransformStyles({
-      transform: 'translateX(100%)',
+      translate: '100%',
     });
     setPositionStyles({
       justifyContent: 'flex-end',
@@ -234,8 +234,3 @@ export default function ImageSliderController({
     calculateNumberOfSlides,
   );
 }
-
-// const updateSwipeStartValue = (event: TouchEvent<HTMLDivElement>): void => {
-//   setSwipeEndValue(null);
-//   setSwipeStartValue(event.targetTouches[0].clientX);
-// };

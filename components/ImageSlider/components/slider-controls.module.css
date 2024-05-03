@@ -120,3 +120,11 @@
 .slider-controls-single__button-icon {
   border-color: var(--talelio-text-white);
 }
+
+@media (max-width: 26.875em) {
+  .slider-controls-single button,
+  .slider-controls-multiple__button-prev, 
+  .slider-controls-multiple__button-next {
+    display: none;
+  }
+}

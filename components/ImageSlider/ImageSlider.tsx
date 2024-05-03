@@ -22,7 +22,7 @@ export default function ImageSlider({ images, multiple }: ImageSliderProps) {
   const [imageStyles, setImageStyles] = useState<Record<string, string>>({});
   const [transformStyles, setTransformStyles] = useState<
     Record<string, string>
-  >({ transform: 'translateX(0)' });
+  >({ translate: '0' });
   const [positionStyles, setPositionStyles] = useState<Record<string, string>>({
     justifyContent: 'flex-start',
   });
@@ -100,7 +100,7 @@ export default function ImageSlider({ images, multiple }: ImageSliderProps) {
               {sliderImages.map((image: Image, index: number) => (
                 <img
                   style={{ ...imageStyles }}
-                  key={index}
+                  key={image.src}
                   src={image.src}
                   alt={image.alt}
                 />
