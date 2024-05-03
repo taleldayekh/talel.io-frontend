@@ -1,5 +1,11 @@
 import { Image } from 'components/ImageSlider/interfaces';
-import { MutableRefObject, Dispatch, SetStateAction, ReactElement, TouchEvent } from 'react';
+import {
+  Dispatch,
+  MutableRefObject,
+  ReactElement,
+  SetStateAction,
+  TouchEvent,
+} from 'react';
 
 export interface ImageSliderControllerProps {
   multiple: boolean | undefined;
@@ -17,7 +23,7 @@ export interface ImageSliderControllerProps {
     onNextClick: () => void,
     onPrevClick: () => void,
     updateSwipeStartValue: (event: TouchEvent<HTMLDivElement>) => void,
-    updateSwipeEndValue:  (event: TouchEvent<HTMLDivElement>) => void,
+    updateSwipeEndValue: (event: TouchEvent<HTMLDivElement>) => void,
     onSwipeEnd: () => void,
     calculateNumberOfSlides: () => number,
   ) => ReactElement;

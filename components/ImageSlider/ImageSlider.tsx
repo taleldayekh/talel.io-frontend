@@ -1,10 +1,10 @@
 /* eslint-disable indent */
 /* eslint-disable @next/next/no-img-element */
-import styles from 'components/ImageSlider/image-slider.module.css';
 import ImageSliderController from 'components/ImageSlider/ImageSliderController';
+import SliderControls from 'components/ImageSlider/components/SliderControls';
+import styles from 'components/ImageSlider/image-slider.module.css';
 import { Image, ImageSliderProps } from 'components/ImageSlider/interfaces';
 import { useEffect, useRef, useState } from 'react';
-import SliderControls from 'components/ImageSlider/components/SliderControls';
 
 export default function ImageSlider({ images, multiple }: ImageSliderProps) {
   // States for managing images in the UI

@@ -1,6 +1,7 @@
+/* eslint-disable indent */
 import { Arrow } from 'components/Icons';
-import { SliderControlsProps } from 'components/ImageSlider/interfaces';
 import styles from 'components/ImageSlider/components/slider-controls.module.css';
+import { SliderControlsProps } from 'components/ImageSlider/interfaces';
 
 export default function SliderControls({
   onNextClick,

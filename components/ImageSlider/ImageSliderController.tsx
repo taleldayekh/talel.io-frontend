@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef, TouchEvent } from 'react';
+import { SlideDirections } from 'components/ImageSlider/enums';
 import { ImageSliderControllerProps } from 'components/ImageSlider/interfaces';
 import useDebounce from 'hooks/debounce/useDebounce';
-import { SlideDirections } from 'components/ImageSlider/enums';
+import { TouchEvent, useEffect, useRef, useState } from 'react';
 
 export default function ImageSliderController({
   multiple,
