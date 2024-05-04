@@ -77,20 +77,24 @@
   padding: 6px 24px 6px 24px;
 }
 
-.slider-controls-single__pagination-indicator__dot {
+/* Specificity to not have styles overwritten by article component styles */
+.slider-controls-single__pagination-indicator ul li.slider-controls-single__pagination-indicator__dot {
   background-color: rgba(var(--buttonColor), 1);
   border-radius: 50%;
   height: 8px;
+  padding-top: 0; /* Removes padding applied to ul li elements in the article component styles */
   transition: border-radius, width, 0.5s linear;
   width: 8px;
 }
 
-.slider-controls-single__pagination-indicator__dot--small {
+/* Specificity to not have styles overwritten by article component styles */
+.slider-controls-single__pagination-indicator ul li.slider-controls-single__pagination-indicator__dot--small {
   height: 6px;
   width: 6px;
 }
 
-.slider-controls-single__pagination-indicator__pill {
+/* Specificity to not have styles overwritten by article component styles */
+.slider-controls-single__pagination-indicator ul li.slider-controls-single__pagination-indicator__pill {
   background-color: var(--talelio-text-white);
   border-radius: 8px;
   width: 14px;
