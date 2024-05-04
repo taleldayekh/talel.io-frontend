@@ -4,7 +4,7 @@ import ArticlesMapper from 'views/ArticlesView/mappers/articles.mapper';
 import ArticlesViewModel from 'views/ArticlesView/models/articles.view-model';
 
 async function getArticles(): Promise<ArticlesViewModel[]> {
-  const articlesRes = await ArticlesRepository.getArticles();
+  const articlesRes = await ArticlesRepository.getArticles(1, 12);
   const articles = articlesRes.data.articles.map((articleRes) =>
     Object.assign(
       {},
