@@ -1,15 +1,28 @@
-'use client'
+import { ArticlesRepository } from 'infrastructure/repositories/articles/articles.repository';
+import ArticlesView from 'views/ArticlesView/ArticlesView';
+import ArticlesMapper from 'views/ArticlesView/mappers/articles.mapper';
+import ArticlesViewModel from 'views/ArticlesView/models/articles.view-model';
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+async function getArticles(): Promise<ArticlesViewModel[]> {
+  const articlesRes = await ArticlesRepository.getArticles();
+  const articles = articlesRes.data.articles.map((articleRes) =>
+    Object.assign(
+      {},
+      ArticlesMapper.fromResponseToArticlesViewModel(articleRes),
+    ),
+  );
 
-export default function Articles() {
-  const router = useRouter();
+  return articles;
+}
 
-  useEffect(() => {
-    // TODO: Temporary redirect until articles page is implemented
-    router.push('/', { scroll: false });
-  });
+export default async function Articles() {
+  let articles = undefined;
 
-  return <></>;
+  try {
+    articles = await getArticles();
+  } catch (error) {
+    // TODO: Error handling
+  }
+
+  return <ArticlesView articles={articles} />;
 }
