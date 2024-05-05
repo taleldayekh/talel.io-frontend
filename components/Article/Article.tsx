@@ -2,6 +2,7 @@ import ArticleController from 'components/Article/ArticleController';
 import styles from 'components/Article/article.module.css';
 import { ArticleContentType, ArticleIds } from 'components/Article/enums';
 import { ArticleContent, ArticleProps } from 'components/Article/interfaces';
+import BuyMeACoffeeWidget from 'components/BuyMeACoffeeWidget/BuyMeACoffeeWidget';
 import ImageSlider from 'components/ImageSlider/ImageSlider';
 import TextGlitch from 'components/TextGlitch/TextGlitch';
 import { GlitchPositions } from 'components/TextGlitch/enums';
@@ -90,6 +91,7 @@ function Article({
               </div>
             </div>
           </main>
+          <BuyMeACoffeeWidget />
         </>
       )}
     />
