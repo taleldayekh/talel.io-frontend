@@ -1,112 +1,40 @@
-/* Local scope variables */
 .image-slider {
-  --buttonsColor: 88, 88, 88;
-  --buttonsHeightWidth: 32px;
-  --buttonsMargin: 8px;
+  --slide-indicator-padding: 40px; /* ! Other unit? */
+}
+
+/* Mobile breakpoint */
+.image-slider {
+  --number-of-images-in-viewport: 2;
 }
 
 .image-slider {
+  display: flex;
   overflow: hidden;
   position: relative;
 }
 
-.image-slider__images {
+.image-slider--multiple {
+  padding-top: var(--slide-indicator-padding);
+}
+
+.image-slider__images-wrapper {
   display: flex;
 }
 
-.image-slider__images--transition {
-  transition: all 0.4s;
+.image-slider__images-wrapper--transition {
+  transition: all 0.5s;
 }
 
-.image-slider__images img {
-  display: block;
-  height: auto;
-  object-fit: cover;
-  width: 100%;
-}
-
-.image-slider__interactions {
-  align-items: flex-end;
-  background: linear-gradient(0deg, var(--talelio-page-bg-dark) 0%, transparent 100%);
-  bottom: 0;
-  display: flex;
-  height: 60px;
-  position: absolute;
-  width: 100%;
-}
-
-.image-slider__interactions button {
-  all: unset;
-  align-items: center;
-  background-color: rgba(var(--buttonsColor), 0.4);
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  height: 28px;
-  transition: background-color 0.3s ease-in-out;
-  width: 28px;
-}
-
-.image-slider__interactions button:first-of-type {
-  margin-right: var(--buttonsMargin);
-}
-
-.image-slider__interactions button:hover {
-  background-color: rgba(var(--buttonsColor), 0.8); 
-}
-
-.image-slider__interactions__button-icon {
-  border-color: var(--talelio-text-white);
-}
-
-.image-slider__interactions__slide-indicator {
-  align-items: center;
-  display: flex;
-  flex: 1;
-  height: var(--buttonsHeightWidth);
-  justify-content: center;
-  padding-left: calc(var(--buttonsHeightWidth) * 2 + var(--buttonsMargin));
-}
-
-.image-slider__interactions__slide-indicator__shadow-wrapper {
-  align-items: center;
-  background-color: rgba(32, 32, 32, 0.9);
-  border-radius: 20px;
-  display: flex;
-  gap: 10px;
-  padding: 6px 24px 6px 24px;
-}
-
-.image-slider__interactions__slide-indicator__dot {
-  background-color: rgba(var(--buttonsColor), 1);
-  border-radius: 50%;
-  height: 8px;
-  transition: border-radius, width, 0.5s linear;
-  width: 8px;
-}
-
-.image-slider__interactions__slide-indicator__pill {
-  background-color: var(--talelio-text-white);
-  border-radius: 8px;
-  width: 14px;
-}
-
-.image-slider__interactions__slide-indicator__dot--small {
-  height: 6px;
-  width: 6px;
-}
-
-/* 
-  Hide slider buttons and rely on
-  swipe gestures for mobile.
-*/
-@media (max-width: 26.875em) {
-  .image-slider__interactions button {
-    display: none;
+/* Tablet breakpoint */
+@media (min-width: 31.25em) {
+  .image-slider {
+    --number-of-images-in-viewport: 4;
   }
+}
 
-  .image-slider__interactions__slide-indicator {
-    padding-left: 0;
+/* Desktop breakpoint */
+@media (min-width: 68.75em) {
+  .image-slider {
+    --number-of-images-in-viewport: 6;
   }
 }

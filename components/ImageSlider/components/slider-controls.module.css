@@ -1,0 +1,134 @@
+.slider-controls-single,
+.slider-controls-multiple {
+  --buttonColor: 88, 88, 88;
+}
+
+.slider-controls-single {
+  --buttonWidthAndHeight: 28px;
+  --buttonMargin: 8px;
+}
+
+.slider-controls-multiple {
+  display: flex;
+  height: var(--slide-indicator-padding);
+  justify-content: flex-end;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.slider-controls-multiple__pagination-indicator {
+  align-items: center;
+  display: flex;
+  gap: 1px;
+  list-style-type: none;
+  margin: 0;
+  margin-right: 4%;
+  padding: 0;
+}
+
+.slider-controls-multiple__pagination-indicator li {
+  background-color: rgba(var(--buttonColor), 1);
+  height: 2px;
+  width: 12px;
+}
+
+.slider-controls-multiple__pagination-indicator li.active {
+  background-color: var(--talelio-text-white);
+}
+
+.slider-controls-multiple__button-prev,
+.slider-controls-multiple__button-next {
+  bottom: 0;
+  position: absolute;
+}
+
+.slider-controls-multiple__button-next {
+  right: 0;
+}
+
+.slider-controls-single {
+  align-items: flex-end;
+  background: linear-gradient(0deg, var(--talelio-page-bg-dark) 0%, transparent 100%);
+  bottom: 0;
+  display: flex;
+  height: 60px; /* ! Other unit? */
+  position: absolute;
+  width: 100%;
+}
+
+.slider-controls-single__pagination-indicator {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  height: var(--buttonWidthAndHeight); /* ! Possibly increase height? */
+  justify-content: center;
+  padding-left: calc(var(--buttonWidthAndHeight) * 2 + var(--buttonMargin));
+}
+
+.slider-controls-single__pagination-indicator__shadow-bg {
+  align-items: center;
+  background-color: rgba(32, 32, 32, 0.9);
+  border-radius: 20px;
+  display: flex;
+  gap: 10px;
+  list-style-type: none;
+  margin: 0;
+  padding: 6px 24px 6px 24px;
+}
+
+/* Specificity to not have styles overwritten by article component styles */
+.slider-controls-single__pagination-indicator ul li.slider-controls-single__pagination-indicator__dot {
+  background-color: rgba(var(--buttonColor), 1);
+  border-radius: 50%;
+  height: 8px;
+  padding-top: 0; /* Removes padding applied to ul li elements in the article component styles */
+  transition: border-radius, width, 0.5s linear;
+  width: 8px;
+}
+
+/* Specificity to not have styles overwritten by article component styles */
+.slider-controls-single__pagination-indicator ul li.slider-controls-single__pagination-indicator__dot--small {
+  height: 6px;
+  width: 6px;
+}
+
+/* Specificity to not have styles overwritten by article component styles */
+.slider-controls-single__pagination-indicator ul li.slider-controls-single__pagination-indicator__pill {
+  background-color: var(--talelio-text-white);
+  border-radius: 8px;
+  width: 14px;
+}
+
+.slider-controls-single button {
+  all: unset;
+  align-items: center;
+  background-color: rgba(var(--buttonColor), 0.4);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  height: var(--buttonWidthAndHeight); /* ! Other unit? */
+  transition: background-color 0.3s ease-in-out;
+  width: var(--buttonWidthAndHeight); /* ! Other unit? */
+}
+
+.slider-controls-single button:first-of-type {
+  margin-right: var(--buttonMargin);
+}
+
+.slider-controls-single button:hover {
+  background-color: rgba(var(--buttonColor), 0.8);
+}
+
+.slider-controls-single__button-icon {
+  border-color: var(--talelio-text-white);
+}
+
+@media (max-width: 26.875em) {
+  .slider-controls-single button,
+  .slider-controls-multiple__button-prev, 
+  .slider-controls-multiple__button-next {
+    display: none;
+  }
+}

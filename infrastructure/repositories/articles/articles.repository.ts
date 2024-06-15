@@ -35,7 +35,7 @@ export class ArticlesRepository {
     limit?: number,
   ): Promise<HttpResponse<GetArticlesResponseSchema>> {
     const paginationQueryParams =
-      !!page && !!limit ? `?page${page}&limit=${limit}` : '';
+      !!page && !!limit ? `?page=${page}&limit=${limit}` : '';
 
     // TODO: Store dev and prod user in config
     return await HttpClient.get(

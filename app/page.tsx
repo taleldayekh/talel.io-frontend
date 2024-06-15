@@ -1,7 +1,5 @@
 'use client';
 
-import ArticlesView from 'views/ArticlesView/ArticlesView';
-
 export default function Home() {
-  return <ArticlesView />;
+  return <h1>Fix this route</h1>;
 }

@@ -1,118 +1,185 @@
 import { SlideDirections } from 'components/ImageSlider/enums';
 import { ImageSliderControllerProps } from 'components/ImageSlider/interfaces';
-import { TouchEvent, useEffect, useState } from 'react';
+import useDebounce from 'hooks/debounce/useDebounce';
+import { TouchEvent, useEffect, useRef, useState } from 'react';
 
 export default function ImageSliderController({
-  sliderElementRef,
+  multiple,
+  imagesWrapperRef,
   sliderImages,
   setSliderImages,
-  setCurrentSlide,
+  numberOfImagesInViewport,
+  setNumberOfImagesInViewport,
+  setCurrentSlideIndex,
   setIsTransitionEnabled,
-  setIsButtonEnabled,
-  setPositionStyles,
+  setIsControlsEnabled,
   setTransformStyles,
+  setPositionStyles,
   render,
 }: ImageSliderControllerProps) {
   const [slideDirection, setSlideDirection] = useState<
     SlideDirections | undefined
   >(undefined);
+
+  // States for swipe gestures
   const [swipeStartValue, setSwipeStartValue] = useState<number | null>(null);
   const [swipeEndValue, setSwipeEndValue] = useState<number | null>(null);
+
+  const isFirstUpdateOfImagesInViewport = useRef(true);
+
+  useEffect(() => {
+    if (!multiple) return;
+    /**
+     * Do not debounce on initial page load since the initial
+     * number of images should be displayed without any delay.
+     */
+    if (isFirstUpdateOfImagesInViewport.current) {
+      updateNumberOfImagesInViewport();
+      isFirstUpdateOfImagesInViewport.current = false;
+    }
+
+    const handleResize = (): void => {
+      debouncedUpdateNumberOfImagesInViewport();
+      setCurrentSlideIndex(0);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  });
 
   useEffect(() => {
     const onTransitionEnd = (): void => {
       if (!slideDirection) return;
 
-      if (slideDirection === SlideDirections.NEXT) {
-        appendFirstImage();
+      // TODO: Rethink this logic
+      if (slideDirection === SlideDirections.NEXT && numberOfImagesInViewport) {
+        appendFirstImages(numberOfImagesInViewport);
       }
 
-      if (slideDirection === SlideDirections.PREV) {
-        prependLastImage();
+      if (slideDirection === SlideDirections.PREV && numberOfImagesInViewport) {
+        prependLastImages(numberOfImagesInViewport);
       }
 
+      /**
+       * Unset transform styles and disable transition
+       * to prevent from jumping back to first images.
+       */
       setIsTransitionEnabled(false);
-      setTransformStyles({ transform: 'translate(0)' });
+      setTransformStyles({
+        translate: '0',
+      });
 
       setTimeout(() => {
         setIsTransitionEnabled(true);
-        setIsButtonEnabled(true);
+        setIsControlsEnabled(true);
       }, 50);
     };
 
-    const sliderElement = sliderElementRef.current;
+    const imagesWrapper = imagesWrapperRef.current;
 
-    sliderElement &&
-      sliderElement.addEventListener('transitionend', onTransitionEnd);
+    // Event listener for CSS transition end
+    imagesWrapper &&
+      imagesWrapper.addEventListener('transitionend', onTransitionEnd);
 
     return () => {
-      sliderElement &&
-        sliderElement.removeEventListener('transitionend', onTransitionEnd);
+      imagesWrapper &&
+        imagesWrapper.removeEventListener('transitionend', onTransitionEnd);
     };
   }, [sliderImages, slideDirection]);
 
-  const appendFirstImage = (): void => {
-    const sliderImagesCopy = [...sliderImages];
-    const firstImage = sliderImagesCopy.shift();
+  const updateNumberOfImagesInViewport = (): void => {
+    /**
+     * Updates the number of images in the viewport
+     * based on CSS variable value which is applied
+     * for different breakpoints.
+     */
+    const imagesWrapper = imagesWrapperRef.current;
 
-    firstImage && sliderImagesCopy.push(firstImage);
-    setSliderImages(sliderImagesCopy);
+    if (imagesWrapper) {
+      const computedStyles = window.getComputedStyle(imagesWrapper);
+      const numberOfImagesInViewport = parseInt(
+        computedStyles
+          .getPropertyValue('--number-of-images-in-viewport')
+          .trim(),
+      );
+
+      setNumberOfImagesInViewport(numberOfImagesInViewport);
+    }
   };
 
-  const prependLastImage = (): void => {
-    const sliderImagesCopy = [...sliderImages];
-    const lastImage = sliderImagesCopy.pop();
-
-    lastImage && sliderImagesCopy.unshift(lastImage);
-    setSliderImages(sliderImagesCopy);
-  };
+  const debouncedUpdateNumberOfImagesInViewport = useDebounce(
+    updateNumberOfImagesInViewport,
+    250,
+  );
 
   const onNextClick = (): void => {
+    if (!numberOfImagesInViewport) return;
+
     if (!slideDirection) {
       setSlideDirection(SlideDirections.NEXT);
     }
 
     if (slideDirection === SlideDirections.PREV) {
-      prependLastImage();
+      prependLastImages(numberOfImagesInViewport);
       setSlideDirection(SlideDirections.NEXT);
     }
 
-    setCurrentSlide((prevSlide) => (prevSlide + 1) % sliderImages.length);
+    updateCurrentSlideIndex(SlideDirections.NEXT);
     setTransformStyles({
-      transform: 'translate(-100%)',
+      translate: '-100%',
     });
     setPositionStyles({
       justifyContent: 'flex-start',
     });
-    setIsButtonEnabled(false);
+    setIsControlsEnabled(false);
   };
 
   const onPrevClick = (): void => {
+    if (!numberOfImagesInViewport) return;
+
     if (!slideDirection) {
       setSlideDirection(SlideDirections.PREV);
-      appendFirstImage();
+      appendFirstImages(numberOfImagesInViewport);
     }
 
     if (slideDirection === SlideDirections.NEXT) {
-      appendFirstImage();
+      appendFirstImages(numberOfImagesInViewport);
       setSlideDirection(SlideDirections.PREV);
     }
 
-    setCurrentSlide(
-      (prevSlide) =>
-        (prevSlide - 1 + sliderImages.length) % sliderImages.length,
-    );
+    updateCurrentSlideIndex(SlideDirections.PREV);
     setTransformStyles({
-      transform: 'translate(100%)',
+      translate: '100%',
     });
     setPositionStyles({
       justifyContent: 'flex-end',
     });
-    setIsButtonEnabled(false);
+    setIsControlsEnabled(false);
+  };
+
+  const prependLastImages = (numberOfImagesInViewport: number): void => {
+    const sliderImagesCopy = [...sliderImages];
+    const imagesFromEndToPrepend = sliderImagesCopy.splice(
+      -numberOfImagesInViewport,
+    );
+
+    sliderImagesCopy.unshift(...imagesFromEndToPrepend);
+    setSliderImages(sliderImagesCopy);
+  };
+
+  const appendFirstImages = (numberOfImagesInViewport: number): void => {
+    const sliderImagesCopy = [...sliderImages];
+    const imagesFromStartToAppend = sliderImagesCopy.splice(
+      0,
+      numberOfImagesInViewport,
+    );
+
+    sliderImagesCopy.push(...imagesFromStartToAppend);
+    setSliderImages(sliderImagesCopy);
   };
 
   const updateSwipeStartValue = (event: TouchEvent<HTMLDivElement>): void => {
-    setSwipeEndValue(null);
     setSwipeStartValue(event.targetTouches[0].clientX);
   };
 
@@ -137,11 +204,33 @@ export default function ImageSliderController({
     }
   };
 
+  const updateCurrentSlideIndex = (slideDirection: SlideDirections): void => {
+    const numberOfSlides = calculateNumberOfSlides();
+
+    if (slideDirection === SlideDirections.NEXT) {
+      setCurrentSlideIndex(
+        (prevSlideIndex) => (prevSlideIndex + 1) % numberOfSlides,
+      );
+    }
+
+    if (slideDirection === SlideDirections.PREV) {
+      setCurrentSlideIndex(
+        (prevSlideIndex) =>
+          (prevSlideIndex - 1 + sliderImages.length) % numberOfSlides,
+      );
+    }
+  };
+
+  const calculateNumberOfSlides = (): number => {
+    return sliderImages.length / (numberOfImagesInViewport || 1);
+  };
+
   return render(
     onNextClick,
     onPrevClick,
     updateSwipeStartValue,
     updateSwipeEndValue,
     onSwipeEnd,
+    calculateNumberOfSlides,
   );
 }
