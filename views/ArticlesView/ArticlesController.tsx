@@ -1,12 +1,12 @@
-import { ArticlesRepository } from 'infrastructure/repositories/articles/articles.repository';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 import { ArticlesControllerProps } from 'views/ArticlesView/interfaces';
 
 export default function ArticlesController({
   render,
 }: ArticlesControllerProps) {
   const router = useRouter();
+  // get heroArticle [0]
+  // get latestArticles [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 
   // useEffect(() => {
   //   ArticlesRepository.getArticles()

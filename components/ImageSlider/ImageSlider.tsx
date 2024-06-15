@@ -1,3 +1,4 @@
+'use client';
 /* eslint-disable indent */
 /* eslint-disable @next/next/no-img-element */
 import ImageSliderController from 'components/ImageSlider/ImageSliderController';

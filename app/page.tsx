@@ -1,7 +1,5 @@
-// TODO: Server component, make requests here
-
-import ArticlesView from 'views/ArticlesView/ArticlesView';
+'use client';
 
 export default function Home() {
-  return <ArticlesView />;
+  return <h1>Fix this route</h1>;
 }
