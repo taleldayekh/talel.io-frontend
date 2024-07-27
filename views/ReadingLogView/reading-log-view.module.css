@@ -1,0 +1,76 @@
+.reading-log {
+  background-color: var(--windows-ui-bg);
+  height: 100vh;
+  padding-top: 40px;
+}
+
+.reading-log__window {
+  border: solid 4px var(--windows-ui-element-border);
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 40px);
+  margin: 0 auto;
+  width: fit-content;
+}
+
+.reading-log__window__header {
+  align-items: center;
+  background-color: var(--windows-ui-element-accent);
+  border-bottom: solid 2px var(--windows-ui-element-border);
+  color: white; /* TODO: Use variable color */
+  display: inline-flex;
+  height: 48px;
+}
+
+.reading-log__window__table {
+  border-collapse: collapse;
+  display: block;
+  overflow: auto;
+}
+
+/* .reading-log__window__table thead {
+  background-color: var(--windows-ui-element-bg-dark);
+  position: sticky;
+  text-align: left;
+  top: 0;
+} */
+
+.reading-log__window__table tbody {
+  background-color: var(--windows-ui-element-bg-light);
+}
+
+/* Scrollbar */
+.reading-log__window__table::-webkit-scrollbar {
+  width: 20px;
+}
+
+.reading-log__window__table::-webkit-scrollbar-track {
+  background-color: #dadada;
+}
+
+.reading-log__window__table::-webkit-scrollbar-thumb {
+  background-color: #c0c0c0;
+  box-shadow: inset 2px 2px 0 0 #fff, inset -2px -2px 0 0 #000;
+}
+
+.reading-log__window__table::-webkit-scrollbar-button:vertical:start:decrement,
+.reading-log__window__table::-webkit-scrollbar-button:vertical:end:increment {
+  background-color: #c0c0c0;
+  box-shadow: inset 2px 2px 0 0 #fff, inset -2px -2px 0 0 #000;
+  display: block;
+  height: 20px;
+  width: 20px;
+}
+
+.reading-log__window__table::-webkit-scrollbar-button:vertical:decrement,
+.reading-log__window__table::-webkit-scrollbar-button:vertical:increment {
+  background-position: center;
+}
+
+.reading-log__window__table::-webkit-scrollbar-button:vertical:decrement {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8l-6 6h12z" fill="black"/></svg>');
+}
+
+.reading-log__window__table::-webkit-scrollbar-button:vertical:increment {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 16l6-6H6z" fill="black"/></svg>');
+}
