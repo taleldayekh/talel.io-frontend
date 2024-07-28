@@ -1,39 +1,582 @@
-import { google } from 'googleapis';
 import ReadingLogView from 'views/ReadingLogView/ReadingLogView';
 
-async function getReadingLogSheetData() {
-  const auth = await google.auth.getClient({
-    credentials: {
-      client_email: process.env.GCP_CLIENT_EMAIL,
-      private_key: process.env.GCP_PRIVATE_KEY,
-    },
-    scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
-  });
+// async function getReadingLogSheetData() {
+//   const auth = await google.auth.getClient({
+//     credentials: {
+//       client_email: process.env.GCP_CLIENT_EMAIL,
+//       private_key: process.env.GCP_PRIVATE_KEY,
+//     },
+//     scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
+//   });
 
-  const readingLogSheet = google.sheets({
-    auth,
-    version: 'v4',
-  });
+//   const readingLogSheet = google.sheets({
+//     auth,
+//     version: 'v4',
+//   });
 
-  const res = await readingLogSheet.spreadsheets.values.get({
-    spreadsheetId: process.env.READING_LOG_SHEET_ID,
-    range: 'Reading Log!A:C',
-  });
+//   const res = await readingLogSheet.spreadsheets.values.get({
+//     spreadsheetId: process.env.READING_LOG_SHEET_ID,
+//     range: 'Reading Log!A:C',
+//   });
 
-  return res.data.values;
-}
+//   return res.data.values;
+// }
 
 export default async function ReadingLog() {
-  const readingLogData = await getReadingLogSheetData();
+  // const readingLogData = await getReadingLogSheetData();
 
   // TODO: Mapper
   // const readingLogEntires
 
-  return readingLogData ? (
+  const readingLogData: any[] = [];
+
+  const readingLogData2 = [
+    {
+      title:
+        'First Book Row First Book Row First Book Row First Book Row First Book Row First Book Row First Book Row First Book Row First Book Row First Book Row First Book Row',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+    {
+      title: 'Book One',
+      yearRead: '2021',
+      format: 'Print',
+    },
+  ];
+
+  return (
     <>
-      <ReadingLogView readingLogEntries={readingLogData} />
+      <ReadingLogView readingLogEntries={readingLogData2} />
     </>
-  ) : (
-    <p>No data</p>
   );
 }

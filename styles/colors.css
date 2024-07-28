@@ -1,13 +1,16 @@
 :root {
     --talelio-page-bg-dark: #00111A;
-
     --talelio-text-white: #d5dce4;
     --talelio-text-gray: #9e9e9e;
     --talelio-text-red: #a70037;
-
     --talelio-neon-blue: #829df3;
     --talelio-neon-blue-glow: #4969ed;
     --talelio-neon-blue-glow-highlight: rgba(73, 105, 237, 0.6);
-
     --talelio-loading: #1b3a4b;
+
+    --windows-ui-bg: #008080;
+    --windows-ui-element-accent: #000080;
+    --windows-ui-element-border: #c3c3c3;
+    --windows-ui-element-bg-dark: #e4dad1;
+    --windows-ui-element-bg-light: #f1ede1;
 }
