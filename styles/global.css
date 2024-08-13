@@ -33,6 +33,13 @@
   url(../assets//fonts//Streamster.ttf);
 }
 
+@font-face {
+  font-family: 'Windows';
+  src:
+  local('Windows'),
+  url(../assets/fonts/Windows.ttf);
+}
+
 body {
   background-color: var(--talelio-page-bg-dark);
   font-family: 'Mona Sans', Serif;

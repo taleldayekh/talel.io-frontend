@@ -9,12 +9,13 @@ export default function ReadingLogView({ readingLogEntries }: any) {
           Reading Log
         </span>
         <div className={styles['reading-log__window__info']}>
-          <span>This contains links</span>
+          <span>TBD Image</span>
+          <p>TBD Text</p>
         </div>
         <div className={styles['reading-log__window__table__header']}>
-          <span>Title</span>
-          <span>Year Read</span>
-          <span>Format</span>
+          <span>Title:</span>
+          <span>Year Read:</span>
+          <span>Format:</span>
         </div>
         <div className={styles['reading-log__window__table__body']}>
           {readingLogEntries.map((entry: any, index: number) => (
@@ -28,23 +29,12 @@ export default function ReadingLogView({ readingLogEntries }: any) {
             </div>
           ))}
         </div>
+        <div className={styles['reading-log__window__table__footer']}>
+          <span>
+            {readingLogEntries.length} Object(s)
+          </span>
+        </div>
       </div>
-      {/* <div className={styles['reading-log__window']}>
-        <span className={styles['reading-log__window__header']}>
-          Reading Log
-        </span>
-        <table className={styles['reading-log__window__table']}>
-          <tbody>
-            {readingLogEntries.map((entry: any, index: number) => (
-              <tr key={index}>
-                <td className={styles['title']}>{entry.title}</td>
-                <td className={styles['year']}>{entry.yearRead}</td>
-                <td className={styles['format']}>{entry.format}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div> */}
     </main>
   );
 }
