@@ -1,7 +1,10 @@
 'use client';
 import styles from 'views/ReadingLogView/reading-log-view.module.css';
+import { ReadingLogViewProps } from 'views/ReadingLogView/interfaces';
 
-export default function ReadingLogView({ readingLogEntries }: any) {
+export default function ReadingLogView({
+  readingLogEntries,
+}: ReadingLogViewProps) {
   return (
     <main className={styles['reading-log']}>
       <div className={styles['reading-log__window']}>
@@ -22,6 +25,7 @@ export default function ReadingLogView({ readingLogEntries }: any) {
             <div
               className={styles['reading-log__window__table__body__row']}
               key={index}
+              onClick={() => window.open(entry.affiliateUrl, '_blank')}
             >
               <span>{entry.title}</span>
               <span>{entry.yearRead}</span>
@@ -30,9 +34,7 @@ export default function ReadingLogView({ readingLogEntries }: any) {
           ))}
         </div>
         <div className={styles['reading-log__window__table__footer']}>
-          <span>
-            {readingLogEntries.length} Object(s)
-          </span>
+          <span>{readingLogEntries.length} Object(s)</span>
         </div>
       </div>
     </main>
