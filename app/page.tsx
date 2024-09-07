@@ -1,5 +1,13 @@
 'use client';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function Home() {
-  return <h1>Fix this route</h1>;
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push('/articles');
+  });
+
+  return <></>;
 }

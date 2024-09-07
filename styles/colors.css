@@ -1,13 +1,10 @@
 :root {
     --talelio-page-bg-dark: #00111A;
-
     --talelio-text-white: #d5dce4;
     --talelio-text-gray: #9e9e9e;
     --talelio-text-red: #a70037;
-
     --talelio-neon-blue: #829df3;
     --talelio-neon-blue-glow: #4969ed;
     --talelio-neon-blue-glow-highlight: rgba(73, 105, 237, 0.6);
-
     --talelio-loading: #1b3a4b;
 }

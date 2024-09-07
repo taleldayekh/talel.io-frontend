@@ -1,39 +1,57 @@
 import { google } from 'googleapis';
+import config from 'config';
+import ReadingLogMapper from 'views/ReadingLogView/mappers/reading-log.mapper';
 import ReadingLogView from 'views/ReadingLogView/ReadingLogView';
 
 async function getReadingLogSheetData() {
-  const auth = await google.auth.getClient({
+  const googleApiCredentials = {
     credentials: {
-      client_email: process.env.GCP_CLIENT_EMAIL,
-      private_key: process.env.GCP_PRIVATE_KEY,
+      client_email: config.google.api.client_email,
+      private_key: config.google.api.private_key,
     },
     scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
-  });
+  };
 
-  const readingLogSheet = google.sheets({
+  const auth = await google.auth.getClient(googleApiCredentials);
+
+  const googleSheets = google.sheets({
     auth,
     version: 'v4',
   });
 
-  const res = await readingLogSheet.spreadsheets.values.get({
-    spreadsheetId: process.env.READING_LOG_SHEET_ID,
-    range: 'Reading Log!A:C',
-  });
+  const readingLogSheetQuery = {
+    spreadsheetId: config.google.sheets.readingLogSheetId,
+    range: 'Reading Log!A:D',
+  };
 
-  return res.data.values;
+  const readingLogSheetRes = await googleSheets.spreadsheets.values.get(
+    readingLogSheetQuery,
+  );
+
+  if (readingLogSheetRes.data.values) {
+    const readingLogEntries =
+      ReadingLogMapper.fromResponseToReadingLogEntriesModel(
+        readingLogSheetRes.data.values,
+      );
+
+    return readingLogEntries;
+  }
+
+  return [];
 }
 
 export default async function ReadingLog() {
-  const readingLogData = await getReadingLogSheetData();
+  let readingLogEntries = undefined;
 
-  // TODO: Mapper
-  // const readingLogEntires
+  try {
+    readingLogEntries = await getReadingLogSheetData();
+  } catch (error) {
+    // TODO: Error handling
+  }
 
-  return readingLogData ? (
-    <>
-      <ReadingLogView readingLogEntries={readingLogData} />
-    </>
-  ) : (
-    <p>No data</p>
-  );
+  if (!readingLogEntries || readingLogEntries.length === 0) {
+    return <span>No reading log entries</span>;
+  }
+
+  return <ReadingLogView readingLogEntries={readingLogEntries} />;
 }
