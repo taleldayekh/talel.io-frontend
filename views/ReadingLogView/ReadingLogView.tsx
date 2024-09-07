@@ -11,10 +11,10 @@ export default function ReadingLogView({
         <span className={styles['reading-log__window__header']}>
           Reading Log
         </span>
-        <div className={styles['reading-log__window__info']}>
+        {/* <div className={styles['reading-log__window__info']}>
           <span>TBD Image</span>
           <p>TBD Text</p>
-        </div>
+        </div> */}
         <div className={styles['reading-log__window__table__header']}>
           <span>Title:</span>
           <span>Year Read:</span>

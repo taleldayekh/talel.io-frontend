@@ -1,7 +1,17 @@
 import { ArticlesRepository } from 'infrastructure/repositories/articles/articles.repository';
+import { Metadata } from 'next';
 import ArticlesMapper from 'views/ArticlesView/mappers/articles.mapper';
 import ArticlesViewModel from 'views/ArticlesView/models/articles.view-model';
 import ArticlesView from 'views/ArticlesView/ArticlesView';
+
+export async function generateMetadata(): Promise<Metadata> {
+  // TODO: Generalize document head implementation
+  let documentHead: Metadata = {
+    title: 'Articles',
+  };
+
+  return documentHead;
+}
 
 async function getArticles(): Promise<ArticlesViewModel[]> {
   const articlesRes = await ArticlesRepository.getArticles();
