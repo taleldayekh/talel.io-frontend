@@ -21,6 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   try {
     const articleRes = await getArticle(slug);
+    // TODO: Generalize document head implementation
     documentHead = ArticleMapper.fromResponseToDocumentHead(articleRes.data);
   } catch (error) {
     // TODO: Error handling

@@ -164,6 +164,23 @@
   padding-top: 1.5em;
 }
 
+.article__content__md ul li,
+.article__content__md ol li {
+  margin-bottom: 1em;
+}
+
+/* 
+  Justify text content with
+  even spacing and hyphens.
+*/
+.article__content__md p,
+.article__content__md ul li,
+.article__content__md ol li {
+  hyphens: auto;
+  text-align: justify;
+  word-spacing: -0.005em;
+}
+
 .article__content__md ul,
 .article__content__md ol {
   margin: 0;
@@ -174,10 +191,26 @@
   padding-top: 0;
 }
 
+.article__content__md ul li:last-child,
+.article__content__md ol li:last-child {
+  margin-bottom: 0;
+}
+
 .article__content__md p img,
 .article__content__image-slider {
   width: calc(100% + 2.75em);
   margin-left: -1.375em;
+}
+
+.article__content__md p code,
+.article__content__md ul li code,
+.article__content__md ol li code {
+  background-color: rgba(158, 158, 158, 0.3);
+  border-radius: 8px;
+  color: var(--talelio-neon-blue);
+  font-family: 'JetBrains ExtraLight', monospace;
+  font-size: 1rem;
+  padding: 0 8px;
 }
 
 /*
@@ -273,6 +306,7 @@ padding top is needed to align with the non-slider images.
   border-left: solid 2px var(--talelio-loading);
   font-family: 'JetBrains ExtraLight', monospace;
   font-size: 1rem;
+  line-height: 1.5em;
   margin-top: 1.5em;
   padding: 0 0 0 18px;
 }
@@ -354,10 +388,13 @@ padding top is needed to align with the non-slider images.
   
   .article__content__md p,
   .article__content__md ul li,
-  .article__content__md ol li,
-  .article__content__md :global(.hljs) {
+  .article__content__md ol li {
     font-size: 1.25rem;
-    text-align: justify;
+  }
+
+  /* highlight.js */
+  .article__content__md :global(.hljs) {
+    margin-top: 1.875em;
   }
   
   .article__content__md p img,
@@ -365,7 +402,13 @@ padding top is needed to align with the non-slider images.
     width: 114%;
     margin-left: -7%;
   }
-  
+
+  .article__content__md p code,
+  .article__content__md ul li code,
+  .article__content__md ol li code {
+    font-size: 1.188rem;
+  }
+
   .article__content__image-slider {
     padding-top: 1.875em;
   }

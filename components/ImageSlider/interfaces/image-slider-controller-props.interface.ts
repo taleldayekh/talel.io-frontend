@@ -8,19 +8,23 @@ import {
 } from 'react';
 
 export interface ImageSliderControllerProps {
-  sliderElementRef: MutableRefObject<any>;
+  multiple: boolean | undefined;
+  imagesWrapperRef: MutableRefObject<HTMLDivElement | null>;
   sliderImages: Image[];
   setSliderImages: Dispatch<SetStateAction<Image[]>>;
-  setCurrentSlide: Dispatch<SetStateAction<number>>;
+  numberOfImagesInViewport: number | undefined;
+  setNumberOfImagesInViewport: Dispatch<SetStateAction<number | undefined>>;
+  setCurrentSlideIndex: Dispatch<SetStateAction<number>>;
   setIsTransitionEnabled: Dispatch<SetStateAction<boolean>>;
-  setIsButtonEnabled: Dispatch<SetStateAction<boolean>>;
-  setPositionStyles: Dispatch<SetStateAction<Record<string, string>>>;
+  setIsControlsEnabled: Dispatch<SetStateAction<boolean>>;
   setTransformStyles: Dispatch<SetStateAction<Record<string, string>>>;
+  setPositionStyles: Dispatch<SetStateAction<Record<string, string>>>;
   render: (
     onNextClick: () => void,
     onPrevClick: () => void,
     updateSwipeStartValue: (event: TouchEvent<HTMLDivElement>) => void,
     updateSwipeEndValue: (event: TouchEvent<HTMLDivElement>) => void,
     onSwipeEnd: () => void,
+    calculateNumberOfSlides: () => number,
   ) => ReactElement;
 }

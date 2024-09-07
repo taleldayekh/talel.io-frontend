@@ -1,133 +1,122 @@
+'use client';
 /* eslint-disable indent */
 /* eslint-disable @next/next/no-img-element */
-import { Arrow } from 'components/Icons';
 import ImageSliderController from 'components/ImageSlider/ImageSliderController';
+import SliderControls from 'components/ImageSlider/components/SliderControls';
 import styles from 'components/ImageSlider/image-slider.module.css';
 import { Image, ImageSliderProps } from 'components/ImageSlider/interfaces';
 import { useEffect, useRef, useState } from 'react';
 
-export default function ImageSlider({ images }: ImageSliderProps) {
+export default function ImageSlider({ images, multiple }: ImageSliderProps) {
+  // States for managing images in the UI
   const [sliderImages, setSliderImages] = useState<Image[]>([]);
-  const [currentSlide, setCurrentSlide] = useState<number>(0);
+  const [numberOfImagesInViewport, setNumberOfImagesInViewport] = useState<
+    number | undefined
+  >(multiple ? undefined : 1);
+  const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0);
+
+  // States for managing slider interactions
   const [isTransitionEnabled, setIsTransitionEnabled] = useState<boolean>(true);
-  const [isButtonEnabled, setIsButtonEnabled] = useState<boolean>(true);
+  const [isControlsEnabled, setIsControlsEnabled] = useState<boolean>(true);
+
+  // States for inline CSS
+  const [imageStyles, setImageStyles] = useState<Record<string, string>>({});
   const [transformStyles, setTransformStyles] = useState<
     Record<string, string>
-  >({
-    transform: 'translate(0)',
-  });
+  >({ translate: '0' });
   const [positionStyles, setPositionStyles] = useState<Record<string, string>>({
     justifyContent: 'flex-start',
   });
 
-  const elementRef = useRef<any>(null);
+  useEffect(() => {
+    if (!numberOfImagesInViewport) return;
+
+    // TODO: Should be the else block
+    setSliderImages([...images]);
+  }, [numberOfImagesInViewport, images]);
 
   useEffect(() => {
-    setSliderImages([...images]);
-  }, [images]);
+    if (!numberOfImagesInViewport) return;
+
+    const imageWidth = multiple ? 100 / numberOfImagesInViewport : 100;
+    const multipleImagesStyle = {
+      borderRadius: '8px',
+      padding: '.2vw',
+    };
+
+    const styles = {
+      flex: `0 0 ${imageWidth}%`,
+      maxWidth: `${imageWidth}%`,
+      ...(multiple && multipleImagesStyle),
+    };
+
+    setImageStyles(styles);
+  }, [numberOfImagesInViewport, multiple]);
+
+  const imagesWrapperRef = useRef<HTMLDivElement>(null);
 
   return (
     <ImageSliderController
-      sliderElementRef={elementRef}
+      multiple={multiple}
+      imagesWrapperRef={imagesWrapperRef}
       sliderImages={sliderImages}
       setSliderImages={setSliderImages}
-      setCurrentSlide={setCurrentSlide}
+      numberOfImagesInViewport={numberOfImagesInViewport}
+      setNumberOfImagesInViewport={setNumberOfImagesInViewport}
+      setCurrentSlideIndex={setCurrentSlideIndex}
       setIsTransitionEnabled={setIsTransitionEnabled}
-      setIsButtonEnabled={setIsButtonEnabled}
-      setPositionStyles={setPositionStyles}
+      setIsControlsEnabled={setIsControlsEnabled}
       setTransformStyles={setTransformStyles}
+      setPositionStyles={setPositionStyles}
       render={(
         onNextClick,
         onPrevClick,
         updateSwipeStartValue,
         updateSwipeEndValue,
         onSwipeEnd,
+        calculateNumberOfSlides,
       ) => (
-        <div
-          className={styles['image-slider']}
-          onTouchStart={updateSwipeStartValue}
-          onTouchMove={updateSwipeEndValue}
-          onTouchEnd={isButtonEnabled ? onSwipeEnd : undefined}
-        >
+        <>
           <div
-            className={`${styles['image-slider__images']} ${
-              isTransitionEnabled
-                ? styles['image-slider__images--transition']
-                : null
-            }`}
-            style={{ ...transformStyles, ...positionStyles }}
-            ref={elementRef}
+            className={`
+              ${styles['image-slider']} 
+              ${multiple ? styles['image-slider--multiple'] : null}
+            `}
+            onTouchStart={updateSwipeStartValue}
+            onTouchMove={updateSwipeEndValue}
+            onTouchEnd={isControlsEnabled ? onSwipeEnd : undefined}
           >
-            {sliderImages.map((image: Image, index: number) => (
-              <img key={index} src={image.src} alt={image.alt} />
-            ))}
-          </div>
-          <div className={styles['image-slider__interactions']}>
             <div
-              className={styles['image-slider__interactions__slide-indicator']}
-            >
-              <div
-                className={
-                  styles[
-                    'image-slider__interactions__slide-indicator__shadow-wrapper'
-                  ]
+              ref={imagesWrapperRef}
+              className={`
+                ${styles['image-slider__images-wrapper']} 
+                ${
+                  isTransitionEnabled
+                    ? styles['image-slider__images-wrapper--transition']
+                    : null
                 }
-              >
-                {sliderImages.map((_, index: number) => (
-                  <div
-                    key={index}
-                    className={`${
-                      styles['image-slider__interactions__slide-indicator__dot']
-                    } 
-                       ${
-                         index === currentSlide
-                           ? styles[
-                               'image-slider__interactions__slide-indicator__pill'
-                             ]
-                           : null
-                       } 
-                       ${
-                         index === 0 && currentSlide !== index
-                           ? styles[
-                               'image-slider__interactions__slide-indicator__dot--small'
-                             ]
-                           : null
-                       } 
-                       ${
-                         index === sliderImages.length - 1 &&
-                         currentSlide !== index
-                           ? styles[
-                               'image-slider__interactions__slide-indicator__dot--small'
-                             ]
-                           : null
-                       }
-                      `}
-                  ></div>
-                ))}
-              </div>
+              `}
+              style={{ ...transformStyles, ...positionStyles }}
+            >
+              {sliderImages.map((image: Image, index: number) => (
+                <img
+                  style={{ ...imageStyles }}
+                  key={image.src}
+                  src={image.src}
+                  alt={image.alt}
+                />
+              ))}
             </div>
-            <button
-              onClick={isButtonEnabled ? onPrevClick : undefined}
-              aria-label="View previous slide"
-            >
-              <Arrow
-                className={styles['image-slider__interactions__button-icon']}
-                direction={'left'}
-                size={8}
-              />
-            </button>
-            <button
-              onClick={isButtonEnabled ? onNextClick : undefined}
-              aria-label="View next slide"
-            >
-              <Arrow
-                className={styles['image-slider__interactions__button-icon']}
-                direction={'right'}
-                size={8}
-              />
-            </button>
+            <SliderControls
+              onNextClick={onNextClick}
+              onPrevClick={onPrevClick}
+              numberOfSlides={calculateNumberOfSlides()}
+              currentSlideIndex={currentSlideIndex}
+              multiple={multiple}
+              isDisabled={!isControlsEnabled}
+            />
           </div>
-        </div>
+        </>
       )}
     />
   );

@@ -32,11 +32,11 @@ export default function RootLayout({ children }: PropsWithChildren) {
       <body>
         {/* Mastodon verification link */}
         <a rel="me"></a>
-        {config.analytics.gaMeasurementId && (
+        {config.google.analytics.gaMeasurementId && (
           <>
             <Script
               async
-              src={`https://www.googletagmanager.com/gtag/js?id=${config.analytics.gaMeasurementId}`}
+              src={`https://www.googletagmanager.com/gtag/js?id=${config.google.analytics.gaMeasurementId}`}
             />
             <Script
               id="google-analytics"
@@ -46,7 +46,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
 
-                  gtag('config', '${config.analytics.gaMeasurementId}');
+                  gtag('config', '${config.google.analytics.gaMeasurementId}');
                 `,
               }}
             />
