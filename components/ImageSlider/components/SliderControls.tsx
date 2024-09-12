@@ -48,11 +48,7 @@ export default function SliderControls({
     return (
       <div className={styles['slider-controls-single']}>
         <div className={styles['slider-controls-single__pagination-indicator']}>
-          <ul
-            className={
-              styles['slider-controls-single__pagination-indicator__shadow-bg']
-            }
-          >
+          <ul>
             {pages.map((_, index: number) => (
               <li
                 key={index}

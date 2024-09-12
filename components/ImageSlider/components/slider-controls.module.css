@@ -1,23 +1,28 @@
 .slider-controls-single,
 .slider-controls-multiple {
-  --buttonColor: 88, 88, 88;
+  --gradientBg: 0, 17, 26;
+  --paginationIndicatorDefaultColor: #666666;
+  --paginationIndicatorActiveColor: #fff;
+  --buttonColor: #8c8c8c;
+  --buttonActiveColor: #fff;
 }
 
 .slider-controls-single {
-  --buttonWidthAndHeight: 28px;
   --buttonMargin: 8px;
+  --buttonWidthAndHeight: 28px;
 }
 
-.slider-controls-multiple {
+/* TODO: When enabling carousel */
+/* .slider-controls-multiple {
   display: flex;
   height: var(--slide-indicator-padding);
   justify-content: flex-end;
   position: absolute;
   top: 0;
   width: 100%;
-}
+} */
 
-.slider-controls-multiple__pagination-indicator {
+/* .slider-controls-multiple__pagination-indicator {
   align-items: center;
   display: flex;
   gap: 1px;
@@ -25,77 +30,83 @@
   margin: 0;
   margin-right: 4%;
   padding: 0;
-}
+} */
 
-.slider-controls-multiple__pagination-indicator li {
+/* .slider-controls-multiple__pagination-indicator li {
   background-color: rgba(var(--buttonColor), 1);
   height: 2px;
   width: 12px;
-}
+} */
 
-.slider-controls-multiple__pagination-indicator li.active {
+/* .slider-controls-multiple__pagination-indicator li.active {
   background-color: var(--talelio-text-white);
-}
+} */
 
-.slider-controls-multiple__button-prev,
+/* .slider-controls-multiple__button-prev,
 .slider-controls-multiple__button-next {
   bottom: 0;
   position: absolute;
-}
+} */
 
-.slider-controls-multiple__button-next {
+/* .slider-controls-multiple__button-next {
   right: 0;
-}
+} */
 
 .slider-controls-single {
-  align-items: flex-end;
-  background: linear-gradient(0deg, var(--talelio-page-bg-dark) 0%, transparent 100%);
+  align-items: center;
+  background: 
+    linear-gradient(
+      0deg, 
+      rgba(var(--gradientBg), 0.3), 
+      transparent 72%
+    );
   bottom: 0;
   display: flex;
-  height: 60px; /* ! Other unit? */
+  height: 60px;
   position: absolute;
   width: 100%;
 }
 
 .slider-controls-single__pagination-indicator {
-  align-items: center;
+  align-self: flex-end;
   display: flex;
   flex: 1;
-  height: var(--buttonWidthAndHeight); /* ! Possibly increase height? */
   justify-content: center;
-  padding-left: calc(var(--buttonWidthAndHeight) * 2 + var(--buttonMargin));
+  margin-bottom: 14px;
+  padding-left: calc(
+    (var(--buttonWidthAndHeight) * 2) + (var(--buttonMargin) * 4)
+  );
 }
 
-.slider-controls-single__pagination-indicator__shadow-bg {
+.slider-controls-single__pagination-indicator ul {
   align-items: center;
-  background-color: rgba(32, 32, 32, 0.9);
   border-radius: 20px;
   display: flex;
-  gap: 10px;
+  gap: var(--buttonMargin);
   list-style-type: none;
-  margin: 0;
-  padding: 6px 24px 6px 24px;
+  padding: 0;
 }
 
-/* Specificity to not have styles overwritten by article component styles */
+/* Specificity to avoid having styles overwritten by article component styles */
 .slider-controls-single__pagination-indicator ul li.slider-controls-single__pagination-indicator__dot {
-  background-color: rgba(var(--buttonColor), 1);
+  background-color: var(--paginationIndicatorDefaultColor);
   border-radius: 50%;
   height: 8px;
-  padding-top: 0; /* Removes padding applied to ul li elements in the article component styles */
+  margin: 0;
+  padding-top: 0; /* Removes conflicting padding applied to ul li elements in the article component styles */
   transition: border-radius, width, 0.5s linear;
   width: 8px;
 }
 
-/* Specificity to not have styles overwritten by article component styles */
+/* Specificity to avoid having styles overwritten by article component styles */
 .slider-controls-single__pagination-indicator ul li.slider-controls-single__pagination-indicator__dot--small {
   height: 6px;
   width: 6px;
 }
 
-/* Specificity to not have styles overwritten by article component styles */
+/* Specificity to avoid having styles overwritten by article component styles */
 .slider-controls-single__pagination-indicator ul li.slider-controls-single__pagination-indicator__pill {
-  background-color: var(--talelio-text-white);
+  background-color: var(--paginationIndicatorActiveColor);
   border-radius: 8px;
   width: 14px;
 }
@@ -103,32 +114,41 @@
 .slider-controls-single button {
   all: unset;
   align-items: center;
-  background-color: rgba(var(--buttonColor), 0.4);
+  border: solid 2px var(--buttonColor);
   border-radius: 50%;
+  box-sizing: border-box;
   cursor: pointer;
   display: flex;
   justify-content: center;
-  height: var(--buttonWidthAndHeight); /* ! Other unit? */
-  transition: background-color 0.3s ease-in-out;
-  width: var(--buttonWidthAndHeight); /* ! Other unit? */
-}
-
-.slider-controls-single button:first-of-type {
+  height: var(--buttonWidthAndHeight);
   margin-right: var(--buttonMargin);
+  transition: background-color 0.3s ease-in-out;
+  width: var(--buttonWidthAndHeight);
 }
 
 .slider-controls-single button:hover {
-  background-color: rgba(var(--buttonColor), 0.8);
+  background-color: var(--buttonColor);
+}
+
+.slider-controls-single button:hover .slider-controls-single__button-icon {
+  border-color: var(--buttonActiveColor);
+  transition: border-color 0.3s ease-in-out;
+}
+
+.slider-controls-single button:last-child {
+  margin-right: calc(var(--buttonMargin) * 3);
 }
 
 .slider-controls-single__button-icon {
-  border-color: var(--talelio-text-white);
+  border-color: var(--buttonColor);
 }
 
 @media (max-width: 26.875em) {
-  .slider-controls-single button,
-  .slider-controls-multiple__button-prev, 
-  .slider-controls-multiple__button-next {
+  .slider-controls-single button {
     display: none;
+  }
+
+  .slider-controls-single__pagination-indicator {
+    padding-left: 0;
   }
 }
