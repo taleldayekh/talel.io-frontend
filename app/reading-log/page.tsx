@@ -40,6 +40,8 @@ async function getReadingLogSheetData() {
   return [];
 }
 
+export const fetchCache = 'no-store';
+
 export default async function ReadingLog() {
   let readingLogEntries = undefined;
 
