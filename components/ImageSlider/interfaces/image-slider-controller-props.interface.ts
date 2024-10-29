@@ -1,7 +1,7 @@
 import { Image } from 'components/ImageSlider/interfaces';
 import {
   Dispatch,
-  MutableRefObject,
+  RefObject,
   ReactElement,
   SetStateAction,
   TouchEvent,
@@ -9,7 +9,7 @@ import {
 
 export interface ImageSliderControllerProps {
   multiple: boolean | undefined;
-  imagesWrapperRef: MutableRefObject<HTMLDivElement | null>;
+  imagesWrapperRef: RefObject<HTMLDivElement | null>;
   sliderImages: Image[];
   setSliderImages: Dispatch<SetStateAction<Image[]>>;
   numberOfImagesInViewport: number | undefined;

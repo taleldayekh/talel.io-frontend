@@ -5,16 +5,17 @@ import ArticleView from 'views/ArticleView/ArticleView';
 import ArticleMapper from 'views/ArticleView/mappers/article.mapper';
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 export const viewport: Viewport = {
   themeColor: '#00111A',
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params;
   const { slug } = params;
 
   let documentHead: Metadata = {};
@@ -30,7 +31,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return documentHead;
 }
 
-export default async function Article({ params }: Props) {
+export default async function Article(props: Props) {
+  const params = await props.params;
   const { slug } = params;
 
   let article = undefined;
