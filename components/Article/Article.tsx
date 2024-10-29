@@ -5,6 +5,7 @@ import { ArticleContent, ArticleProps } from 'components/Article/interfaces';
 import BuyMeACoffeeWidget from 'components/BuyMeACoffeeWidget/BuyMeACoffeeWidget';
 import ImageSlider from 'components/ImageSlider/ImageSlider';
 import TextGlitch from 'components/TextGlitch/TextGlitch';
+import ToC from 'components/ToC/ToC';
 import { GlitchPositions } from 'components/TextGlitch/enums';
 import { memo, useState } from 'react';
 
@@ -61,10 +62,7 @@ function Article({
             </div>
             <div className={styles.article__content} ref={articleContentRef}>
               <div className={styles.article__content__toc}>
-                <h2>Table of Contents</h2>
-                <div
-                  dangerouslySetInnerHTML={{ __html: article.tableOfContents }}
-                />
+                <ToC tocHTML={article.tableOfContents} />
               </div>
               <div className={styles.article__content__md}>
                 {articleContent.map((content: ArticleContent, index) => {

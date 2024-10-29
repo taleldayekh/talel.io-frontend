@@ -5,7 +5,7 @@ export default function useDebounce<F extends (...args: any[]) => any>(
   delay: number,
 ) {
   const functionToDebounce = useRef(func);
-  const timeoutTimerId = useRef<ReturnType<typeof setTimeout>>();
+  const timeoutTimerId = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   /**
    * Maintain reference to the latest function version and
