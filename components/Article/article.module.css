@@ -37,9 +37,11 @@
     opacity: 0;
     transform: translateY(-2.5em);
   }
+
   10% {
     opacity: 0;
   }
+
   100% {
     opacity: 100;
     transform: translateY(0);
@@ -61,7 +63,7 @@
   margin: 7.5em 0 5em 0;
 }
 
-.article__details > div {
+.article__details>div {
   display: inline-flex;
   flex-direction: column;
 }
@@ -86,9 +88,9 @@
   margin: 0 0 20px 0;
   text-align: center;
   text-shadow:
-  0 0 20px var(--talelio-neon-blue-glow),
-  0 0 20px var(--talelio-neon-blue-glow),
-  0 0 40px var(--talelio-neon-blue-glow);
+    0 0 20px var(--talelio-neon-blue-glow),
+    0 0 20px var(--talelio-neon-blue-glow),
+    0 0 40px var(--talelio-neon-blue-glow);
 }
 
 .article__content {
@@ -311,29 +313,30 @@ padding top is needed to align with the non-slider images.
     margin: 2.125em 2.125em 0 0;
     text-align: right;
   }
-  
+
   .article__details__meta {
     margin: 0;
   }
-  
+
   .article__content {
     padding: 0;
   }
-  
+
   .article__content__toc {
     grid-column: 1 / 4;
-    height: calc(100vh - 6.25em); /* Footer hight + top value */
-    margin: 3em 1.375em 0 1.5em;
+    height: calc(100vh - 6.25em);
+    /* Footer hight + top value */
+    margin: 1.875em 1.375em 0 1.5em;
     overflow: auto;
     position: sticky;
     text-align: left;
     top: 2em;
   }
-  
+
   .article__content__md {
     grid-column: 4 / 10;
   }
-  
+
   .article__content__md p,
   .article__content__md ul li,
   .article__content__md ol li {
@@ -344,7 +347,7 @@ padding top is needed to align with the non-slider images.
   .article__content__md :global(.hljs) {
     margin-top: 1.875em;
   }
-  
+
   .article__content__md p img,
   .article__content__image-slider {
     width: 114%;
@@ -360,12 +363,12 @@ padding top is needed to align with the non-slider images.
   .article__content__image-slider {
     padding-top: 1.875em;
   }
-  
+
   /* Table */
   .article__content__md table {
     padding: 2.89286em 0 0.75em 0;
   }
-  
+
   .article__content__md hr {
     margin-bottom: 2.125em;
     margin-top: 4em;
@@ -373,7 +376,7 @@ padding top is needed to align with the non-slider images.
 }
 
 /* Drop cap styles */
-.article__content__md > div:first-child p:first-child::first-letter {
+.article__content__md>div:first-child p:first-child::first-letter {
   background-clip: text;
   background-image: linear-gradient(30deg, #829df3, #81c9a0);
   color: transparent;
