@@ -1,12 +1,16 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { ToCControllerProps, ToC, ToCHeading } from 'components/ToC/interfaces';
 
 export default function ToCController({
   tocHTML,
+  toc,
   setToC,
+  setHighlightedHeading,
   subHeadingsRef,
   render,
 }: ToCControllerProps) {
+  const intersectionObserverRef = useRef<IntersectionObserver | null>(null);
+
   useEffect(() => {
     const toc: ToC[] = [];
 
@@ -53,6 +57,72 @@ export default function ToCController({
     });
   }, [tocHTML, setToC]);
 
+  useEffect(() => {
+    setHeadingsIntersectionObserver();
+
+    return () => {
+      if (intersectionObserverRef.current) {
+        intersectionObserverRef.current.disconnect();
+      }
+    };
+  }, [toc, setHighlightedHeading]);
+
+  const setHeadingsIntersectionObserver = () => {
+    const articleHeadings = Array.from(document.querySelectorAll('h1, h2'));
+
+    const intersectionObserver = new IntersectionObserver(
+      ([observerEntry]: IntersectionObserverEntry[]) => {
+        const articleHeadingId = observerEntry.target.id;
+
+        if (observerEntry.isIntersecting) {
+          setHighlightedHeading(articleHeadingId);
+
+          const headingWithSubheadingsIndex = toc.findIndex((heading) =>
+            heading.subHeadings.some(
+              (subHeading) => subHeading.href.slice(1) === articleHeadingId,
+            ),
+          );
+
+          if (headingWithSubheadingsIndex !== -1) {
+            const subHeadingsToggleTrigger = document.getElementById(
+              `expand-collapse-subheading-${headingWithSubheadingsIndex}`,
+            ) as HTMLInputElement;
+
+            if (!subHeadingsToggleTrigger) return;
+
+            /**
+             * The expand animation in handleDisplaySubHeadings
+             * will only work if the checked attribute is true.
+             */
+            subHeadingsToggleTrigger.checked = true;
+            handleDisplaySubHeadings(headingWithSubheadingsIndex);
+          }
+        }
+      },
+      {
+        root: null,
+        rootMargin: '0px 0px -100% 0px',
+        threshold: 0,
+      },
+    );
+
+    articleHeadings.forEach((heading) => intersectionObserver.observe(heading));
+    intersectionObserverRef.current = intersectionObserver;
+  };
+
+  const handleHeadingClick = (heading: string) => {
+    if (intersectionObserverRef.current) {
+      intersectionObserverRef.current.disconnect();
+    }
+
+    setHighlightedHeading(heading);
+
+    // TODO: Smarter timeout calculation based on scroll distance
+    setTimeout(() => {
+      setHeadingsIntersectionObserver();
+    }, 800);
+  };
+
   const handleDisplaySubHeadings = (headingIndex: number): void => {
     if (!subHeadingsRef.current.length) return;
 
@@ -62,7 +132,6 @@ export default function ToCController({
     const subHeadings = subHeadingsRef.current[headingIndex];
 
     if (!subHeadings || !subHeadingsToggleTrigger) return;
-
     const subHeadingsHeight = subHeadings.scrollHeight;
     subHeadings.style.height = `${subHeadingsHeight}px`;
 
@@ -77,5 +146,5 @@ export default function ToCController({
     }
   };
 
-  return render(handleDisplaySubHeadings);
+  return render(handleHeadingClick, handleDisplaySubHeadings);
 }

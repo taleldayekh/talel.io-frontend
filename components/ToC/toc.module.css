@@ -50,11 +50,21 @@
 .toc__link {
   color: var(--talelio-text-white);
   line-height: 1.5em;
+  transition: margin .5s ease;
   text-decoration: none;
 }
 
-.toc__link:hover {
+.toc__link:hover,
+.toc__link--highlighted {
   color: var(--talelio-neon-blue);
+}
+
+.toc__link__subheading {
+  margin-left: 0;
+}
+
+.toc__link__subheading--highlighted {
+  margin-left: 12px;
 }
 
 .toc__subheadings {
