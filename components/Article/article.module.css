@@ -326,7 +326,7 @@ padding top is needed to align with the non-slider images.
     grid-column: 1 / 4;
     height: calc(100vh - 6.25em);
     /* Footer hight + top value */
-    margin: 1.875em 1.375em 0 1.5em;
+    margin: 3em 1.375em 0 1.5em;
     overflow: auto;
     position: sticky;
     text-align: left;

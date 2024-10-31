@@ -3,16 +3,27 @@ import { ToCProps, ToC as ToCInterface } from 'components/ToC/interfaces';
 import ToCController from 'components/ToC/ToCController';
 import styles from 'components/ToC/toc.module.css';
 
+const shouldHighlightHeading = (
+  heading: string,
+  highlightedHeading: string,
+): boolean => {
+  return heading === highlightedHeading;
+};
+
 export default function ToC({ tocHTML }: ToCProps) {
   const [toc, setToC] = useState<ToCInterface[]>([]);
+  const [highlightedHeading, setHighlightedHeading] = useState<string>('');
+
   const subHeadingsRef = useRef<(HTMLUListElement | null)[]>([]);
 
   return (
     <ToCController
       tocHTML={tocHTML}
+      toc={toc}
       setToC={setToC}
+      setHighlightedHeading={setHighlightedHeading}
       subHeadingsRef={subHeadingsRef}
-      render={(handleDisplaySubHeadings) => (
+      render={(handleHeadingClick, handleDisplaySubHeadings) => (
         <>
           <h2 className={styles.toc__title}>Table of Contents</h2>
           <ul className={styles.toc}>
@@ -31,7 +42,19 @@ export default function ToC({ tocHTML }: ToCProps) {
                       htmlFor={`expand-collapse-subheading-${headingIndex}`}
                     >
                       <span className={styles.toc__heading__label__icon}></span>
-                      <a className={styles.toc__link} href={tocHeading.href}>
+                      <a
+                        className={`${styles.toc__link} ${
+                          shouldHighlightHeading(
+                            tocHeading.href.slice(1),
+                            highlightedHeading,
+                          ) && styles['toc__link--highlighted']
+                        }`}
+                        href={tocHeading.href}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleHeadingClick(tocHeading.href.slice(1));
+                        }}
+                      >
                         {tocHeading.text}
                       </a>
                     </label>
@@ -48,8 +71,19 @@ export default function ToC({ tocHTML }: ToCProps) {
                             key={subHeadingIndex}
                           >
                             <a
-                              className={styles.toc__link}
+                              className={`${styles.toc__link} ${
+                                shouldHighlightHeading(
+                                  subHeading.href.slice(1),
+                                  highlightedHeading,
+                                )
+                                  ? `${styles['toc__link--highlighted']} ${styles['toc__link__subheading--highlighted']}`
+                                  : `${styles.toc__link__subheading}`
+                              }`}
                               href={subHeading.href}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                handleHeadingClick(subHeading.href.slice(1));
+                              }}
                             >
                               {subHeading.text}
                             </a>
@@ -60,7 +94,19 @@ export default function ToC({ tocHTML }: ToCProps) {
                   </>
                 )}
                 {tocHeading.subHeadings.length === 0 && (
-                  <a className={styles.toc__link} href={tocHeading.href}>
+                  <a
+                    className={`${styles.toc__link} ${
+                      shouldHighlightHeading(
+                        tocHeading.href.slice(1),
+                        highlightedHeading,
+                      ) && styles['toc__link--highlighted']
+                    }`}
+                    href={tocHeading.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleHeadingClick(tocHeading.href.slice(1));
+                    }}
+                  >
                     {tocHeading.text}
                   </a>
                 )}
