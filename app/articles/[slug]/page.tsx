@@ -1,21 +1,28 @@
 import { getArticle } from 'infrastructure/repositories/articles/articles.repository';
+import type { Viewport } from 'next';
 import { Metadata } from 'next';
 import ArticleView from 'views/ArticleView/ArticleView';
 import ArticleMapper from 'views/ArticleView/mappers/article.mapper';
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export const viewport: Viewport = {
+  themeColor: '#00111A',
+};
+
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params;
   const { slug } = params;
 
   let documentHead: Metadata = {};
 
   try {
     const articleRes = await getArticle(slug);
+    // TODO: Generalize document head implementation
     documentHead = ArticleMapper.fromResponseToDocumentHead(articleRes.data);
   } catch (error) {
     // TODO: Error handling
@@ -24,7 +31,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return documentHead;
 }
 
-export default async function Article({ params }: Props) {
+export default async function Article(props: Props) {
+  const params = await props.params;
   const { slug } = params;
 
   let article = undefined;

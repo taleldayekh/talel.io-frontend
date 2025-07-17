@@ -1,7 +1,13 @@
 'use client';
-
-import ArticlesView from 'views/ArticlesView/ArticlesView';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function Home() {
-  return <ArticlesView />;
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push('/articles');
+  });
+
+  return <></>;
 }

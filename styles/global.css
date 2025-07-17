@@ -1,39 +1,60 @@
 @font-face {
-    font-family: 'Blanka';
-    src: 
-        local('Blanka'),
-        url(../assets/fonts/Blanka.ttf);
+  font-family: 'Blanka';
+  src: 
+  local('Blanka'),
+  url(../assets/fonts/Blanka.ttf);
 }
 
 @font-face {
-    font-family: 'JetBrains';
-    src:
-        local('JetBrains'),
-        url(../assets/fonts/JetBrainsMono.ttf);
+  font-family: 'JetBrains';
+  src:
+  local('JetBrains'),
+  url(../assets/fonts/JetBrainsMono.ttf);
 }
 
 @font-face {
-    font-family: 'JetBrains ExtraLight';
-    src:
-        local('JetBrains ExtraLight'),
-        url(../assets/fonts/JetBrainsMono-ExtraLight.ttf);
+  font-family: 'JetBrains ExtraLight';
+  src:
+  local('JetBrains ExtraLight'),
+  url(../assets/fonts/JetBrainsMono-ExtraLight.ttf);
 }
 
 @font-face {
-    font-family: 'Mona Sans';
-    src: 
-        local('Mona Sans'),
-        url(../assets/fonts/Mona-Sans.ttf);
+  font-family: 'Mona Sans';
+  src: 
+  local('Mona Sans'),
+  url(../assets/fonts/Mona-Sans.ttf);
 }
 
 @font-face {
-    font-family: 'Streamster';
-    src:
-        local('Streamster'),
-        url(../assets//fonts//Streamster.ttf);
+  font-family: 'Streamster';
+  src:
+  local('Streamster'),
+  url(../assets//fonts//Streamster.ttf);
+}
+
+@font-face {
+  font-family: 'Windows';
+  src:
+  local('Windows'),
+  url(../assets/fonts/Windows.ttf);
 }
 
 body {
-    font-family: 'Mona Sans', Serif;
-    margin: 0;
+  background-color: var(--talelio-page-bg-dark);
+  font-family: 'Mona Sans', Serif;
+  margin: 0;
 }
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+/* ! Start style overrides */
+
+/* Buy me a coffee widget styles */
+#bmc-iframe {
+  height: auto !important;
+  min-height: 700px !important;
+}
+
+/* ! End style overrides */
