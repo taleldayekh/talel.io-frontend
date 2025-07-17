@@ -1,9 +1,4 @@
-import axios, {
-  AxiosHeaders,
-  AxiosInstance,
-  AxiosRequestConfig,
-  AxiosResponse,
-} from 'axios';
+import axios, { AxiosHeaders, AxiosInstance, AxiosResponse } from 'axios';
 import config from 'config';
 import { RequestInterceptionEvents } from 'libs/http-client/enums';
 import { HttpResponse } from 'libs/http-client/interfaces';
@@ -18,26 +13,25 @@ class HttpClient {
   }
 
   private initializeRequestInterceptor(): void {
-    this.axiosInstance.interceptors.request.use(
-      (config: AxiosRequestConfig) => {
-        const getToken = this.requestInterceptorCallbacks.get(
-          RequestInterceptionEvents.TOKEN,
-        );
+    // TODO: Remove any type
+    this.axiosInstance.interceptors.request.use((config: any) => {
+      const getToken = this.requestInterceptorCallbacks.get(
+        RequestInterceptionEvents.TOKEN,
+      );
 
-        if (getToken) {
-          const token = getToken();
+      if (getToken) {
+        const token = getToken();
 
-          if (token.length) {
-            (config.headers as AxiosHeaders).set(
-              'Authorization',
-              `Bearer ${token}`,
-            );
-          }
+        if (token.length) {
+          (config.headers as AxiosHeaders).set(
+            'Authorization',
+            `Bearer ${token}`,
+          );
         }
+      }
 
-        return config;
-      },
-    );
+      return config;
+    });
   }
 
   // TODO: Consider types for the callbacks

@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
 
 export interface ArticlesControllerProps {
-  render: () => ReactElement;
+  render: (navigateToArticle: (slug: string) => void) => ReactElement;
 }

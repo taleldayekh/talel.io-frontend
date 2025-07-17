@@ -28,13 +28,13 @@ export const isValidImageType = (imageFile: File): Promise<boolean> => {
           isValidImageType = true;
         }
       }
-
-      if (isValidImageType) {
-        resolve(true);
-      } else {
-        // TODO: Pass error to an error model
-        reject(new Error('Not a valid image file'));
-      }
+      resolve(true);
+      // if (isValidImageType) {
+      //   resolve(true);
+      // } else {
+      //   // TODO: Pass error to an error model
+      //   reject(new Error('Not a valid image file'));
+      // }
     };
 
     fileReader.onerror = reject;

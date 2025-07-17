@@ -1,0 +1,24 @@
+.articles {
+  color: var(--talelio-text-white);
+  display: flex;
+  flex-direction: column;
+  margin: 1.5em 0 0 1.5em;
+}
+
+.articles__title {
+  font-size: 1.25rem;
+}
+
+.articles__list {
+  list-style-type: none;
+  margin: 1.5em 0 0 1.5em;
+  padding: 0;
+}
+
+.articles__list li span {
+  cursor: pointer;
+}
+
+.articles__list li span:hover {
+  color: var(--talelio-neon-blue);
+}

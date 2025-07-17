@@ -1,0 +1,166 @@
+.reading-log {
+  /* Colors */
+  --windows-gui-bg: #008080;
+  --windows-gui-window-accent-blue: #000080;
+  --windows-gui-window-accent-yellow: #ff0;
+  --windows-gui-window-white: #fff;
+  --windows-gui-window-gray-light: #dadada;
+  --windows-gui-window-gray-medium: #c0c0c0;
+  --windows-gui-window-gray-dark: #818181;
+  --windows-gui-window-border-white: #fff;
+  --windows-gui-window-border-black: #000;
+  --windows-gui-window-header-color: linear-gradient(to right, var(--windows-gui-window-accent-blue), #0033a0, #0055c0, #0077e0, #3399ff);
+  --text-light: #fff;
+  --text-dark: #000;
+
+  /* Spacing */
+  --windows-gui-window-top-spacing: 2.5em;
+  --windows-gui-window-default-border-width: 0.125em;
+  --windows-gui-window-hover-border-width: 0.0625em;
+  --windows-gui-window-content-margin: 0.5em;
+  --windows-gui-window-scrollbar-width: 1.25em;
+}
+
+.reading-log {
+  background-color: var(--windows-gui-bg);
+  font-family: 'Windows', serif;
+  height: 100vh;
+  letter-spacing: 1px;
+  padding: var(--windows-gui-window-top-spacing) var(--windows-gui-window-content-margin) 0 var(--windows-gui-window-content-margin);
+}
+
+.reading-log__window {
+  background-color: var(--windows-gui-window-gray-medium);
+  border: solid var(--windows-gui-window-default-border-width);
+  border-bottom-color: var(--windows-gui-window-border-black);
+  border-left-color: var(--windows-gui-window-border-white);
+  border-right-color: var(--windows-gui-window-border-black);
+  border-top-color: var(--windows-gui-window-border-white);
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - var(--windows-gui-window-top-spacing));
+  margin: 0 auto;
+  max-width: 50em;
+}
+
+.reading-log__window__header {
+  align-items: center;
+  background: var(--windows-gui-window-header-color);
+  border: solid var(--windows-gui-window-default-border-width) var(--windows-gui-window-gray-medium);
+  color: var(--text-light);
+  display: inline-flex;
+  flex: 0 0 2em;
+  padding-left: var(--windows-gui-window-content-margin);
+}
+
+/* TODO */
+.reading-log__window__info {
+  margin-left: 9px;
+  display: flex;
+}
+
+.reading-log__window__table__header {
+  display: flex;
+  margin: 0 var(--windows-gui-window-content-margin) 0 var(--windows-gui-window-content-margin);
+  padding-right: calc(var(--windows-gui-window-scrollbar-width) + var(--windows-gui-window-hover-border-width));
+}
+
+.reading-log__window__table__header span:first-child,
+.reading-log__window__table__body__row span:first-child {
+  flex: 1;
+}
+
+.reading-log__window__table__header span:nth-last-child(-n+2),
+.reading-log__window__table__body__row span:nth-last-child(-n+2) {
+  flex: 0 0 5.625em;
+}
+
+.reading-log__window__table__header span:last-child,
+.reading-log__window__table__body__row span:last-child {
+  flex: 0 0 3.75em;
+}
+
+.reading-log__window__table__body {
+  background-color: var(--windows-gui-window-white);
+  border: solid var(--windows-gui-window-default-border-width);
+  border-bottom-color: var(--windows-gui-window-border-white);
+  border-left-color: var(--windows-gui-window-border-black);
+  border-right-color: var(--windows-gui-window-border-white);
+  border-top-color: var(--windows-gui-window-border-black);
+  flex: 1;
+  margin: 0 var(--windows-gui-window-content-margin) 0 var(--windows-gui-window-content-margin);
+  overflow-y: scroll;
+}
+
+.reading-log__window__table__body__row {
+  align-items: center;
+  border: solid var(--windows-gui-window-hover-border-width) var(--windows-gui-window-white);
+  display: flex;
+}
+
+.reading-log__window__table__body__row:hover {
+  background-color: var(--windows-gui-window-accent-blue);
+  border: dotted var(--windows-gui-window-hover-border-width) var(--windows-gui-window-accent-yellow);
+  color: var(--text-light);
+  cursor: help;
+}
+
+.reading-log__window__table__body__row span:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.reading-log__window__table__body__row span:first-child {
+  padding-left: var(--windows-gui-window-default-border-width);
+}
+
+.reading-log__window__table__body__row span:nth-last-child(-n+2) {
+  padding-left: calc(var(--windows-gui-window-default-border-width) + var(--windows-gui-window-hover-border-width));
+}
+
+.reading-log__window__table__footer {
+  border: solid var(--windows-gui-window-default-border-width);
+  border-bottom-color: var(--windows-gui-window-border-white);
+  border-left-color: var(--windows-gui-window-gray-dark);
+  border-right-color: var(--windows-gui-window-border-white);
+  border-top-color: var(--windows-gui-window-gray-dark);
+  margin: var(--windows-gui-window-content-margin);
+  padding: var(--windows-gui-window-hover-border-width) 0 var(--windows-gui-window-hover-border-width) var(--windows-gui-window-default-border-width);
+}
+
+/* Scrollbar */
+.reading-log__window__table__body::-webkit-scrollbar {
+  width: var(--windows-gui-window-scrollbar-width);
+}
+
+.reading-log__window__table__body::-webkit-scrollbar-track {
+  background-color: var(--windows-gui-window-gray-light);
+}
+
+.reading-log__window__table__body::-webkit-scrollbar-thumb {
+  background-color: var(--windows-gui-window-gray-medium);
+  box-shadow: inset var(--windows-gui-window-default-border-width) var(--windows-gui-window-default-border-width) 0 0 var(--windows-gui-window-border-white), inset calc(0em - var(--windows-gui-window-default-border-width)) calc(0em - var(--windows-gui-window-default-border-width)) 0 0 var(--windows-gui-window-border-black);
+}
+
+.reading-log__window__table__body::-webkit-scrollbar-button:vertical:start:decrement,
+.reading-log__window__table__body::-webkit-scrollbar-button:vertical:end:increment {
+  background-color: var(--windows-gui-window-gray-medium);
+  box-shadow: inset var(--windows-gui-window-default-border-width) var(--windows-gui-window-default-border-width) 0 0 var(--windows-gui-window-border-white), inset calc(0em - var(--windows-gui-window-default-border-width)) calc(0em - var(--windows-gui-window-default-border-width)) 0 0 var(--windows-gui-window-border-black);
+  display: block;
+  height: var(--windows-gui-window-scrollbar-width);
+  width: var(--windows-gui-window-scrollbar-width);
+}
+
+.reading-log__window__table__body::-webkit-scrollbar-button:vertical:decrement,
+.reading-log__window__table__body::-webkit-scrollbar-button:vertical:increment {
+  background-position: center;
+}
+
+.reading-log__window__table__body::-webkit-scrollbar-button:vertical:decrement {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8l-6 6h12z" fill="black"/></svg>');
+}
+
+.reading-log__window__table__body::-webkit-scrollbar-button:vertical:increment {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 16l6-6H6z" fill="black"/></svg>');
+}

@@ -1,4 +1,9 @@
-import { ArticleControllerProps } from 'components/Article/interfaces';
+import { ArticleContentType } from 'components/Article/enums';
+import {
+  ArticleContent,
+  ArticleControllerProps,
+} from 'components/Article/interfaces';
+import { Image } from 'components/ImageSlider/interfaces';
 import hljs from 'highlight.js';
 import { useEffect } from 'react';
 
@@ -22,12 +27,64 @@ const getTableOfContentsAnchors = (
 };
 
 export default function ArticleController({
+  articleHTML,
   tableOfContentsHTML,
+  setArticleContent,
   render,
 }: ArticleControllerProps) {
   useEffect(() => {
-    hljs.highlightAll();
-  }, []);
+    const parser = new DOMParser();
+    const document = parser.parseFromString(articleHTML, 'text/html');
+    const articleContent: ArticleContent[] = [];
+
+    let currentContent = '';
+
+    document.body.childNodes.forEach((node: ChildNode) => {
+      if (node.nodeType !== Node.ELEMENT_NODE) return;
+
+      const elementNode = node as Element;
+      const htmlContent = elementNode.outerHTML;
+
+      if (elementNode.classList.contains(ArticleContentType.GALLERY)) {
+        if (currentContent) {
+          articleContent.push({
+            type: ArticleContentType.DEFAULT,
+            content: currentContent.trim(),
+          });
+
+          currentContent = '';
+        }
+
+        const documentForImgs = parser.parseFromString(
+          htmlContent,
+          'text/html',
+        );
+        const imgs = documentForImgs.querySelectorAll('img');
+        const imgContent: Image[] = Array.from(imgs).map((img) => ({
+          src: img.src,
+          alt: img.alt,
+        }));
+
+        articleContent.push({
+          type: ArticleContentType.GALLERY,
+          content: imgContent,
+        });
+      } else {
+        currentContent += htmlContent;
+      }
+    });
+
+    currentContent = currentContent.trim();
+
+    if (currentContent) {
+      articleContent.push({
+        type: ArticleContentType.DEFAULT,
+        content: currentContent,
+      });
+    }
+
+    setArticleContent(articleContent);
+  }, [articleHTML, setArticleContent]);
 
   useEffect(() => {
     // TODO: Typing
@@ -54,6 +111,10 @@ export default function ArticleController({
         anchor.removeEventListener('click', smoothScroll);
       });
     };
+  });
+
+  useEffect(() => {
+    hljs.highlightAll();
   });
 
   return render();

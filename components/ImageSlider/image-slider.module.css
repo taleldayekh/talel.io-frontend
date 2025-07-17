@@ -1,0 +1,40 @@
+.image-slider {
+  --slide-indicator-padding: 40px; /* ! Other unit? */
+}
+
+/* Mobile breakpoint */
+.image-slider {
+  --number-of-images-in-viewport: 2;
+}
+
+.image-slider {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+.image-slider--multiple {
+  padding-top: var(--slide-indicator-padding);
+}
+
+.image-slider__images-wrapper {
+  display: flex;
+}
+
+.image-slider__images-wrapper--transition {
+  transition: all 0.5s;
+}
+
+/* Tablet breakpoint */
+@media (min-width: 31.25em) {
+  .image-slider {
+    --number-of-images-in-viewport: 4;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 68.75em) {
+  .image-slider {
+    --number-of-images-in-viewport: 6;
+  }
+}
